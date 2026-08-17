@@ -410,28 +410,13 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 4 full-bleed mörka bildkort i grid */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(4, 1fr)',
-              gap: '16px',
-            }}
-            className="services-grid-4"
-          >
+          {/* 4 full-bleed mörka bildkort i grid (Fullt mobilanpassad) */}
+          <div className="home-services-grid">
             {services.map((svc: ServiceItem, index: number) => (
               <ScrollReveal key={svc.slug} animation="fade-up" delay={index * 80}>
                 <Link
                   to={svc.href}
-                  style={{
-                    position: 'relative',
-                    height: '460px',
-                    overflow: 'hidden',
-                    borderRadius: '0px',
-                    display: 'block',
-                    textDecoration: 'none',
-                    background: '#07131e',
-                  }}
+                  className="home-service-card"
                   onMouseEnter={(e) => {
                     const card = e.currentTarget;
                     const img = card.querySelector('.card-bg-img') as HTMLElement;
@@ -449,59 +434,17 @@ export default function Home() {
                     alt={svc.title}
                     loading="lazy"
                     className="card-bg-img"
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      display: 'block',
-                      transition: 'transform 0.45s ease',
-                    }}
                   />
 
                   {/* Mörk overlay med mjuk gradient */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.25) 100%)',
-                    }}
-                  />
+                  <div className="home-service-overlay" />
 
                   {/* Textinnehåll placerat längst ner över bilden */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      padding: '24px 20px',
-                      zIndex: 2,
-                    }}
-                  >
-                    <h3
-                      style={{
-                        color: '#ffffff',
-                        fontWeight: 800,
-                        fontSize: '1.25rem',
-                        margin: '0 0 10px 0',
-                        lineHeight: 1.18,
-                        letterSpacing: '-0.01em',
-                        fontFamily: 'var(--font-heading)',
-                      }}
-                    >
+                  <div className="home-service-content">
+                    <h3 className="home-service-title">
                       {svc.title}
                     </h3>
-                    <p
-                      style={{
-                        color: 'rgba(255, 255, 255, 0.88)',
-                        fontSize: '0.88rem',
-                        lineHeight: 1.5,
-                        margin: 0,
-                        fontWeight: 400,
-                      }}
-                    >
+                    <p className="home-service-desc">
                       {svc.shortDescription}
                     </p>
                   </div>
@@ -1049,6 +992,91 @@ export default function Home() {
         </div>
       </section>
 
+      <style>{`
+        .home-services-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+        }
+        .home-service-card {
+          position: relative;
+          height: 460px;
+          overflow: hidden;
+          border-radius: 4px;
+          display: block;
+          text-decoration: none;
+          background: #07131e;
+        }
+        .home-service-card .card-bg-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .home-service-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.2) 100%);
+          transition: background 0.3s ease;
+        }
+        .home-service-content {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 24px 20px;
+          z-index: 2;
+        }
+        .home-service-title {
+          color: #ffffff;
+          font-weight: 800;
+          font-size: 1.25rem;
+          margin: 0 0 10px 0;
+          line-height: 1.2;
+          letter-spacing: -0.01em;
+          font-family: var(--font-heading);
+        }
+        .home-service-desc {
+          color: rgba(255, 255, 255, 0.88);
+          font-size: 0.88rem;
+          line-height: 1.5;
+          margin: 0;
+          font-weight: 400;
+        }
+
+        @media (max-width: 1100px) {
+          .home-services-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+          }
+          .home-service-card {
+            height: 380px !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .home-services-grid {
+            grid-template-columns: 1fr !important;
+            gap: 14px !important;
+          }
+          .home-service-card {
+            height: 280px !important;
+          }
+          .home-service-content {
+            padding: 20px 16px !important;
+          }
+          .home-service-title {
+            font-size: 1.18rem !important;
+            margin-bottom: 6px !important;
+          }
+          .home-service-desc {
+            font-size: 0.86rem !important;
+            line-height: 1.45 !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }

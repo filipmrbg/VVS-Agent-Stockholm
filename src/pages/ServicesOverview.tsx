@@ -93,21 +93,26 @@ export default function ServicesOverview() {
         position: 'sticky',
         top: '72px',
         zIndex: 40,
-        background: 'rgba(255, 255, 255, 0.95)',
+        background: 'rgba(255, 255, 255, 0.96)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
         borderBottom: '1px solid #e2e8f0',
-        padding: '12px 0',
+        padding: '10px 0',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
       }}>
         <div style={container}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '12px',
-            flexWrap: 'wrap',
-          }}>
+          <div
+            className="services-tab-bar"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              overflowX: 'auto',
+              WebkitOverflowScrolling: 'touch',
+              padding: '4px 0',
+            }}
+          >
             {services.map((svc) => (
               <button
                 key={svc.slug}
@@ -116,13 +121,15 @@ export default function ServicesOverview() {
                   background: '#f1f5f9',
                   border: '1px solid #e2e8f0',
                   borderRadius: '4px',
-                  padding: '10px 20px',
+                  padding: '9px 18px',
                   fontSize: '0.88rem',
                   fontWeight: 600,
                   color: 'var(--text-dark)',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
                   fontFamily: 'var(--font-heading)',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.background = 'var(--primary)';
@@ -143,7 +150,7 @@ export default function ServicesOverview() {
       </div>
 
       {/* ── DETAILED SERVICE SECTIONS (ALTERNATING LAYOUT) ──────────── */}
-      <div style={{ padding: '60px 0 100px 0' }}>
+      <div style={{ padding: '20px 0 80px 0' }}>
         {services.map((svc: ServiceItem, index: number) => {
           const isEven = index % 2 === 0;
 
@@ -152,30 +159,26 @@ export default function ServicesOverview() {
               key={svc.slug}
               id={svc.slug}
               style={{
-                padding: '80px 0',
+                padding: 'clamp(50px, 8vw, 80px) 0',
                 background: isEven ? '#ffffff' : '#f8fafc',
                 borderBottom: '1px solid #e2e8f0',
               }}
             >
               <div style={container}>
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                  gap: '50px',
-                  alignItems: 'center',
-                }}>
-
+                <div
+                  className={`service-detail-grid ${isEven ? 'layout-normal' : 'layout-reversed'}`}
+                >
                   {/* Image Column */}
-                  <div style={{ order: isEven ? 1 : 2 }}>
+                  <div className="service-image-col">
                     <ScrollReveal animation={isEven ? 'fade-right' : 'fade-left'}>
                       <div style={{
                         position: 'relative',
-                        borderRadius: '24px',
+                        borderRadius: '4px',
                         overflow: 'hidden',
-                        boxShadow: '0 20px 40px rgba(15, 23, 42, 0.12)',
-                        border: '3px solid #ffffff',
+                        boxShadow: '0 16px 36px rgba(0, 0, 0, 0.1)',
+                        border: '1px solid #e2e8f0',
                         aspectRatio: '4/3',
-                        background: '#0f172a',
+                        background: '#07131e',
                       }}>
                         <img
                           src={svc.image}
@@ -192,23 +195,35 @@ export default function ServicesOverview() {
                   </div>
 
                   {/* Content Column */}
-                  <div style={{ order: isEven ? 2 : 1 }}>
+                  <div className="service-content-col">
                     <ScrollReveal animation={isEven ? 'fade-left' : 'fade-right'}>
+                      <span style={{
+                        color: 'var(--primary)',
+                        fontWeight: 700,
+                        fontSize: '0.84rem',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        display: 'block',
+                        marginBottom: '8px',
+                      }}>
+                        {svc.tag || 'VVS-Tjänst'}
+                      </span>
                       <h2 style={{
-                        color: 'var(--color-text-dark)',
+                        color: 'var(--text-dark)',
                         fontWeight: 800,
-                        fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
-                        letterSpacing: '-0.03em',
+                        fontSize: 'clamp(1.8rem, 3.2vw, 2.4rem)',
+                        letterSpacing: '-0.02em',
                         margin: '0 0 16px 0',
                         lineHeight: 1.2,
+                        fontFamily: 'var(--font-heading)',
                       }}>
                         {svc.title}
                       </h2>
                       <p style={{
                         color: 'var(--color-gray-600)',
-                        fontSize: '1.02rem',
+                        fontSize: '0.96rem',
                         lineHeight: 1.75,
-                        margin: '0 0 28px 0',
+                        margin: '0 0 24px 0',
                         whiteSpace: 'pre-line',
                       }}>
                         {svc.detailedDescription}
@@ -220,31 +235,31 @@ export default function ServicesOverview() {
                         style={{
                           display: 'inline-flex',
                           alignItems: 'center',
-                          gap: '10px',
-                          background: 'var(--color-primary)',
+                          gap: '8px',
+                          background: 'var(--primary)',
                           color: '#ffffff',
                           fontWeight: 700,
-                          fontSize: '0.95rem',
-                          padding: '14px 28px',
-                          borderRadius: 'var(--border-radius-pill)',
+                          fontSize: '0.92rem',
+                          padding: '12px 24px',
+                          borderRadius: '4px',
                           textDecoration: 'none',
-                          boxShadow: '0 4px 14px rgba(234, 88, 12, 0.35)',
+                          boxShadow: '0 4px 14px rgba(175, 115, 73, 0.3)',
                           transition: 'all 0.25s ease',
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.background = 'var(--color-primary-hover)';
+                          e.currentTarget.style.background = 'var(--color-primary-hover, #925c38)';
                           e.currentTarget.style.transform = 'translateY(-2px)';
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.background = 'var(--color-primary)';
+                          e.currentTarget.style.background = 'var(--primary)';
                           e.currentTarget.style.transform = 'translateY(0)';
                         }}
                       >
-                        Begär offert för {svc.title} <ArrowRight size={16} />
+                        <span>Begär offert för {svc.title}</span>
+                        <ArrowRight size={16} />
                       </Link>
                     </ScrollReveal>
                   </div>
-
                 </div>
               </div>
             </section>
@@ -255,6 +270,45 @@ export default function ServicesOverview() {
       {/* ── CTA BANNER ────────────────────────────────────────── */}
       <CTABanner />
 
+      <style>{`
+        .services-tab-bar::-webkit-scrollbar {
+          display: none;
+        }
+        .services-tab-bar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .service-detail-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 50px;
+          alignItems: center;
+        }
+        .service-detail-grid.layout-reversed .service-image-col {
+          order: 2;
+        }
+        .service-detail-grid.layout-reversed .service-content-col {
+          order: 1;
+        }
+        @media (max-width: 900px) {
+          .service-detail-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .service-detail-grid.layout-reversed .service-image-col,
+          .service-detail-grid.layout-normal .service-image-col {
+            order: 1 !important;
+          }
+          .service-detail-grid.layout-reversed .service-content-col,
+          .service-detail-grid.layout-normal .service-content-col {
+            order: 2 !important;
+          }
+          .services-tab-bar {
+            justify-content: flex-start !important;
+            padding-left: 4px !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
