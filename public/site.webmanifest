@@ -1,16 +1,26 @@
 {
-  "name": "JH Huskvalitet AB",
-  "short_name": "JH Huskvalitet",
-  "description": "Professionellt entreprenad- och byggföretag med Uppland som utgångspunkt.",
+  "name": "VVS AGENT STOCKHOLM AB",
+  "short_name": "VVS Agent",
+  "description": "Specialister inom VVS & fastighetsservice i Stockholm. Kök, badrum, värmesystem och rörservice.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ea580c",
+  "background_color": "#0b132b",
+  "theme_color": "#af7349",
   "icons": [
     {
-      "src": "/logo.jpg",
+      "src": "/logo-favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo-raw.jpg",
       "sizes": "1024x1024",
       "type": "image/jpeg"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "1024x295",
+      "type": "image/png"
     }
   ]
 }
