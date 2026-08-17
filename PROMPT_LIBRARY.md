@@ -1,38 +1,44 @@
-# Antigravity Prompt Library (9-Step Website Onboarding SOP)
+# Antigravity Prompt Library (9-Step VVS & Rörmokare Onboarding SOP)
 
-This is your complete 9-brick Prompt Library and Standard Operating Procedure (SOP) for building client website demos.
+This is your complete 9-brick Prompt Library and Standard Operating Procedure (SOP) for building client website demos for **Rörmokare & VVS-företag** (Auktoriserade VVS-installatörer, Värmepumpstekniker & Rörservice).
 
-When creating a new demo for a client:
-1. Duplicate the appropriate master template directory (e.g., `0000-MALL-Universell-Industri`) and rename it for the client.
+When creating a new demo for a VVS client:
+1. Duplicate this master template directory (`MALL-Rormokare-VVS`) and rename it for the client.
 2. Open the project in Antigravity.
 3. Run the bricks one by one in sequence (Brick 1 to Brick 9), filling in the required client data inside the brackets `[...]`.
 
 ---
 
-## 🧱 BRICK 1: Company Information
+## 🧱 BRICK 1: Company Information (VVS-Företag)
 
 Copy and paste the following into the AI chat:
 
 ```text
 Use this brick to update the company information across the entire website.
 
-The information provided here must replace all existing company details in the project, including the company name, location, contact information, and any other references to the business.
+The information provided here must replace all existing company details in the project, including the company name, location, contact information, authorization (Säker Vatten / SKVP), and any other references to the business.
 
 Scan the entire project and ensure that the correct company information is used consistently across all pages and components.
 
 Remove any outdated or placeholder company details that may still exist in the template.
 
 Company Name:
-JH Huskvalitet AB
+[FÖRETAGSNAMN AB, t.ex. Philip Rörmokaren AB]
 
 Location / City:
-Uppland
+[ORT / REGION, t.ex. Stockholm / Nacka]
+
 Phone Number:
-072-210 10 75
+[TELEFONNUMMER, t.ex. 08-123 45 67]
 
 Email:
-JHHuskvalitet@outlook.com
+[E-POST, t.ex. kontakt@philiprormokaren.se]
 
+Auktorisation & Certifikat:
+- Säker Vatten Auktoriserat VVS-företag
+- SKVP Certifierad Värmepumpstekniker
+- 10 MSEK Ansvarsförsäkring
+- 30% ROT-avdrag
 ```
 
 ---
@@ -56,66 +62,71 @@ Important rules:
 4. The logo must also be used as the default preview image when the website is shared on social media platforms (OG image).
 
 Logo Image URL:
-https://scontent.fmmx3-1.fna.fbcdn.net/v/t39.30808-6/634476989_122107636611240431_2908585992468745978_n.jpg?stp=dst-jpg_tt6&cstp=mx1024x1024&ctp=s1024x1024&_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=jqufOUVujasQ7kNvwGZ7uxs&_nc_oc=Adougzd4pxtPxUXdNW9ojqHbrmRBfbUBLxOyOycMNzEKh-WbeFthFn0ekuK2sCd11h4&_nc_zt=23&_nc_ht=scontent.fmmx3-1.fna&_nc_gid=FRSnwH-lvQUP6zF9nKN0Gg&_nc_ss=7b2a8&oh=00_AQHTbpeMWbLaqQ0OVOjKfezJDLPpSy6vScEORZNaNIWkWw&oe=6A84DCDB
+[ENTER LOGO URL HERE]
 ```
 
 ---
 
-## 🧱 BRICK 3: Social Media Links
+## 🧱 BRICK 3: Social Media & Reco / Google Reviews Links
 
 Copy and paste the following into the AI chat:
 
 ```text
-Use this brick to update the company’s social media links.
-Each link provided here must replace the existing social media links wherever they appear on the website (e.g., Header, Footer, Contact section).
+Use this brick to update the company’s social media and review profile links.
+Each link provided here must replace the existing links wherever they appear on the website (e.g., Header, Footer, Contact section).
 
 Instagram:
-https://www.instagram.com/jhhuskvalitetab
+[INSTAGRAM URL]
 
-Facebook: https://www.facebook.com/profile.php?id=61587212942833#
+Facebook:
+[FACEBOOK URL]
+
+Reco / Google Reviews URL:
+[RECO / GOOGLE REVIEWS URL]
 ```
 
 ---
 
-## 🧱 BRICK 4: About Section & Main Service Description
+## 🧱 BRICK 4: About Section & VVS Specialty Description
 
 Copy and paste the following into the AI chat:
 
 ```text
-Use this brick to update the About section and the main service description on the website.
+Use this brick to update the About section and the main VVS service description on the website.
 Replace the existing text content in this section with the text provided below. Do not modify the layout, spacing, styling, or component structure.
 
-The section should present the company using both images/visuals and text. The visuals should support the written content while keeping the existing layout and design of the template intact.
-The text should describe the company, what it does, and the main services it provides.
-Only update the text content.
+The section should present the company using both visuals and text highlighting Säker Vatten authorization, SKVP certification, and personal customer care.
 
 About & Services Text:
-JH Huskvalitet AB erbjuder byggtjänster med fokus på kvalitet, noggrannhet och hållbara lösningar. Vi hjälper dig från idé till färdigt resultat med trygghet, struktur och yrkesstolthet i varje steg.
+[BESKRIVNING AV VVS-FÖRETAGET, HISTORIA OCH SPECIALITET, t.ex. Vi erbjuder auktoriserade VVS-installationer, värmepumpsbyten och akut service med fackmannamässig trygghet...]
 ```
 
 ---
 
-## 🧱 BRICK 5: Projects & Portfolio Section
+## 🧱 BRICK 5: Projects & VVS Portfolio Section
 
 Copy and paste the following into the AI chat:
 
 ```text
-Use this brick to update the Projects section only.
+Use this brick to update the Projects section with real VVS project photos.
 
 Each Image/Video URL must replace the existing project media in that section — and nowhere else.
 
-Do not generate or insert any text descriptions for the projects unless explicitly requested. The section should display high-quality media.
+Do not generate or insert any text descriptions for the projects unless explicitly requested. The section should display high-quality media (e.g., värmepumpar, badrum, pannrum, golvvärme).
 
-Fill in the three project entries below:
+Fill in the project entries below:
 
-Project 1 Image/Video URL:
-[ENTER IMAGE/VIDEO URL HERE]
+Project 1 (Värmepumpar) Image URL:
+[ENTER IMAGE URL HERE]
 
-Project 2 Image/Video URL:
-[ENTER IMAGE/VIDEO URL HERE]
+Project 2 (Badrum & Kök) Image URL:
+[ENTER IMAGE URL HERE]
 
-Project 3 Image/Video URL:
-[ENTER IMAGE/VIDEO URL HERE]
+Project 3 (Rörservice / Pannrum) Image URL:
+[ENTER IMAGE URL HERE]
+
+Project 4 (Vattenburen Golvvärme) Image URL:
+[ENTER IMAGE URL HERE]
 ```
 
 ---
@@ -129,32 +140,34 @@ Use this brick to update the Hero section background image or video.
 
 The media provided here must replace the current background used in the Hero section. Do not modify the Hero layout, overlay, text positioning, spacing, or styling.
 
-Only replace the background media source while keeping the existing structure of the template intact.
-Ensure the image/video is responsive and scales properly across desktop, tablet, and mobile devices.
+Keep the 3 key checkmarks:
+✓ Auktoriserat VVS-företag (Säker Vatten)
+✓ Jour & akuta ärenden
+✓ Fast pris & 30% ROT-avdrag
 
 Hero Background Image/Video URL:
-https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260816_182956_5f9788b4-1956-469f-bd36-25622b10a0ef.mp4
+[ENTER HERO VIDEO / IMAGE URL HERE]
 ```
 
 ---
 
-## 🧱 BRICK 7: Customer Reviews Generator
+## 🧱 BRICK 7: Customer Reviews Generator (VVS & Värmepumpar)
 
 Copy and paste the following into the AI chat:
 
 ```text
 Use this brick to replace the existing reviews on the website.
 
-Replace the current reviews by generating exactly 3 new customer reviews.
-The new reviews should naturally fit the current company based on its name, location, and services. The system should determine what details are appropriate to include.
+Replace the current reviews by generating exactly 3 new authentic customer reviews for VVS & värmepumpsarbeten.
+The new reviews should naturally fit the current company based on its name, location, and services (e.g. 1 review about värmepumpsbyte/bergvärme, 1 about badrumsrenovering enligt Säker Vatten, 1 about akut rörservice/läcka).
 
 Each time this prompt is used:
 - The existing reviews must be fully replaced.
 - The new reviews must be original and tailored to the business.
 - Reviewer names must be realistic and localized to the company's operating area.
 - Wording and tone should vary naturally.
-- Reviews should sound human, believable, and authentic (avoid generic marketing jargon).
-- The three reviews should have slightly different lengths (varying character counts) while maintaining visually balanced cards.
+- Reviews should sound human, believable, and authentic with 5-star ratings and 4.9/5 Reco/Google badge.
+- The three reviews should have slightly different lengths while maintaining visually balanced cards.
 
 The result must be placed directly into the website’s reviews/testimonials section, replacing old content entirely.
 ```
@@ -180,7 +193,7 @@ The goal is to keep the project clean, lightweight, and free from unused templat
 
 ---
 
-## 🧱 BRICK 9: SEO & Metadata Verification
+## 🧱 BRICK 9: SEO & Metadata Verification (Plumber / HVAC Schema)
 
 Copy and paste the following into the AI chat:
 
@@ -188,15 +201,14 @@ Copy and paste the following into the AI chat:
 Ensure that the website displays correct and consistent company information everywhere, especially for SEO and social link previews.
 
 Scan the entire project and identify all sources of metadata and structured data, including:
-- <title> and meta description in index.html
+- <title> and meta description in index.html (Auktoriserat VVS-företag | Säker Vatten)
 - Open Graph tags (og:title, og:description, og:site_name, og:url, og:image)
 - Twitter Card tags
-- JSON-LD (Organization / LocalBusiness schema)
+- JSON-LD (Schema.org types ["Plumber", "HVACBusiness"] with OfferCatalog for Värmepumpar, Badrum & Kök, Rörservice, Golvvärme)
 - Manifests or config files that inject metadata
 
 Remove all outdated, duplicated, or conflicting company information and ensure that only the current, correct company name and location are used consistently across all metadata.
 
 Use the information provided in the previous bricks to populate all metadata fields and ensure consistency across the entire project.
-
-Use absolute URLs where required, ensure all required meta tags are present, and confirm that SEO results and social link previews display the correct company information.
 ```
+

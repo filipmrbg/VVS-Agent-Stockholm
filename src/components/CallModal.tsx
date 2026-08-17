@@ -10,10 +10,10 @@ export default function CallModal({ isOpen, onClose }: CallModalProps) {
 
   const contacts = [
     {
-      name: 'JH Huskvalitet AB',
-      role: 'Kundtjänst och Offert',
-      phone: '072-210 10 75',
-      tel: 'tel:0722101075',
+      name: 'VVS Agent Stockholm AB',
+      role: 'Kundservice & Offert',
+      phone: '073-500 02 50',
+      tel: 'tel:+46735000250',
     },
   ];
 
@@ -39,7 +39,7 @@ export default function CallModal({ isOpen, onClose }: CallModalProps) {
           width: '100%',
           maxWidth: '440px',
           background: '#ffffff',
-          borderRadius: '24px',
+          borderRadius: '4px',
           padding: '32px 28px',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.35)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
@@ -84,8 +84,8 @@ export default function CallModal({ isOpen, onClose }: CallModalProps) {
             style={{
               width: '56px',
               height: '56px',
-              background: 'rgba(234, 88, 12, 0.12)',
-              borderRadius: '16px',
+              background: 'rgba(175, 115, 73, 0.12)',
+              borderRadius: '4px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -100,10 +100,10 @@ export default function CallModal({ isOpen, onClose }: CallModalProps) {
               fontWeight: 800,
               color: '#0f172a',
               margin: '0 0 8px 0',
-              fontFamily: 'var(--font-family)',
+              fontFamily: 'var(--font-heading)',
             }}
           >
-            Ring JH Huskvalitet AB
+            Ring VVS Agent Stockholm
           </h2>
           <p style={{ fontSize: '0.9rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>
             Kontakta oss direkt för rådgivning, frågor och kostnadsfri kalkyl.

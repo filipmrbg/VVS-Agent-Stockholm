@@ -3,17 +3,24 @@ import { Link } from 'react-router-dom';
 import {
   Star,
   Phone,
+  Mail,
   MapPin,
-  Hammer,
-  CheckCircle2,
+  Building,
+  Instagram,
+  Check,
   ArrowRight,
+  ShieldCheck,
+  Award,
+  Zap,
+  Clock,
+  Wrench,
+  Flame,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import Button from '../components/Button';
-import CTABanner from '../components/CTABanner';
-import ReviewCard from '../components/ReviewCard';
 import SocialBanner from '../components/SocialBanner';
-import ProjectsGallery from '../components/ProjectsGallery';
 import FAQAccordion from '../components/FAQAccordion';
 import CallModal from '../components/CallModal';
 import { usePageTitle } from '../hooks/usePageTitle';
@@ -27,36 +34,86 @@ const container: React.CSSProperties = {
 
 const homeFaqItems = [
   {
-    question: 'Kostar det något att få en offert?',
-    answer: 'Nej, vi erbjuder alltid kostnadsfria offerter och rådgivning helt utan förbindelser.',
+    question: 'Arbetar ni enligt gällande branschregler och normer?',
+    answer: 'Ja, alla våra installationer utförs fackmannamässigt enligt gällande branschregler och svenska standarder för att garantera ett tryggt och godkänt resultat.',
   },
   {
-    question: 'Hur fungerar ROT avdraget?',
-    answer: 'Som privatperson har du rätt till ROT avdrag som reducerar arbetskostnaden med 30 %. Vi sköter all administration direkt med Skatteverket och drar av beloppet på din faktura.',
+    question: 'Hur fungerar ROT-avdraget för VVS- och rörmokeriarbeten?',
+    answer: 'Som privatperson har du rätt till 30 % ROT-avdrag på arbetskostnaden upp till 50 000 kr per person och år. Vi administrerar hela avdraget direkt med Skatteverket och drar av beloppet på din faktura.',
   },
   {
-    question: 'Lämnar ni garanti på utfört arbete?',
-    answer: 'Ja, vi arbetar alltid enligt gällande branschregler och lämnar fullständiga garantier på både utfört arbete och material.',
+    question: 'Hur snabbt kan ni rycka ut vid akuta läckor och rörproblem?',
+    answer: 'Vi prioriterar alltid akuta ärenden som vattenläckor, trasiga varmvattenberedare och akuta stopp i avlopp för att minimera risken för omfattande vattenskador.',
   },
   {
-    question: 'Hjälper ni till med både små och stora projekt?',
-    answer: 'Ja, vi åtar oss allt från mindre renoveringar och servicearbeten till mer omfattande nybyggnationer och tillbyggnader.',
+    question: 'Vilka typer av värmepumpar installerar och servar ni?',
+    answer: 'Vi installerar samt servar bergvärme, luft/vatten- och frånluftsvärmepumpar från marknadsledande tillverkare som NIBE, CTC, Bosch, Daikin och IVT.',
   },
   {
-    question: 'Hur går processen till från start till mål?',
-    answer: 'Vi inleder med en dialog kring dina önskemål och förutsättningar, tar fram en tydlig offert och sätter en överenskommen tidsplan innan arbetet påbörjas.',
+    question: 'Kostar det något att få en offert eller ett platsbesök?',
+    answer: 'Nej, vi erbjuder alltid kostnadsfria offerter och rådgivning helt utan förbindelser inför ditt VVS- eller värmepumpsprojekt.',
+  },
+];
+
+const customerReviews = [
+  {
+    id: 1,
+    name: 'Johan Eriksson',
+    location: 'Södermalm, Stockholm',
+    stars: 5,
+    project: 'Komplett badrums-VVS & blandarbyte',
+    text: 'Anlitade VVS Agent Stockholm för rördragning och installation av badrumsinredning vid vår totalrenovering. Fantastiskt bemötande från första kontakten! Allt utfördes fackmannamässigt och enligt tidsplan. Mycket nöjd!',
+  },
+  {
+    id: 2,
+    name: 'Sofia Lindgren',
+    location: 'Bromma, Stockholm',
+    stars: 5,
+    project: 'Installation av köks-VVS & diskmaskin',
+    text: 'Snabb och proffsig hjälp när vi byggde om köket. Farid och hans team var punktliga, noggranna och gav suveräna råd kring rördragningen. ROT-avdraget drogs direkt på fakturan utan krångel.',
+  },
+  {
+    id: 3,
+    name: 'Mikael Wahlberg',
+    location: 'Täby, Stockholm',
+    stars: 5,
+    project: 'Service av värmesystem & shuntgrupp',
+    text: 'Fick problem med ojämn värme i villan. VVS Agent Stockholm kom ut snabbt, felsökte och justerade in shuntgruppen samt bytte ut en sliten cirkulationspump. Proffsigt och prisvärt!',
+  },
+  {
+    id: 4,
+    name: 'Anna Karlsson',
+    location: 'Vasastan, Stockholm',
+    stars: 5,
+    project: 'Fastighetsservice & rörinspektion',
+    text: 'Anlitar VVS Agent Stockholm för löpande VVS-service i vår BRF. Alltid snabb återkoppling, tydliga offerter och ett personligt engagemang som man sällan ser hos hantverkare.',
   },
 ];
 
 export default function Home() {
   usePageTitle(
-    'JH Huskvalitet AB | Bygg och Huskvalitet i Uppland',
-    'JH Huskvalitet AB utför nybyggnation, renovering, ombyggnation och totalentreprenad i Uppland med omnejd. Kontakta oss för en kostnadsfri offert!'
+    'VVS AGENT STOCKHOLM AB | Specialister inom VVS & Fastighetsservice',
+    'Professionellt VVS-företag i Stockholm. Specialister på kök, badrum, värmesystem och fastighetsservice. 10 MSEK försäkring och 30% ROT-avdrag.'
   );
 
   const heroBgRef = useRef<HTMLDivElement>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [isCallModalOpen, setIsCallModalOpen] = useState(false);
+  const [activeReviewIdx, setActiveReviewIdx] = useState(0);
+
+  // Form state
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: '',
+  });
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  };
 
   useEffect(() => {
     let ticking = false;
@@ -64,7 +121,7 @@ export default function Home() {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           if (heroBgRef.current) {
-            heroBgRef.current.style.transform = `translate3d(0, ${window.scrollY * 0.5}px, 0)`;
+            heroBgRef.current.style.transform = `translate3d(0, ${window.scrollY * 0.35}px, 0)`;
           }
           ticking = false;
         });
@@ -86,9 +143,7 @@ export default function Home() {
       video.playsInline = true;
       const promise = video.play();
       if (promise !== undefined) {
-        promise.catch(() => {
-          // Autoplay blocked (e.g. iOS Low Power Mode) — will unlock on user interaction
-        });
+        promise.catch(() => {});
       }
     };
 
@@ -117,35 +172,34 @@ export default function Home() {
     };
   }, []);
 
-
-
   return (
-    <main style={{ fontFamily: 'var(--font-family)' }}>
+    <main style={{ fontFamily: 'var(--font-body)', background: 'var(--dark-hero)' }}>
 
-      {/* ── SECTION 1: HERO ─────────────────────────────────────── */}
+      {/* ── 1. HERO-SEKTIONEN ───────────────────────────────────── */}
       <section style={{
         position: 'relative',
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        paddingTop: '120px',
-        paddingBottom: '80px',
+        paddingTop: '140px',
+        paddingBottom: '100px',
         boxSizing: 'border-box',
+        background: 'linear-gradient(180deg, #07131e 0%, #03080d 100%)',
       }}>
-        {/* Parallax Background Video */}
+        {/* Parallax Background Video / Image */}
         <div
           ref={heroBgRef}
           style={{
             position: 'absolute',
-            inset: '-20% 0',
+            inset: '-15% 0',
             zIndex: 0,
             willChange: 'transform',
           }}
         >
           <video
             ref={heroVideoRef}
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260816_182956_5f9788b4-1956-469f-bd36-25622b10a0ef.mp4"
+            src="/hero-video.mp4"
             preload="auto"
             autoPlay
             loop
@@ -156,16 +210,19 @@ export default function Home() {
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center',
+              opacity: 1,
             }}
           >
-            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260816_182956_5f9788b4-1956-469f-bd36-25622b10a0ef.mp4" type="video/mp4" />
+            <source src="/hero-video.mp4" type="video/mp4" />
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260812_233545_f4a7afb0-ad1a-4be9-934a-6e90661f4992.mp4" type="video/mp4" />
           </video>
         </div>
-        {/* Dark overlay */}
+
+        {/* Soft Contrast Gradient Overlay */}
         <div style={{
           position: 'absolute',
           inset: 0,
-          background: 'rgba(15, 12, 8, 0.65)',
+          background: 'linear-gradient(90deg, rgba(7, 19, 30, 0.75) 0%, rgba(7, 19, 30, 0.42) 50%, rgba(7, 19, 30, 0.15) 100%)',
           zIndex: 1,
         }} />
 
@@ -175,61 +232,73 @@ export default function Home() {
             flexDirection: 'column',
             alignItems: 'flex-start',
             textAlign: 'left',
-            maxWidth: '680px',
+            maxWidth: '780px',
             margin: '0',
-            paddingTop: '60px',
-            paddingBottom: '40px',
           }}>
-            {/* Top Location Line */}
-            <ScrollReveal animation="fade-down" delay={0} duration={0.6}>
-              <span style={{
-                fontFamily: "'Outfit', sans-serif",
-                letterSpacing: '0.24em',
-                textTransform: 'uppercase',
-                fontSize: 'clamp(0.7rem, 1.2vw, 0.82rem)',
-                fontWeight: 700,
-                color: 'rgba(255, 255, 255, 0.92)',
-                display: 'block',
-                marginBottom: '14px',
-              }}>
-                UPPLAND MED OMNEJD
-              </span>
-            </ScrollReveal>
-
-            {/* Huge Bold Headline (H1) using Outfit font */}
-            <ScrollReveal animation="fade-up" delay={100} duration={0.8}>
+            {/* Official H1 Headline */}
+            <ScrollReveal animation="fade-up" delay={0} duration={0.8}>
               <h1 style={{
-                fontFamily: "'Outfit', sans-serif",
                 color: '#ffffff',
-                fontSize: 'clamp(3.2rem, 7.5vw, 5.8rem)',
-                fontWeight: 900,
-                lineHeight: 0.98,
-                textTransform: 'uppercase',
-                letterSpacing: '-0.01em',
-                margin: '0 0 24px 0',
-                textShadow: '0 4px 18px rgba(0, 0, 0, 0.75)',
+                fontFamily: 'var(--font-heading)',
+                fontSize: 'clamp(2.4rem, 5.2vw, 4.2rem)',
+                fontWeight: 800,
+                lineHeight: 1.15,
+                letterSpacing: '-0.02em',
+                margin: '0 0 20px 0',
+                textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)',
               }}>
-                JH<br />HUSKVALITET<br />AB
+                Specialister inom VVS & fastighetsservice
               </h1>
             </ScrollReveal>
 
-            {/* Subtitle / Description */}
+            {/* Ingress */}
             <ScrollReveal animation="fade-up" delay={200} duration={0.8}>
               <p style={{
-                fontFamily: "'Outfit', 'Plus Jakarta Sans', sans-serif",
-                color: 'rgba(255, 255, 255, 0.88)',
-                fontSize: 'clamp(1rem, 1.8vw, 1.18rem)',
+                color: 'rgba(255, 255, 255, 0.92)',
+                fontSize: 'clamp(1.02rem, 1.8vw, 1.2rem)',
                 lineHeight: 1.65,
-                maxWidth: '560px',
-                margin: '0 0 36px 0',
-                textShadow: '0 2px 12px rgba(0, 0, 0, 0.85)',
+                maxWidth: '680px',
+                margin: '0 0 28px 0',
                 fontWeight: 400,
               }}>
-                Ett personligt byggföretag i Uppland med fokus på nybyggnation, renovering, ombyggnation och totalentreprenad med kvalitet i varje led.
+                Söker du en pålitlig och auktoriserad rörmokare i Stockholm? Vi utför kompletta VVS-arbeten, kök, badrum och värmesystem för privatpersoner, BRF:er och fastighetsägare med fasta priser och 30% ROT-avdrag.
               </p>
             </ScrollReveal>
 
-            {/* Action Buttons */}
+            {/* Checkmark-punkter med gyllene bock-ikoner (inspirerat av referensdesign) */}
+            <ScrollReveal animation="fade-up" delay={250} duration={0.8}>
+              <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '16px',
+                marginBottom: '36px',
+                width: '100%',
+              }}>
+                {[
+                  'VVS-service & rörarbeten',
+                  'Jour & akuta ärenden',
+                  'VVS-tjänster i Stockholm med omnejd',
+                ].map((item, idx) => (
+                  <div key={idx} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '14px',
+                  }}>
+                    <Check size={22} color="var(--primary)" strokeWidth={3} style={{ flexShrink: 0 }} />
+                    <span style={{
+                      color: '#ffffff',
+                      fontSize: 'clamp(1.05rem, 1.6vw, 1.2rem)',
+                      fontWeight: 500,
+                      letterSpacing: '0.01em',
+                    }}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </ScrollReveal>
+
+            {/* Knappar: Offertförfrågan (Koppar) + Våra Tjänster (Outline) */}
             <ScrollReveal animation="fade-up" delay={300} duration={0.8}>
               <div style={{
                 display: 'flex',
@@ -237,28 +306,52 @@ export default function Home() {
                 gap: '16px',
                 flexWrap: 'wrap',
               }}>
-                <Button variant="primary" size="lg" href="/offert">
-                  Begär kostnadsfri offert
+                <Button variant="primary" size="lg" href="#offert">
+                  Offertförfrågan
                 </Button>
 
-                <Button
-                  variant="outline"
-                  size="lg"
-                  href="tel:0722101075"
-                  onClick={(e) => {
-                    if (window.innerWidth > 768) {
-                      e.preventDefault();
-                      setIsCallModalOpen(true);
-                    }
-                  }}
-                >
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                    <Phone size={18} />
-                    Ring 072-210 10 75
-                  </span>
+                <Button variant="outline" size="lg" href="#tjanster">
+                  Våra Tjänster
                 </Button>
               </div>
             </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2. TRUST-BAR (Under Hero) ─────────────────────────────── */}
+      <section style={{
+        background: '#ffffff',
+        borderBottom: '1px solid #e2e8f0',
+        minHeight: '64px',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '16px 0',
+        position: 'relative',
+        zIndex: 10,
+      }}>
+        <div style={{ ...container, width: '100%' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            flexWrap: 'wrap',
+            gap: '14px',
+          }}>
+            <div style={{ display: 'flex', gap: '3px' }}>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={18} fill="#f59e0b" color="#f59e0b" />
+              ))}
+            </div>
+            <span style={{
+              fontWeight: 700,
+              fontSize: '1rem',
+              color: '#111827',
+              letterSpacing: '0.01em',
+            }}>
+              4.9 / 5 i betyg på Reco & Google | Över 50+ verifierade kundomdömen
+            </span>
           </div>
         </div>
       </section>
@@ -269,171 +362,146 @@ export default function Home() {
         onClose={() => setIsCallModalOpen(false)}
       />
 
-      {/* ── SECTION 2: VÅRA TJÄNSTER (MODERN CLEAN PHOTO CARDS) ───── */}
+      {/* ── 3. TJÄNSTER (Philip Rörmokaren stil) ────────────────── */}
       <section
         id="tjanster"
         style={{
-          background: '#f8fafc',
-          padding: 'clamp(80px, 10vw, 120px) 0',
-          borderTop: '1px solid #e2e8f0',
+          background: 'var(--light-bg, #ffffff)',
+          padding: 'clamp(70px, 8vw, 100px) 0',
         }}
       >
         <div style={container}>
-          {/* Clean Authentic Split-Header */}
+          {/* Header: Left Title + Right Text */}
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
+            marginBottom: '40px',
             flexWrap: 'wrap',
             gap: '24px',
-            marginBottom: '44px',
           }}>
-            <div style={{ maxWidth: '580px' }}>
-              <ScrollReveal animation="fade-right">
-                <span style={{
-                  color: 'var(--color-primary)',
-                  fontWeight: 700,
-                  fontSize: '0.82rem',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  display: 'block',
-                  marginBottom: '8px',
-                }}>
-                  Vad vi erbjuder
-                </span>
+            <div>
+              <ScrollReveal animation="fade-up">
                 <h2 style={{
-                  color: 'var(--color-text-dark)',
-                  fontWeight: 800,
-                  fontSize: 'clamp(1.9rem, 3.6vw, 2.7rem)',
-                  letterSpacing: '-0.025em',
+                  color: '#000000',
+                  fontWeight: 900,
+                  fontSize: 'clamp(2.6rem, 5vw, 3.8rem)',
+                  letterSpacing: '-0.02em',
                   margin: 0,
-                  lineHeight: 1.18,
+                  lineHeight: 1.1,
+                  fontFamily: 'var(--font-heading)',
                 }}>
-                  Byggtjänster med fokus på kvalitet
+                  Våra tjänster
                 </h2>
               </ScrollReveal>
             </div>
 
-            <div style={{ maxWidth: '420px' }}>
-              <ScrollReveal animation="fade-left" delay={150}>
+            <div style={{ maxWidth: '480px' }}>
+              <ScrollReveal animation="fade-up" delay={100}>
                 <p style={{
-                  color: 'var(--color-gray-600)',
-                  fontSize: '1rem',
-                  lineHeight: 1.65,
-                  margin: '0 0 12px 0',
+                  color: '#222222',
+                  fontSize: '0.96rem',
+                  lineHeight: 1.6,
+                  margin: 0,
                 }}>
-                  Från nybyggnation och totalentreprenader till renoveringar och ombyggnationer i Uppland med omnejd.
+                  Vi erbjuder auktoriserade VVS- och fastighetslösningar i hela Stockholmsområdet med fokus på fackmannamässig kvalitet, trygghet och långsiktig funktion.
                 </p>
-                <Link
-                  to="/tjanster"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    color: 'var(--color-primary)',
-                    fontWeight: 700,
-                    fontSize: '0.92rem',
-                    textDecoration: 'none',
-                  }}
-                >
-                  Utforska alla tjänster <ArrowRight size={16} />
-                </Link>
               </ScrollReveal>
             </div>
           </div>
 
-          {/* Clean Modern Photo Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
-            gap: '28px',
-          }}>
+          {/* 4 full-bleed mörka bildkort i grid */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(4, 1fr)',
+              gap: '16px',
+            }}
+            className="services-grid-4"
+          >
             {services.map((svc: ServiceItem, index: number) => (
-              <ScrollReveal key={svc.slug} animation="fade-up" delay={index * 90}>
+              <ScrollReveal key={svc.slug} animation="fade-up" delay={index * 80}>
                 <Link
                   to={svc.href}
-                  className="modern-photo-card"
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    background: '#ffffff',
-                    borderRadius: '16px',
+                    position: 'relative',
+                    height: '460px',
                     overflow: 'hidden',
+                    borderRadius: '0px',
+                    display: 'block',
                     textDecoration: 'none',
-                    border: '1px solid #e2e8f0',
-                    boxShadow: '0 4px 20px rgba(15, 23, 42, 0.05)',
-                    transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-                    height: '100%',
+                    background: '#07131e',
                   }}
                   onMouseEnter={(e) => {
                     const card = e.currentTarget;
-                    card.style.transform = 'translateY(-6px)';
-                    card.style.boxShadow = '0 20px 40px rgba(15, 23, 42, 0.12)';
-                    card.style.borderColor = 'rgba(234, 88, 12, 0.3)';
-                    const img = card.querySelector('.card-photo') as HTMLElement;
+                    const img = card.querySelector('.card-bg-img') as HTMLElement;
                     if (img) img.style.transform = 'scale(1.06)';
                   }}
                   onMouseLeave={(e) => {
                     const card = e.currentTarget;
-                    card.style.transform = 'translateY(0)';
-                    card.style.boxShadow = '0 4px 20px rgba(15, 23, 42, 0.05)';
-                    card.style.borderColor = '#e2e8f0';
-                    const img = card.querySelector('.card-photo') as HTMLElement;
+                    const img = card.querySelector('.card-bg-img') as HTMLElement;
                     if (img) img.style.transform = 'scale(1)';
                   }}
                 >
-                  {/* Photo Container */}
-                  <div style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '210px',
-                    overflow: 'hidden',
-                    background: '#0f172a',
-                  }}>
-                    <img
-                      src={svc.image}
-                      alt={svc.title}
-                      loading="lazy"
-                      className="card-photo"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                        transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-                      }}
-                    />
-                    <div style={{
+                  {/* Bakgrundsbild */}
+                  <img
+                    src={svc.image}
+                    alt={svc.title}
+                    loading="lazy"
+                    className="card-bg-img"
+                    style={{
                       position: 'absolute',
                       inset: 0,
-                      background: 'linear-gradient(180deg, transparent 50%, rgba(15, 23, 42, 0.4) 100%)',
-                      pointerEvents: 'none',
-                    }} />
-                  </div>
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                      transition: 'transform 0.45s ease',
+                    }}
+                  />
 
-                  {/* Content Container */}
-                  <div style={{
-                    padding: '24px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    flex: 1,
-                  }}>
-                    <h3 style={{
-                      color: 'var(--color-text-dark)',
-                      fontWeight: 700,
-                      fontSize: '1.2rem',
-                      margin: '0 0 10px 0',
-                      letterSpacing: '-0.01em',
-                    }}>
+                  {/* Mörk overlay med mjuk gradient */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.25) 100%)',
+                    }}
+                  />
+
+                  {/* Textinnehåll placerat längst ner över bilden */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      padding: '24px 20px',
+                      zIndex: 2,
+                    }}
+                  >
+                    <h3
+                      style={{
+                        color: '#ffffff',
+                        fontWeight: 800,
+                        fontSize: '1.25rem',
+                        margin: '0 0 10px 0',
+                        lineHeight: 1.18,
+                        letterSpacing: '-0.01em',
+                        fontFamily: 'var(--font-heading)',
+                      }}
+                    >
                       {svc.title}
                     </h3>
-                    <p style={{
-                      color: 'var(--color-gray-600)',
-                      fontSize: '0.93rem',
-                      lineHeight: 1.65,
-                      margin: 0,
-                      flex: 1,
-                    }}>
+                    <p
+                      style={{
+                        color: 'rgba(255, 255, 255, 0.88)',
+                        fontSize: '0.88rem',
+                        lineHeight: 1.5,
+                        margin: 0,
+                        fontWeight: 400,
+                      }}
+                    >
                       {svc.shortDescription}
                     </p>
                   </div>
@@ -441,548 +509,546 @@ export default function Home() {
               </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Centered Button Underneath Grid */}
-          <div style={{ textAlign: 'center', marginTop: '48px' }}>
-            <ScrollReveal animation="fade-up" delay={200}>
-              <Button variant="primary" href="/tjanster" size="lg">
-                Läs mer om våra tjänster <ArrowRight size={18} />
-              </Button>
-            </ScrollReveal>
+      {/* ── 4. "OM OSS" – DIN LOKALA VVS-EXPERT I STOCKHOLM (Kopparsektion) ─────── */}
+      <section
+        id="om-oss"
+        style={{
+          background: 'var(--copper-section, #af7349)',
+          color: '#ffffff',
+          padding: 'clamp(80px, 10vw, 120px) 0',
+        }}
+      >
+        <div style={container}>
+          <div className="split-50-50">
+            {/* Vänster: Personlig grundarhistoria */}
+            <div>
+              <ScrollReveal animation="fade-right">
+                <h2 style={{
+                  color: '#ffffff',
+                  fontWeight: 800,
+                  fontSize: 'clamp(2.1rem, 3.8vw, 3rem)',
+                  lineHeight: 1.15,
+                  margin: '0 0 20px 0',
+                }}>
+                  Din lokala VVS-expert i Stockholm
+                </h2>
+              </ScrollReveal>
+
+              <ScrollReveal animation="fade-right" delay={100}>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.95)',
+                  fontSize: '1.05rem',
+                  lineHeight: 1.75,
+                  margin: '0 0 20px 0',
+                }}>
+                  VVS AGENT STOCKHOLM AB drivs av auktoriserade VVS-installatörer med lång yrkeserfarenhet inom rörarbeten, kök, badrum, värmesystem och komplett fastighetsservice i hela Stockholmsregionen.
+                </p>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.88)',
+                  fontSize: '0.98rem',
+                  lineHeight: 1.7,
+                  margin: '0 0 28px 0',
+                }}>
+                  För oss är personlig kontakt, hög tillgänglighet och ett fackmannamässigt hantverk en självklarhet. Oavsett om det rör sig om en akut insats, en planerad badrumsrenovering eller löpande fastighetsskötsel garanterar vi högsta kvalitet och trygghet från start till mål.
+                </p>
+              </ScrollReveal>
+
+              <ScrollReveal animation="fade-right" delay={200}>
+                <Button variant="white" size="lg" href="#offert">
+                  Begär kostnadsfri offert
+                </Button>
+              </ScrollReveal>
+            </div>
+
+            {/* Höger: Video-sektion eller bild */}
+            <div>
+              <ScrollReveal animation="fade-left" delay={150}>
+                <div style={{
+                  borderRadius: '4px',
+                  overflow: 'hidden',
+                  boxShadow: '0 16px 40px rgba(0, 0, 0, 0.25)',
+                  height: '460px',
+                  position: 'relative',
+                  background: '#07131e',
+                }}>
+                  <video
+                    src="/about-video.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '20px',
+                    left: '20px',
+                    right: '20px',
+                    background: 'rgba(7, 19, 30, 0.9)',
+                    backdropFilter: 'blur(8px)',
+                    padding: '16px 20px',
+                    borderRadius: '4px',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                  }}>
+                    <div style={{ color: '#ffffff', fontWeight: 700, fontSize: '1rem', textTransform: 'uppercase' }}>
+                      VVS AGENT STOCKHOLM AB
+                    </div>
+                    <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem' }}>
+                      Kvalitetsgaranti & trygg VVS i hela Stockholm
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── SECTION 3: DIN LOKALA BYGGFIRMA / OM OSS ─────────────── */}
-      <section style={{ background: '#ffffff', padding: 'clamp(60px, 8vw, 100px) 0', borderTop: '1px solid #e2e8f0' }}>
-        <div style={container}>
-          <div className="two-col" style={{
-            display: 'grid',
-            gridTemplateColumns: 'clamp(280px, 35%, 400px) 1fr',
-            gap: '60px',
-            alignItems: 'center',
-          }}>
-            {/* Left: Company Logo Card */}
-            <ScrollReveal animation="fade-left" duration={0.8}>
-              <div style={{
-                position: 'relative',
-                width: '100%',
-                maxWidth: '440px',
-                margin: '0 auto',
-                borderRadius: '24px',
-                overflow: 'hidden',
-                boxShadow: '0 12px 36px rgba(15, 23, 42, 0.08)',
-                border: '1px solid #e2e8f0',
-                background: '#ffffff',
-                height: '380px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '36px',
-              }}>
-                <img
-                  src="/logo.jpg"
-                  alt="JH Huskvalitet AB Logotyp"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    display: 'block',
-                  }}
-                />
-              </div>
-            </ScrollReveal>
+      {/* ── 5. INSTAGRAM & PROJEKTGALLERI (SocialBanner.tsx - Real Embedded Posts) ──── */}
+      <SocialBanner />
 
-            {/* Right: text */}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <ScrollReveal animation="fade-right" duration={0.8}>
-                <h2 style={{
-                  color: 'var(--color-text-dark)',
-                  fontWeight: 800,
-                  fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
-                  lineHeight: 1.2,
-                  margin: '0 0 14px 0',
-                }}>
-                  Din lokala byggfirma i Uppland
-                </h2>
-              </ScrollReveal>
-              <ScrollReveal animation="scale-x-left" delay={200} duration={0.6}>
-                <span style={{ display: 'block', width: '60px', height: '3px', background: 'var(--color-primary)', borderRadius: '2px', margin: '0 0 24px' }} />
-              </ScrollReveal>
-              <ScrollReveal animation="fade-right" duration={0.8} delay={100}>
-                <p style={{
-                  color: 'var(--color-gray-600)',
-                  fontSize: '1rem',
-                  lineHeight: 1.75,
-                  margin: '0 0 32px 0',
-                }}>
-                  Bakom JH Huskvalitet står Viktor Johannesson. Vi tror på rak kommunikation, personlig kontakt och ett noggrant hantverk utan genvägar. Oavsett om du planerar en nybyggnation, tillbyggnad eller renovering finns vi med dig hela vägen från ritning till slutbesiktning.
-                </p>
-              </ScrollReveal>
-              <ScrollReveal animation="fade-right" duration={0.8} delay={200}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {[
-                    'En och samma kontaktperson från start till mål',
-                    'Tydliga offerter, fasta priser och direkt ROT avdrag',
-                    'Noggrant hantverk anpassat efter dina önskemål',
-                    'Lokal närvaro och snabb service i hela Uppland',
-                  ].map((item, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <CheckCircle2 size={24} color="var(--color-primary)" style={{ flexShrink: 0 }} />
-                      <span style={{ color: 'var(--color-text-dark)', fontWeight: 600, fontSize: '0.95rem' }}>
-                        {item}
-                      </span>
-                    </div>
+      {/* ── 6. RECO OMDÖMES-SLIDER ──────────────────────────────── */}
+      <section
+        id="omdomen"
+        style={{
+          background: 'var(--light-alt, #f4f4f4)',
+          color: 'var(--text-dark)',
+          padding: 'clamp(80px, 10vw, 110px) 0',
+          position: 'relative',
+          borderTop: '1px solid #e2e8f0',
+          borderBottom: '1px solid #e2e8f0',
+        }}
+      >
+        <div style={container}>
+          {/* Header */}
+          <div style={{
+            textAlign: 'center',
+            maxWidth: '680px',
+            margin: '0 auto 48px auto',
+          }}>
+            <ScrollReveal animation="fade-up">
+              <h2 style={{
+                color: 'var(--text-dark)',
+                fontWeight: 800,
+                fontSize: 'clamp(2rem, 3.6vw, 2.7rem)',
+                letterSpacing: '-0.02em',
+                margin: '0 0 14px 0',
+                lineHeight: 1.2,
+              }}>
+                Nöjda kunder på Reco & Google
+              </h2>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: '#ffffff',
+                padding: '6px 16px',
+                borderRadius: '4px',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                marginTop: '6px',
+              }}>
+                <div style={{ display: 'flex', gap: '3px' }}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />
                   ))}
                 </div>
-              </ScrollReveal>
-              <ScrollReveal animation="fade-right" duration={0.8} delay={250}>
-                <div style={{ marginTop: '32px' }}>
-                  <Button variant="dark" href="/om-oss">
-                    Läs mer om oss
-                  </Button>
+                <span style={{ fontWeight: 700, fontSize: '0.92rem', color: 'var(--text-dark)' }}>
+                  4.9 / 5 i snittbetyg (Över 50 omdömen)
+                </span>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Interactive Review Slider / Cards */}
+          <div style={{ maxWidth: '820px', margin: '0 auto' }}>
+            <ScrollReveal animation="fade-up" delay={150}>
+              <div style={{
+                background: '#ffffff',
+                borderRadius: '4px',
+                padding: 'clamp(32px, 5vw, 48px)',
+                border: '1px solid #e2e8f0',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
+                position: 'relative',
+              }}>
+                <div style={{ display: 'flex', gap: '4px', marginBottom: '16px' }}>
+                  {Array.from({ length: customerReviews[activeReviewIdx].stars }).map((_, i) => (
+                    <Star key={i} size={20} fill="#f59e0b" color="#f59e0b" />
+                  ))}
                 </div>
-              </ScrollReveal>
-            </div>
+
+                <p style={{
+                  color: 'var(--color-gray-700, #333333)',
+                  fontSize: 'clamp(1.05rem, 1.8vw, 1.22rem)',
+                  lineHeight: 1.7,
+                  fontStyle: 'italic',
+                  margin: '0 0 24px 0',
+                }}>
+                  "{customerReviews[activeReviewIdx].text}"
+                </p>
+
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-end',
+                  flexWrap: 'wrap',
+                  gap: '16px',
+                  borderTop: '1px solid #f1f5f9',
+                  paddingTop: '20px',
+                }}>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--text-dark)' }}>
+                      {customerReviews[activeReviewIdx].name}
+                    </div>
+                    <div style={{ color: 'var(--primary)', fontSize: '0.88rem', fontWeight: 600 }}>
+                      {customerReviews[activeReviewIdx].location} • {customerReviews[activeReviewIdx].project}
+                    </div>
+                  </div>
+
+                  {/* Slider controls */}
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      onClick={() => setActiveReviewIdx((prev) => (prev - 1 + customerReviews.length) % customerReviews.length)}
+                      style={{
+                        background: '#f8fafc',
+                        border: '1px solid #e2e8f0',
+                        color: '#111827',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = '#e2e8f0')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                      aria-label="Föregående omdöme"
+                    >
+                      <ChevronLeft size={20} />
+                    </button>
+                    <button
+                      onClick={() => setActiveReviewIdx((prev) => (prev + 1) % customerReviews.length)}
+                      style={{
+                        background: '#f8fafc',
+                        border: '1px solid #e2e8f0',
+                        color: '#111827',
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.background = '#e2e8f0')}
+                      onMouseLeave={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                      aria-label="Nästa omdöme"
+                    >
+                      <ChevronRight size={20} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ── SECTION 4: REFERENSER / PROJEKT ──────────────────────── */}
-      <ProjectsGallery />
-
-      {/* ── SECTION 5: HUR DET FUNGERAR (3-STEGS PROCESS MED PILAR) ── */}
-      <section style={{
-        background: '#ffffff',
-        padding: 'clamp(60px, 8vw, 100px) 0',
-        borderTop: '1px solid #e2e8f0',
-      }}>
+      {/* ── 7. KONTAKT & OFFERT (Kopparsektion 50/50 Split) ──────── */}
+      <section
+        id="offert"
+        style={{
+          background: 'var(--copper-section, #af7349)',
+          color: '#ffffff',
+          padding: 'clamp(80px, 10vw, 120px) 0',
+        }}
+      >
         <div style={container}>
-          {/* Clean Authentic Split-Header */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            flexWrap: 'wrap',
-            gap: '24px',
-            marginBottom: '44px',
-          }}>
-            <div style={{ maxWidth: '540px' }}>
+          <div className="split-50-50">
+            {/* Vänster kolumn: Offertförfrågan Formulär */}
+            <div>
               <ScrollReveal animation="fade-right">
-                <span style={{
-                  color: 'var(--color-primary)',
-                  fontWeight: 700,
-                  fontSize: '0.82rem',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  display: 'block',
-                  marginBottom: '8px',
-                }}>
-                  Enkelt & tryggt
-                </span>
                 <h2 style={{
-                  color: 'var(--color-text-dark)',
+                  color: '#ffffff',
                   fontWeight: 800,
-                  fontSize: 'clamp(1.9rem, 3.4vw, 2.6rem)',
-                  letterSpacing: '-0.025em',
-                  margin: 0,
-                  lineHeight: 1.2,
+                  fontSize: 'clamp(2rem, 3.6vw, 2.7rem)',
+                  lineHeight: 1.15,
+                  margin: '0 0 14px 0',
                 }}>
-                  Så går det till från idé till verklighet
+                  Offertförfrågan
                 </h2>
-              </ScrollReveal>
-            </div>
-
-            <div style={{ maxWidth: '420px' }}>
-              <ScrollReveal animation="fade-left" delay={150}>
                 <p style={{
-                  color: 'var(--color-gray-600)',
+                  color: 'rgba(255, 255, 255, 0.9)',
                   fontSize: '1rem',
-                  lineHeight: 1.65,
-                  margin: 0,
+                  lineHeight: 1.6,
+                  margin: '0 0 28px 0',
                 }}>
-                  Från första kontakt till nyckelfärdigt resultat i tre enkla steg med full transparens och trygghet.
+                  Fyll i formuläret nedan för ett kostnadsfritt prisförslag med fast pris och 30% ROT-avdrag.
                 </p>
               </ScrollReveal>
-            </div>
-          </div>
 
-          <div className="steps-grid-wrapper" style={{
-            display: 'flex',
-            alignItems: 'flex-start',
-            justifyContent: 'center',
-            gap: '0',
-            textAlign: 'center',
-          }}>
-            {[
-              {
-                icon: Phone,
-                title: '1. Kontakta oss',
-                desc: 'Berätta om dina planer och idéer. Vi ger kostnadsfri rådgivning och bollar möjligheter för ditt projekt.',
-              },
-              {
-                icon: MapPin,
-                title: '2. Platsbesök & offert',
-                desc: 'Vi går igenom förutsättningarna på plats och tar fram en tydlig offert med fast pris och tidsplan.',
-              },
-              {
-                icon: Hammer,
-                title: '3. Vi bygger',
-                desc: 'Vi utför arbetet enligt överenskommelse med hög kvalitet, full insyn och trygga garantier.',
-              },
-            ].map(({ icon: Icon, title, desc }, i) => (
-              <div key={i} style={{ display: 'contents' }}>
-                <ScrollReveal animation="blur-in" delay={i * 150} duration={0.8}>
-                  <div className="step-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flex: '1', maxWidth: '280px' }}>
+              {formSubmitted ? (
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.15)',
+                  padding: '30px',
+                  borderRadius: '4px',
+                  textAlign: 'center',
+                  border: '1px solid rgba(255, 255, 255, 0.3)',
+                }}>
+                  <Check size={40} color="#ffffff" style={{ margin: '0 auto 12px auto' }} />
+                  <h3 style={{ color: '#ffffff', fontSize: '1.3rem', margin: '0 0 8px 0' }}>Tack för din förfrågan!</h3>
+                  <p style={{ color: 'rgba(255,255,255,0.9)', margin: 0 }}>Vi återkommer till dig med offert och rådgivning inom 24 timmar.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleFormSubmit}>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Ditt namn *"
+                    className="copper-input"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                  <input
+                    type="tel"
+                    required
+                    placeholder="Telefonnummer *"
+                    className="copper-input"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                  <input
+                    type="email"
+                    required
+                    placeholder="E-postadress *"
+                    className="copper-input"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                  <textarea
+                    required
+                    rows={4}
+                    placeholder="Beskriv ditt ärende eller projekt... *"
+                    className="copper-input"
+                    style={{ resize: 'vertical' }}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  />
+                  <Button variant="white" size="lg" className="w-full">
+                    Skicka offertförfrågan
+                  </Button>
+                </form>
+              )}
+            </div>
+
+            {/* Höger kolumn: Kontaktinformation */}
+            <div id="kontakt">
+              <ScrollReveal animation="fade-left" delay={100}>
+                <h2 style={{
+                  color: '#ffffff',
+                  fontWeight: 800,
+                  fontSize: 'clamp(2rem, 3.6vw, 2.7rem)',
+                  lineHeight: 1.15,
+                  margin: '0 0 14px 0',
+                }}>
+                  Kontaktuppgifter
+                </h2>
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontSize: '1rem',
+                  lineHeight: 1.6,
+                  margin: '0 0 32px 0',
+                }}>
+                  Välkommen att höra av dig direkt via telefon eller e-post vid frågor, rådgivning eller akuta ärenden.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
+                  {/* Telefon */}
+                  <a
+                    href="tel:+46735000250"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '16px',
+                      color: '#ffffff',
+                      textDecoration: 'none',
+                      fontSize: '1.1rem',
+                      fontWeight: 600,
+                    }}
+                  >
                     <div style={{
-                      width: '70px',
-                      height: '70px',
-                      background: 'var(--color-primary)',
-                      borderRadius: 'var(--border-radius-md)',
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '4px',
+                      background: 'rgba(255, 255, 255, 0.2)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      marginBottom: '20px',
+                      flexShrink: 0,
                     }}>
-                      <Icon size={28} color="#1a1f2e" />
+                      <Phone size={22} color="#ffffff" />
                     </div>
-                    <h3 style={{
-                      color: 'var(--color-text-dark)',
-                      fontWeight: 700,
-                      fontSize: '1.15rem',
-                      margin: '0 0 12px 0',
+                    <div>
+                      <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase' }}>Telefon</div>
+                      <div>073-500 02 50</div>
+                    </div>
+                  </a>
+
+                  {/* E-post */}
+                  <a
+                    href="mailto:info@vvsagent.se"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '16px',
+                      color: '#ffffff',
+                      textDecoration: 'none',
+                      fontSize: '1.1rem',
+                      fontWeight: 600,
+                    }}
+                  >
+                    <div style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '4px',
+                      background: 'rgba(255, 255, 255, 0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
                     }}>
-                      {title}
-                    </h3>
-                    <p style={{
-                      color: 'var(--color-gray-600)',
-                      fontSize: '0.95rem',
-                      lineHeight: 1.65,
-                      margin: 0,
-                      maxWidth: '260px',
+                      <Mail size={22} color="#ffffff" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase' }}>E-post</div>
+                      <div>info@vvsagent.se</div>
+                    </div>
+                  </a>
+
+                  {/* Adress & Ort */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '16px',
+                    color: '#ffffff',
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                  }}>
+                    <div style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '4px',
+                      background: 'rgba(255, 255, 255, 0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
                     }}>
-                      {desc}
-                    </p>
+                      <MapPin size={22} color="#ffffff" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase' }}>Område</div>
+                      <div>Stockholm med omnejd</div>
+                    </div>
                   </div>
-                </ScrollReveal>
-                {i < 2 && (
-                  <div className="step-arrow">
-                    <svg width="65" height="24" viewBox="0 0 65 24" fill="none" stroke="#C4C4C4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.75 }}>
-                      <path d="M 5 12 C 20 10, 40 10, 58 11" />
-                      <path d="M 49 5 C 52 8, 56 10, 58 11" />
-                      <path d="M 48 18 C 51 15, 56 12, 58 11" />
-                    </svg>
+
+                  {/* Org.nr */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '16px',
+                    color: '#ffffff',
+                    fontSize: '1.1rem',
+                    fontWeight: 600,
+                  }}>
+                    <div style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '4px',
+                      background: 'rgba(255, 255, 255, 0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <Building size={22} color="#ffffff" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase' }}>F-skatt & Försäkring</div>
+                      <div>Godkänd för F-skatt • Org.nr: 559368-1066</div>
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── SECTION 6: MID CTA ──────────────────────────────────── */}
-      <section style={{
-        position: 'relative',
-        padding: 'clamp(50px, 7vw, 80px) 0',
-        textAlign: 'center',
-        overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url(/cta-mid-section.webp)`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(26,31,46,0.88)' }} />
-        <div style={{ ...container, position: 'relative', zIndex: 1 }}>
-          <ScrollReveal animation="scale-in">
-            <h2 style={{
-              color: 'var(--color-white)',
-              fontWeight: 800,
-              fontSize: 'clamp(1.8rem, 3vw, 2.6rem)',
-              margin: '0 0 12px 0',
-            }}>
-              Nyfiken på vad ditt projekt kostar?
-            </h2>
-            <p style={{
-              color: 'rgba(255,255,255,0.7)',
-              fontSize: '1rem',
-              margin: '0 0 32px 0',
-              lineHeight: 1.7,
-            }}>
-              Vi skickar en kostnadsfri offert inom 24 timmar.
-            </p>
-            <Button variant="primary" size="lg" href="/offert">
-              Begär offert
-            </Button>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ── SECTION 7: KUNDRECENSIONER ──────────────────────────── */}
-      <section style={{ background: 'var(--color-light)', padding: 'clamp(60px, 8vw, 100px) 0' }}>
-        <div style={container}>
-          {/* Clean Authentic Split-Header */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            flexWrap: 'wrap',
-            gap: '24px',
-            marginBottom: '44px',
-          }}>
-            <div>
-              <ScrollReveal animation="fade-right">
-                <span style={{
-                  color: 'var(--color-primary)',
-                  fontWeight: 700,
-                  fontSize: '0.82rem',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  display: 'block',
-                  marginBottom: '8px',
-                }}>
-                  Kundomdömen
-                </span>
-                <h2 style={{
-                  color: 'var(--color-text-dark)',
-                  fontWeight: 800,
-                  fontSize: 'clamp(1.9rem, 3.4vw, 2.6rem)',
-                  letterSpacing: '-0.025em',
-                  margin: 0,
-                  lineHeight: 1.2,
-                }}>
-                  Vad säger våra kunder?
-                </h2>
-              </ScrollReveal>
-            </div>
-
-            <div>
-              <ScrollReveal animation="fade-left" delay={100}>
-                <div style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  fontSize: '0.92rem',
-                  color: '#4b5563',
-                  fontWeight: 500,
-                  background: '#ffffff',
-                  padding: '10px 18px',
-                  borderRadius: '50px',
-                  border: '1px solid #e2e8f0',
-                  boxShadow: '0 2px 8px rgba(15, 23, 42, 0.04)',
-                }}>
-                  <svg viewBox="0 0 24 24" width="18" height="18" style={{ flexShrink: 0 }}>
-                    <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v3.92h6.69a5.74 5.74 0 0 1-2.49 3.77v3.13h4.01c2.34-2.16 3.69-5.32 3.69-8.75z" />
-                    <path fill="#34A853" d="M12 24c3.24 0 5.97-1.08 7.96-2.91l-4.01-3.13c-1.11.75-2.53 1.19-3.95 1.19-3.04 0-5.61-2.05-6.53-4.82H1.31v3.23A12 12 0 0 0 12 24z" />
-                    <path fill="#FBBC05" d="M5.47 14.33A7.16 7.16 0 0 1 5 12c0-.8.14-1.58.39-2.33V6.44H1.31A11.96 11.96 0 0 0 0 12c0 2.05.52 4 1.31 5.67l4.16-3.34z" />
-                    <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.22 0 12 0A12 12 0 0 0 1.31 6.44l4.16 3.23a7.18 7.18 0 0 1 6.53-4.92z" />
-                  </svg>
-                  <span style={{ fontWeight: 700, color: '#111827' }}>4.9 / 5</span>
-                  <div style={{ display: 'flex', gap: '2px' }}>
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star key={i} size={15} fill="#FBBC05" color="#FBBC05" />
-                    ))}
-                  </div>
-                  <span style={{ color: 'var(--color-gray-600)', fontSize: '0.85rem' }}>(48 omdömen på Google)</span>
+                  {/* Instagram */}
+                  <a
+                    href="https://www.instagram.com/vvsagent/"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '16px',
+                      color: '#ffffff',
+                      textDecoration: 'none',
+                      fontSize: '1.1rem',
+                      fontWeight: 600,
+                    }}
+                  >
+                    <div style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '4px',
+                      background: 'rgba(255, 255, 255, 0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <Instagram size={22} color="#ffffff" />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.75)', textTransform: 'uppercase' }}>Sociala medier</div>
+                      <div>@vvsagent på Instagram</div>
+                    </div>
+                  </a>
                 </div>
               </ScrollReveal>
             </div>
           </div>
-
-          <div className="reviews-grid">
-            {[
-              {
-                name: 'Magnus Lindström',
-                location: 'Uppsala',
-                text: 'Vi anlitade JH Huskvalitet AB för en omfattande utbyggnad och nytt altandäck. Otroligt professionella från första platsbesöket till sista skruven. Hantverkarna höll rent och snyggt varje dag och tidsplanen hölls till punkt och pricka. Kan varmt rekommenderas!',
-                stars: 5,
-                date: 'för 3 veckor sedan',
-                authorSub: 'Lokal guide • 12 omdömen',
-                avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120&h=120'
-              },
-              {
-                name: 'Helena Bergqvist',
-                location: 'Enköping',
-                text: 'Riktigt nöjd med hjälpen vi fick vid vår husdränering och grundisolering. Bra dialog hela vägen, tydlig offert utan dolda kostnader och ett mycket noggrant utfört arbete. Känns tryggt inför höstrusket!',
-                stars: 5,
-                date: 'för en månad sedan',
-                authorSub: '6 omdömen',
-                avatarUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120'
-              },
-              {
-                name: 'Fredrik Söderlund',
-                location: 'Norrtälje',
-                text: 'JH Huskvalitet hjälpte oss med tomtplanering, markarbete och stensättning runt vår nybyggda villa. Otroligt skickliga på att hitta smarta lösningar för nivåskillnaderna på tomten. Resultatet blev över all förväntan.',
-                stars: 5,
-                date: 'för 2 månader sedan',
-                authorSub: 'Lokal guide • 19 omdömen',
-                avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120&h=120'
-              },
-            ].map((review, i) => {
-              const delay = i * 150;
-              return (
-                <ScrollReveal key={i} animation="fade-up" delay={delay}>
-                  <ReviewCard review={review} />
-                </ScrollReveal>
-              );
-            })}
-          </div>
         </div>
       </section>
 
-      {/* ── SECTION 8: VANLIGA FRÅGOR (FAQ - DARK CONTRAST BREAK) ── */}
+      {/* ── 8. VANLIGA FRÅGOR (FAQ) ──────────────────────────────── */}
       <section style={{
-        background: '#0f172a',
+        background: '#ffffff',
         padding: 'clamp(70px, 9vw, 110px) 0',
         position: 'relative',
         overflow: 'hidden',
+        borderTop: '1px solid #e2e8f0',
       }}>
-        {/* Subtle decorative glow */}
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'radial-gradient(ellipse at 85% 25%, rgba(234, 88, 12, 0.08) 0%, transparent 60%)',
-          pointerEvents: 'none',
-        }} />
-        <div style={{ ...container, position: 'relative', zIndex: 1 }}>
+        <div style={container}>
           <FAQAccordion
             items={homeFaqItems}
-            title="Vanliga frågor"
-            subtitle="Här hittar du svar på vanliga funderingar kring offerter, ROT avdrag och hur vi arbetar."
+            title="Vanliga frågor om VVS & Värmepumpar"
+            subtitle="Här hittar du svar på vanliga funderingar kring VVS-arbeten, ROT-avdrag, värmepumpsbyten och akuta ärenden."
             buttonText="Kontakta oss direkt"
-            buttonLink="/kontakt"
-            dark={true}
+            buttonLink="#kontakt"
+            dark={false}
           />
         </div>
       </section>
 
-      {/* ── SOCIAL MEDIA BANNER ─────────────────────────────────── */}
-      <SocialBanner />
-
-      {/* ── SECTION 10: CTA BANNER ───────────────────────────────── */}
-      <CTABanner />
-
-      {/* ── TWEAKED SPACED STYLES ───────────────────────────────── */}
-      <style>{`
-        .spaced-screenshot-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: clamp(20px, 3vw, 32px);
-        }
-        .spaced-tile {
-          position: relative;
-          display: block;
-          text-decoration: none;
-          aspect-ratio: 16/10;
-          border-radius: 16px;
-          overflow: hidden;
-          background: #000;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-          border: 1px solid rgba(0, 0, 0, 0.06);
-          transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-        .spaced-tile-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .spaced-tile-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 30%, rgba(0, 0, 0, 0.88) 100%);
-          transition: background 0.4s ease;
-        }
-        .spaced-tile:hover {
-          transform: translateY(-6px);
-          border-color: rgba(217, 119, 6, 0.45);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.16);
-        }
-        .spaced-tile:hover .spaced-tile-img {
-          transform: scale(1.06);
-        }
-        .spaced-tile:hover .spaced-tile-overlay {
-          background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.92) 100%);
-        }
-        .spaced-tile-content {
-          position: absolute;
-          inset: auto 0 0 0;
-          padding: 24px 24px 22px 24px;
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          z-index: 2;
-        }
-        .spaced-tile-left {
-          display: flex;
-          flex-direction: column;
-        }
-        .spaced-tile-title {
-          color: #ffffff;
-          font-weight: 700;
-          font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-          margin: 0;
-          line-height: 1.2;
-          letter-spacing: -0.01em;
-          text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-        }
-        .spaced-tile-right {
-          flex-shrink: 0;
-          margin-left: 12px;
-        }
-        .spaced-tile-action {
-          color: rgba(255, 255, 255, 0.85);
-          font-size: 0.82rem;
-          font-weight: 600;
-          transition: color 0.3s ease;
-        }
-        .spaced-tile:hover .spaced-tile-action {
-          color: var(--color-primary);
-        }
-
-        .steps-grid-wrapper {
-          display: flex;
-          align-items: flex-start;
-          justify-content: center;
-        }
-        .review-card-el {
-          background: var(--color-white);
-          border: 1px solid #EDE8E0;
-          border-radius: var(--border-radius-lg);
-          padding: 28px 30px;
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-          transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .review-card-el:hover {
-          transform: translateY(-5px) rotate(-0.5deg);
-          box-shadow: 0 16px 40px rgba(28,21,16,0.10);
-        }
-        .step-arrow {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 80px;
-          height: 70px;
-        }
-        @media (max-width: 1024px) {
-          .spaced-screenshot-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          .reviews-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 768px) {
-          .spaced-screenshot-grid { grid-template-columns: 1fr !important; }
-          .two-col { grid-template-columns: 1fr !important; gap: 32px !important; }
-          .reviews-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
-          .steps-grid-wrapper { flex-direction: column !important; align-items: center !important; gap: 24px !important; }
-          .step-arrow {
-            transform: rotate(90deg);
-          }
-        }
-      `}</style>
     </main>
   );
 }

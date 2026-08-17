@@ -1,53 +1,47 @@
 import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Instagram, ExternalLink } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import Button from './Button';
 
-interface ReferenceItem {
+interface InstagramPost {
   id: string;
   image: string;
-  alt: string;
+  caption: string;
+  tag: string;
 }
 
-const references: ReferenceItem[] = [
+const instagramPosts: InstagramPost[] = [
   {
     id: '1',
-    image: '/service-smahusbyggnation.webp',
-    alt: 'Nybyggnation i Uppland',
+    image: '/gallery-1.jpg',
+    caption: 'Kopparrörsdragning, shuntgrupp och tryckprovning i badrumsprojekt i Stockholm. Fackmannamässigt utfört med högsta precision! 🔧🚰',
+    tag: '#badrum #vvsstockholm #badrumsrenovering',
   },
   {
     id: '2',
-    image: '/portfolio-extension.webp',
-    alt: 'Tillbyggnad på villa',
+    image: '/gallery-4.jpg',
+    caption: 'Komplett badrums-VVS med dolda rör, vägghängd fixtur och moderna blandare. Precision i varje detalj! 🚿✨',
+    tag: '#badrumsrenovering #kök #vvsagent',
   },
   {
     id: '3',
-    image: '/gallery-deck.webp',
-    alt: 'Platsbyggt trädäck och altan',
+    image: '/images/service_varmepumpar.jpg',
+    caption: 'Installation och injustering av energieffektivt värmesystem för lägsta möjliga driftkostnad. 🔥⚡',
+    tag: '#värmesystem #fastighetsservice',
   },
   {
     id: '4',
-    image: '/gallery-kitchen.webp',
-    alt: 'Köksrenovering och finsnickeri',
-  },
-  {
-    id: '5',
-    image: '/gallery-bathroom.webp',
-    alt: 'Badrumsrenovering',
-  },
-  {
-    id: '6',
-    image: '/portfolio-facade.webp',
-    alt: 'Fasadbyte och panelarbete',
+    image: '/images/service_reparation.jpg',
+    caption: 'Rörservice, felsökning och reparation av vattenledningar och ventiler i fastighet i Stockholm. 🛠️',
+    tag: '#rörservice #fastighetsservice #stockholm',
   },
 ];
 
 export default function ProjectsGallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const total = references.length;
+  const total = instagramPosts.length;
 
   const handlePrev = useCallback(() => {
     setLightboxIndex((prev) => (prev === null ? 0 : (prev - 1 + total) % total));
@@ -57,7 +51,6 @@ export default function ProjectsGallery() {
     setLightboxIndex((prev) => (prev === null ? 0 : (prev + 1) % total));
   }, [total]);
 
-  // Lightbox keyboard navigation & body lock
   useEffect(() => {
     if (lightboxIndex === null) return;
 
@@ -81,10 +74,11 @@ export default function ProjectsGallery() {
     <section
       id="projekt"
       style={{
-        background: 'radial-gradient(ellipse at 50% 40%, rgba(234, 88, 12, 0.03) 0%, transparent 65%), #f8fafc',
-        padding: 'clamp(58px, 7.5vw, 92px) 0',
+        background: 'var(--light-alt, #f4f4f4)',
+        padding: 'clamp(70px, 9vw, 110px) 0',
         position: 'relative',
         borderTop: '1px solid #e2e8f0',
+        borderBottom: '1px solid #e2e8f0',
       }}
     >
       <div
@@ -94,377 +88,304 @@ export default function ProjectsGallery() {
           padding: '0 clamp(20px, 5vw, 40px)',
         }}
       >
-        {/* Clean Authentic Split-Header */}
+        {/* Header */}
         <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-          flexWrap: 'wrap',
-          gap: '20px',
-          marginBottom: '32px',
+          textAlign: 'center',
+          maxWidth: '680px',
+          margin: '0 auto 48px auto',
         }}>
-          <div>
-            <ScrollReveal animation="fade-right">
-              <span style={{
-                color: 'var(--color-primary)',
-                fontWeight: 700,
-                fontSize: '0.82rem',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                display: 'block',
-                marginBottom: '8px',
-              }}>
-                Utförda projekt
-              </span>
-              <h2
-                style={{
-                  color: 'var(--color-text-dark)',
-                  fontWeight: 800,
-                  fontSize: 'clamp(1.9rem, 3.4vw, 2.6rem)',
-                  letterSpacing: '-0.025em',
-                  margin: 0,
-                  lineHeight: 1.2,
-                }}
-              >
-                Ett urval av våra referenser
-              </h2>
-            </ScrollReveal>
-          </div>
-
-          <div style={{ maxWidth: '400px' }}>
-            <ScrollReveal animation="fade-left" delay={100}>
-              <p
-                style={{
-                  color: 'var(--color-gray-600)',
-                  fontSize: '0.96rem',
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                Ett urval av våra utförda byggprojekt och renoveringar. Klicka på valfri bild för fullskärmsvy.
-              </p>
-            </ScrollReveal>
-          </div>
+          <ScrollReveal animation="fade-up">
+            <h2
+              style={{
+                color: 'var(--text-dark)',
+                fontWeight: 800,
+                fontSize: 'clamp(2rem, 3.6vw, 2.7rem)',
+                letterSpacing: '-0.02em',
+                margin: '0 0 14px 0',
+                lineHeight: 1.2,
+              }}
+            >
+              Senaste uppdateringarna
+            </h2>
+            <p
+              style={{
+                color: 'var(--color-gray-600)',
+                fontSize: '1rem',
+                lineHeight: 1.65,
+                margin: 0,
+              }}
+            >
+              Följ med bakom kulisserna och se våra pågående projekt och vardagen som rörmokare.
+            </p>
+          </ScrollReveal>
         </div>
 
-        {/* 6-Image Dynamic Ratio Collage Grid */}
+        {/* 4-kolumners grid med Instagram-kort */}
         <div
-          className="collage-grid"
-          onMouseLeave={() => setHoveredIndex(null)}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '20px',
+            marginBottom: '44px',
+          }}
+          className="insta-grid"
         >
-          {references.map((item, idx) => {
-            const isHovered = hoveredIndex === idx;
-            const isAnyHovered = hoveredIndex !== null;
-
-            return (
+          {instagramPosts.map((post, idx) => (
+            <ScrollReveal key={post.id} animation="fade-up" delay={idx * 80}>
               <div
-                key={item.id}
-                className={`collage-item collage-item-${idx + 1} ${isHovered ? 'hovered' : ''} ${isAnyHovered && !isHovered ? 'dimmed' : ''}`}
                 onClick={() => setLightboxIndex(idx)}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                role="button"
-                tabIndex={0}
-                aria-label={`Visa referensbild ${idx + 1}`}
+                style={{
+                  background: '#ffffff',
+                  borderRadius: '4px',
+                  overflow: 'hidden',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.05)',
+                  cursor: 'pointer',
+                  transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+                  border: '1px solid #e5e7eb',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-6px)';
+                  e.currentTarget.style.boxShadow = '0 14px 30px rgba(0, 0, 0, 0.12)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0, 0, 0, 0.05)';
+                }}
               >
-                <img
-                  src={item.image}
-                  alt={item.alt}
-                  loading="lazy"
-                  className="collage-card-img"
-                />
+                {/* Photo with hover overlay */}
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '240px',
+                  overflow: 'hidden',
+                  background: '#07131e',
+                }}>
+                  <img
+                    src={post.image}
+                    alt={post.caption}
+                    loading="lazy"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
+                      transition: 'transform 0.4s ease',
+                    }}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: '12px',
+                    right: '12px',
+                    background: 'rgba(0,0,0,0.65)',
+                    color: '#ffffff',
+                    padding: '6px',
+                    borderRadius: '4px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                    <Instagram size={16} />
+                  </div>
+                </div>
+
+                {/* Caption text */}
+                <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flex: 1 }}>
+                  <span style={{
+                    color: 'var(--primary)',
+                    fontSize: '0.78rem',
+                    fontWeight: 700,
+                    marginBottom: '6px',
+                    display: 'block',
+                  }}>
+                    {post.tag}
+                  </span>
+                  <p style={{
+                    color: 'var(--text-dark)',
+                    fontSize: '0.88rem',
+                    lineHeight: 1.55,
+                    margin: 0,
+                    flex: 1,
+                  }}>
+                    {post.caption}
+                  </p>
+                </div>
               </div>
-            );
-          })}
+            </ScrollReveal>
+          ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div style={{ textAlign: 'center', marginTop: '40px' }}>
-          <ScrollReveal animation="fade-up" delay={100}>
-            <Button variant="primary" href="/offert" size="md">
-              Begär offert för ditt projekt
+        {/* Knappar längst ner: "Följ oss på Instagram" */}
+        <div style={{ textAlign: 'center' }}>
+          <ScrollReveal animation="fade-up" delay={200}>
+            <Button
+              variant="primary"
+              size="lg"
+              href="https://www.instagram.com/vvsagent/"
+            >
+              <Instagram size={18} />
+              Följ oss på Instagram
             </Button>
           </ScrollReveal>
         </div>
       </div>
 
-      {/* Lightbox Modal via Portal directly to body */}
-      {lightboxIndex !== null && typeof document !== 'undefined' && createPortal(
-        <div
-          className="ref-modal-backdrop"
-          onClick={() => setLightboxIndex(null)}
-        >
-          {/* Close Button */}
-          <button
-            onClick={() => setLightboxIndex(null)}
-            className="ref-modal-close"
-            aria-label="Stäng"
-          >
-            <X size={24} />
-          </button>
-
-          {/* Previous Arrow */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePrev();
-            }}
-            className="ref-modal-arrow prev"
-            aria-label="Föregående bild"
-          >
-            <ChevronLeft size={30} />
-          </button>
-
-          {/* Next Arrow */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNext();
-            }}
-            className="ref-modal-arrow next"
-            aria-label="Nästa bild"
-          >
-            <ChevronRight size={30} />
-          </button>
-
-          {/* Modal Image Wrapper */}
+      {/* Lightbox Modal */}
+      {lightboxIndex !== null &&
+        createPortal(
           <div
-            className="ref-modal-dialog"
-            onClick={(e) => e.stopPropagation()}
+            className="lightbox-overlay"
+            onClick={() => setLightboxIndex(null)}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(0, 0, 0, 0.92)',
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px',
+            }}
           >
-            <img
-              src={references[lightboxIndex].image}
-              alt={references[lightboxIndex].alt}
-              className="ref-modal-img"
-            />
-            <div className="ref-modal-counter">
-              {lightboxIndex + 1} / {total}
+            <button
+              onClick={() => setLightboxIndex(null)}
+              style={{
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                background: 'rgba(255, 255, 255, 0.15)',
+                border: 'none',
+                color: '#fff',
+                width: '44px',
+                height: '44px',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}
+              aria-label="Stäng bildvisare"
+            >
+              <X size={24} />
+            </button>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handlePrev();
+              }}
+              style={{
+                position: 'absolute',
+                left: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'rgba(255, 255, 255, 0.15)',
+                border: 'none',
+                color: '#fff',
+                width: '48px',
+                height: '48px',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}
+              aria-label="Föregående bild"
+            >
+              <ChevronLeft size={28} />
+            </button>
+
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                maxWidth: '650px',
+                background: '#ffffff',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+              }}
+            >
+              <img
+                src={instagramPosts[lightboxIndex].image}
+                alt={instagramPosts[lightboxIndex].caption}
+                style={{
+                  width: '100%',
+                  maxHeight: '65vh',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+              <div style={{ padding: '24px', background: '#ffffff' }}>
+                <span style={{ color: 'var(--primary)', fontSize: '0.82rem', fontWeight: 700, display: 'block', marginBottom: '8px' }}>
+                  {instagramPosts[lightboxIndex].tag}
+                </span>
+                <p style={{ color: 'var(--text-dark)', fontSize: '0.95rem', lineHeight: 1.6, margin: '0 0 16px 0' }}>
+                  {instagramPosts[lightboxIndex].caption}
+                </p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #eee', paddingTop: '14px' }}>
+                  <span style={{ fontSize: '0.85rem', color: '#888' }}>
+                    Bild {lightboxIndex + 1} av {total}
+                  </span>
+                  <a
+                    href="https://www.instagram.com/vvsagent/"
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      color: 'var(--primary)',
+                      fontWeight: 700,
+                      fontSize: '0.88rem',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Visa på Instagram <ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>,
-        document.body
-      )}
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNext();
+              }}
+              style={{
+                position: 'absolute',
+                right: '20px',
+                top: '50%',
+                transform: 'translateY(-50%)',
+                background: 'rgba(255, 255, 255, 0.15)',
+                border: 'none',
+                color: '#fff',
+                width: '48px',
+                height: '48px',
+                borderRadius: '4px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}
+              aria-label="Nästa bild"
+            >
+              <ChevronRight size={28} />
+            </button>
+          </div>,
+          document.body
+        )}
 
       <style>{`
-        /* Desktop Dynamic Ratio 2-Row Collage */
-        .collage-grid {
-          display: grid;
-          grid-template-columns: repeat(12, 1fr);
-          grid-auto-rows: 250px;
-          gap: 20px;
-        }
-
-        .collage-item {
-          position: relative;
-          border-radius: 16px;
-          overflow: hidden;
-          background: #e2e8f0;
-          border: 1px solid rgba(15, 23, 42, 0.08);
-          cursor: pointer;
-          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease, opacity 0.3s ease;
-          box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
-        }
-
-        /* Row 1: 5 cols (Wide) + 4 cols (Med) + 3 cols (Compact) */
-        .collage-item-1 {
-          grid-column: span 5;
-        }
-
-        .collage-item-2 {
-          grid-column: span 4;
-        }
-
-        .collage-item-3 {
-          grid-column: span 3;
-        }
-
-        /* Row 2: 3 cols (Compact) + 4 cols (Med) + 5 cols (Wide) */
-        .collage-item-4 {
-          grid-column: span 3;
-        }
-
-        .collage-item-5 {
-          grid-column: span 4;
-        }
-
-        .collage-item-6 {
-          grid-column: span 5;
-        }
-
-        .collage-card-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          display: block;
-          user-select: none;
-          transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .collage-item.hovered {
-          transform: translateY(-5px);
-          border-color: rgba(234, 88, 12, 0.35);
-          box-shadow: 0 20px 40px -8px rgba(15, 23, 42, 0.16), 0 0 0 1px rgba(234, 88, 12, 0.2);
-          z-index: 2;
-        }
-
-        .collage-item.hovered .collage-card-img {
-          transform: scale(1.035);
-        }
-
-        .collage-item.dimmed {
-          opacity: 0.76;
-        }
-
-        /* Lightbox Modal (Directly on body) */
-        .ref-modal-backdrop {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          width: 100vw;
-          height: 100vh;
-          background: rgba(10, 15, 29, 0.95);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          z-index: 999999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 24px;
-          margin: 0;
-          box-sizing: border-box;
-          animation: modalFadeIn 0.2s ease;
-        }
-
-        .ref-modal-dialog {
-          position: relative;
-          max-width: 90vw;
-          max-height: 85vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-          z-index: 1000000;
-        }
-
-        .ref-modal-img {
-          max-width: 88vw;
-          max-height: 80vh;
-          width: auto;
-          height: auto;
-          object-fit: contain;
-          border-radius: 12px;
-          box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
-        }
-
-        .ref-modal-counter {
-          color: rgba(255, 255, 255, 0.75);
-          font-size: 0.9rem;
-          font-weight: 500;
-          margin-top: 14px;
-          letter-spacing: 0.05em;
-        }
-
-        .ref-modal-close {
-          position: fixed;
-          top: 24px;
-          right: 24px;
-          width: 46px;
-          height: 46px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.12);
-          color: #ffffff;
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          z-index: 1000001;
-          transition: all 0.2s ease;
-        }
-
-        .ref-modal-close:hover {
-          background: rgba(255, 255, 255, 0.25);
-          transform: scale(1.06);
-        }
-
-        .ref-modal-arrow {
-          position: fixed;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.12);
-          color: #ffffff;
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          z-index: 1000001;
-          transition: all 0.2s ease;
-        }
-
-        .ref-modal-arrow:hover {
-          background: rgba(255, 255, 255, 0.25);
-          transform: translateY(-50%) scale(1.08);
-        }
-
-        .ref-modal-arrow.prev {
-          left: 24px;
-        }
-
-        .ref-modal-arrow.next {
-          right: 24px;
-        }
-
-        @keyframes modalFadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes modalScaleUp {
-          from { opacity: 0; transform: scale(0.95); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Tablet & Mobile Fallbacks (Simple, non-messy) */
-        @media (max-width: 900px) {
-          .collage-grid {
-            grid-template-columns: repeat(2, 1fr);
-            grid-auto-rows: unset;
-            gap: 16px;
-          }
-          .collage-item-1,
-          .collage-item-2,
-          .collage-item-3,
-          .collage-item-4,
-          .collage-item-5,
-          .collage-item-6 {
-            grid-column: span 1 !important;
-            aspect-ratio: 4 / 3;
+        @media (max-width: 1024px) {
+          .insta-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
         }
-
         @media (max-width: 580px) {
-          .collage-grid {
-            grid-template-columns: 1fr;
-            gap: 14px;
-          }
-          .collage-item {
-            aspect-ratio: 4 / 3;
-          }
-          .ref-modal-close {
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
-          }
-          .ref-modal-img {
-            max-width: 92vw;
-            max-height: 70vh;
+          .insta-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>

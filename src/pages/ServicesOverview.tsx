@@ -14,8 +14,8 @@ const container: React.CSSProperties = {
 
 export default function ServicesOverview() {
   usePageTitle(
-    'Våra Tjänster | JH Huskvalitet AB Uppland',
-    'Utforska våra byggtjänster: Nybyggnation, Renovering, Ombyggnation och Totalentreprenad i Uppland med omnejd.'
+    'Våra Tjänster | VVS Agent Stockholm AB – Kompletta VVS-installationer',
+    'Upptäck våra professionella VVS-tjänster i Stockholm: Värmepumpar, Badrum & Kök, Rörservice & Akut VVS och Vattenburen Golvvärme. Begär kostnadsfri offert!'
   );
 
   const { hash } = useLocation();
@@ -52,14 +52,14 @@ export default function ServicesOverview() {
       {/* ── HERO HEADER ──────────── */}
       <section style={{
         position: 'relative',
-        backgroundImage: 'url(/hero-services.png)',
+        backgroundImage: 'url(https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1400)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: '130px',
-        paddingBottom: '36px',
+        paddingBottom: '40px',
         textAlign: 'center',
       }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(15, 23, 42, 0.78)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(7, 19, 30, 0.85)' }} />
 
         <div style={{ ...container, position: 'relative', zIndex: 1 }}>
           <ScrollReveal animation="blur-in">
@@ -69,20 +69,20 @@ export default function ServicesOverview() {
               fontSize: 'clamp(2.2rem, 4.5vw, 3.4rem)',
               margin: '0 0 16px 0',
               lineHeight: 1.15,
-              letterSpacing: '-0.03em',
+              letterSpacing: '-0.02em',
             }}>
-              Våra Tjänster
+              Våra VVS-tjänster
             </h1>
           </ScrollReveal>
           <ScrollReveal animation="fade-up" delay={150}>
             <p style={{
-              color: 'rgba(255,255,255,0.85)',
+              color: 'rgba(255, 255, 255, 0.85)',
               fontSize: '1.08rem',
               maxWidth: '640px',
               margin: '0 auto',
               lineHeight: 1.65,
             }}>
-              Vi på JH Huskvalitet AB erbjuder kompletta lösningar för din fastighet i Uppland med omnejd.
+              Kompletta och fackmannamässiga VVS-installationer för både privatpersoner och fastighetsägare – alltid med fasta priser och 30% ROT-avdrag.
             </p>
           </ScrollReveal>
         </div>
@@ -115,23 +115,23 @@ export default function ServicesOverview() {
                 style={{
                   background: '#f1f5f9',
                   border: '1px solid #e2e8f0',
-                  borderRadius: '20px',
-                  padding: '8px 20px',
-                  fontSize: '0.92rem',
+                  borderRadius: '4px',
+                  padding: '10px 20px',
+                  fontSize: '0.88rem',
                   fontWeight: 600,
-                  color: '#334155',
+                  color: 'var(--text-dark)',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
-                  fontFamily: 'var(--font-family)',
+                  fontFamily: 'var(--font-heading)',
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--color-primary)';
+                  e.currentTarget.style.background = 'var(--primary)';
                   e.currentTarget.style.color = '#ffffff';
-                  e.currentTarget.style.borderColor = 'var(--color-primary)';
+                  e.currentTarget.style.borderColor = 'var(--primary)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.background = '#f1f5f9';
-                  e.currentTarget.style.color = '#334155';
+                  e.currentTarget.style.color = 'var(--text-dark)';
                   e.currentTarget.style.borderColor = '#e2e8f0';
                 }}
               >

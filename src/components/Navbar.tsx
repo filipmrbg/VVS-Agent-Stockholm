@@ -183,10 +183,10 @@ export default function Navbar() {
           position: 'absolute',
           left: '50%',
           transform: 'translateX(-50%)',
-          borderRadius: 'var(--border-radius-pill)',
+          borderRadius: '4px',
           background: 'rgba(255,255,255,0.06)',
           border: '1px solid rgba(255,255,255,0.08)',
-          padding: '6px',
+          padding: '4px',
           display: 'flex',
           alignItems: 'center',
           gap: '2px',
@@ -209,12 +209,13 @@ export default function Navbar() {
                       background: active || isServicesOpen ? 'rgba(255,255,255,0.1)' : 'none',
                       border: 'none',
                       cursor: 'pointer',
-                      color: active || isServicesOpen ? 'var(--color-primary)' : 'var(--color-white)',
-                      fontFamily: 'var(--font-family)',
-                      fontSize: '0.9rem',
-                      fontWeight: active || isServicesOpen ? 600 : 400,
+                      color: active || isServicesOpen ? 'var(--primary)' : 'var(--color-white)',
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '0.92rem',
+                      fontWeight: active || isServicesOpen ? 700 : 500,
+                      letterSpacing: '0.01em',
                       padding: '10px 18px',
-                      borderRadius: 'var(--border-radius-pill)',
+                      borderRadius: '4px',
                       transition: 'background 0.2s ease, color 0.2s ease',
                       whiteSpace: 'nowrap',
                       display: 'inline-flex',
@@ -246,12 +247,12 @@ export default function Navbar() {
                       pointerEvents: isServicesOpen ? 'auto' : 'none',
                       transition: 'opacity 0.18s ease, transform 0.18s ease',
                       zIndex: 1100,
-                      minWidth: '180px',
-                      background: 'rgba(24, 29, 42, 0.96)',
+                      minWidth: '220px',
+                      background: 'rgba(24, 29, 42, 0.98)',
                       backdropFilter: 'blur(16px)',
                       WebkitBackdropFilter: 'blur(16px)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '14px',
+                      border: '1px solid rgba(255, 255, 255, 0.12)',
+                      borderRadius: '4px',
                       boxShadow: '0 12px 32px rgba(0, 0, 0, 0.4)',
                       padding: '6px',
                     }}
@@ -264,12 +265,12 @@ export default function Navbar() {
                           width: '100%',
                           display: 'block',
                           textAlign: 'left',
-                          padding: '9px 14px',
-                          borderRadius: '8px',
+                          padding: '10px 14px',
+                          borderRadius: '4px',
                           background: 'none',
                           border: 'none',
                           color: '#ffffff',
-                          fontFamily: 'var(--font-family)',
+                          fontFamily: 'var(--font-body)',
                           fontSize: '0.88rem',
                           fontWeight: 500,
                           cursor: 'pointer',
@@ -279,7 +280,7 @@ export default function Navbar() {
                         onMouseEnter={e => {
                           const el = e.currentTarget as HTMLElement;
                           el.style.background = 'rgba(255, 255, 255, 0.08)';
-                          el.style.color = 'var(--color-primary)';
+                          el.style.color = 'var(--primary)';
                         }}
                         onMouseLeave={e => {
                           const el = e.currentTarget as HTMLElement;
@@ -303,12 +304,13 @@ export default function Navbar() {
                   background: active ? 'rgba(255,255,255,0.1)' : 'none',
                   border: 'none',
                   cursor: 'pointer',
-                  color: active ? 'var(--color-primary)' : 'var(--color-white)',
-                  fontFamily: 'var(--font-family)',
-                  fontSize: '0.9rem',
-                  fontWeight: active ? 600 : 400,
-                  padding: '10px 20px',
-                  borderRadius: 'var(--border-radius-pill)',
+                  color: active ? 'var(--primary)' : 'var(--color-white)',
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '0.92rem',
+                  fontWeight: active ? 700 : 500,
+                  letterSpacing: '0.01em',
+                  padding: '10px 18px',
+                  borderRadius: '4px',
                   transition: 'background 0.2s ease, color 0.2s ease',
                   whiteSpace: 'nowrap',
                 }}
@@ -329,66 +331,44 @@ export default function Navbar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexShrink: 0 }}>
           <div className="phone-link-wrapper" style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '12px' }}>
             <a
-              href="tel:0722101075"
+              href="tel:+46735000250"
               className="phone-link"
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '5px',
+                gap: '6px',
                 color: 'var(--color-white)',
                 textDecoration: 'none',
-                fontFamily: 'var(--font-family)',
+                fontFamily: 'var(--font-heading)',
                 fontSize: '0.85rem',
-                fontWeight: 500,
+                fontWeight: 600,
                 transition: 'color 0.2s ease',
                 cursor: 'pointer',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-primary)')}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--primary)')}
               onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-white)')}
             >
-              <Phone size={14} color="var(--color-primary)" />
-              <span>072-210 10 75</span>
+              <Phone size={14} color="var(--primary)" />
+              <span>073-500 02 50</span>
             </a>
           </div>
 
           <Link
             to="/offert"
-            className="offert-btn"
+            className="offert-btn btn-craftsman btn-primary"
             style={{
-              background: 'var(--color-primary)',
-              color: '#ffffff',
-              fontFamily: 'var(--font-family)',
-              fontWeight: 700,
-              borderRadius: 'var(--border-radius-pill)',
-              padding: '12px 26px',
-              textDecoration: 'none',
-              fontSize: '0.9rem',
-              transition: 'all 0.3s ease',
-              display: 'inline-block',
-              cursor: 'pointer',
-              boxShadow: '0 4px 16px rgba(234, 88, 12, 0.35)',
-            }}
-            onMouseEnter={e => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = 'var(--color-primary-hover)';
-              el.style.transform = 'translateY(-2px)';
-              el.style.boxShadow = '0 8px 24px rgba(234, 88, 12, 0.5)';
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget as HTMLElement;
-              el.style.background = 'var(--color-primary)';
-              el.style.transform = 'translateY(0)';
-              el.style.boxShadow = '0 4px 16px rgba(234, 88, 12, 0.35)';
+              padding: '10px 22px',
+              fontSize: '13px',
             }}
           >
-            <span className="offert-full">Begär offert</span>
+            <span className="offert-full">Offertförfrågan</span>
             <span className="offert-short">Offert</span>
           </Link>
 
           {/* Phone icon — shown on mobile only */}
           <div className="mobile-phone-btn" style={{ position: 'relative', display: 'none' }}>
             <a
-              href="tel:0722101075"
+              href="tel:+46735000250"
               aria-label="Ring oss"
               style={{
                 display: 'flex',
@@ -541,8 +521,8 @@ export default function Navbar() {
             Ring oss direkt:
           </span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
-            <a href="tel:0722101075" style={{ color: 'var(--color-white)', fontWeight: 600, fontSize: '0.95rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-              <Phone size={14} color="var(--color-primary)" /> 072-210 10 75
+            <a href="tel:+46735000250" style={{ color: 'var(--color-white)', fontWeight: 600, fontSize: '0.95rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Phone size={14} color="var(--color-primary)" /> 073-500 02 50
             </a>
           </div>
         </div>

@@ -13,16 +13,20 @@ const container: React.CSSProperties = {
 
 const faqItems = [
   {
-    question: 'Kostar platsbesöket något?',
-    answer: 'Nej, platsbesök och offert är alltid kostnadsfritt. Vi besöker din fastighet, mäter höjder, kollar förutsättningar och tar fram ett tydligt prisförslag helt utan förbindelser.',
+    question: 'Kostar platsbesök eller rådgivning något?',
+    answer: 'Nej, platsbesök och offert för värmepumpar, badrum och större VVS-arbeten är alltid helt kostnadsfritt och utan förbindelser.',
   },
   {
-    question: 'Hur snabbt kan ni påbörja projektet?',
-    answer: 'Det styrs av projektets storlek samt vår nuvarande kapacitet och planering. Mindre jobb kan vi ofta påbörja inom två veckor, medan större projekt planeras in med god framförhållning.',
+    question: 'Hur snabbt kan ni hjälpa till med mitt ärende?',
+    answer: 'För akuta läckor och rörbrott prioriterar vi snabb inställelse. För planerade installationer som värmepumpar och badrumsrenoveringar bokar vi in startdatum i samråd med dig.',
   },
   {
-    question: 'Fungerar ROT avdrag för era tjänster?',
-    answer: 'Ja, för godkända renoverings och ombyggnadsarbeten på din bostad drar vi av ROT avdraget på 30 % av arbetskostnaden direkt på fakturan.',
+    question: 'Hur fungerar ROT-avdraget för VVS-arbeten?',
+    answer: 'Som privatperson drar vi av 30% av arbetskostnaden direkt på fakturan. Vi administrerar allt mot Skatteverket utan extra kostnad.',
+  },
+  {
+    question: 'Får jag ett skriftligt intyg och garanti efter arbetet?',
+    answer: 'Ja, vi utfärdar alltid skriftlig dokumentation och fulla garantier efter färdigställd installation för ditt och ditt försäkringsbolags trygghet.',
   },
 ];
 
@@ -30,11 +34,11 @@ const inputStyle: React.CSSProperties = {
   width: '100%',
   padding: '14px 16px',
   border: '1px solid #e5e7eb',
-  borderRadius: '12px',
+  borderRadius: '4px',
   background: '#fafafa',
   fontSize: '0.95rem',
-  fontFamily: 'var(--font-family)',
-  color: 'var(--color-text-dark)',
+  fontFamily: 'var(--font-body)',
+  color: 'var(--text-dark)',
   outline: 'none',
   boxSizing: 'border-box',
   marginBottom: '16px',
@@ -43,8 +47,8 @@ const inputStyle: React.CSSProperties = {
 };
 
 function focusInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-  e.currentTarget.style.borderColor = 'var(--color-primary)';
-  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(234, 88, 12, 0.15)';
+  e.currentTarget.style.borderColor = 'var(--primary)';
+  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(175, 115, 73, 0.15)';
 }
 function blurInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderColor = '#e5e7eb';
@@ -53,8 +57,8 @@ function blurInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | 
 
 export default function Quote() {
   usePageTitle(
-    'Begär offert | JH Huskvalitet AB',
-    'Beskriv ditt projekt och begär en kostnadsfri offert för entreprenad- och byggarbeten med Uppland som utgångspunkt.'
+    'Begär offert | VVS Agent Stockholm AB – Fast Pris & ROT-avdrag',
+    'Begär en kostnadsfri VVS-offert från VVS Agent Stockholm AB. Kök, badrum, värmesystem och fastighetsservice. Snabb återkoppling inom 24 timmar.'
   );
   const [name, setName]       = useState('');
   const [email, setEmail]     = useState('');
@@ -63,34 +67,35 @@ export default function Quote() {
   const [message, setMessage] = useState('');
 
   return (
-    <main style={{ fontFamily: 'var(--font-family)' }}>
+    <main style={{ fontFamily: 'var(--font-body)' }}>
 
       {/* ── SECTION A: HERO ───────────────────────────────────── */}
       <section style={{
         position: 'relative',
-        backgroundImage: 'url(/hero-main.webp)',
+        backgroundImage: 'url(https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1400)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: '140px',
         paddingBottom: '60px',
         textAlign: 'center',
       }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.65)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(7, 19, 30, 0.85)' }} />
         <div style={{ ...container, position: 'relative', zIndex: 1 }}>
           <div>
             <ScrollReveal animation="blur-in">
               <h1 style={{
                 color: 'var(--color-white)',
                 fontWeight: 800,
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
                 margin: '0 0 16px 0',
                 lineHeight: 1.15,
+                letterSpacing: '-0.02em',
               }}>
                 Begär kostnadsfri offert
               </h1>
             </ScrollReveal>
             <ScrollReveal animation="scale-x-center" delay={150} duration={0.6}>
-              <span style={{ display: 'block', width: '60px', height: '3px', background: 'var(--color-primary)', borderRadius: '2px', margin: '14px auto 0' }} />
+              <span style={{ display: 'block', width: '60px', height: '3px', background: 'var(--primary)', borderRadius: '2px', margin: '14px auto 0' }} />
             </ScrollReveal>
             <ScrollReveal animation="fade-up" delay={200}>
               <p style={{
@@ -100,7 +105,7 @@ export default function Quote() {
                 margin: '20px auto 0',
                 lineHeight: 1.65,
               }}>
-                Beskriv ditt projekt nedan så återkommer vi med en kostnadsfri offert och kalkyl inom 24 timmar.
+                Beskriv ditt VVS-ärende nedan så återkommer vi med en tydlig kalkyl med fast pris och 30% ROT-avdrag inom 24 timmar.
               </p>
             </ScrollReveal>
           </div>
@@ -122,12 +127,12 @@ export default function Quote() {
               <div style={{
                 background: '#ffffff',
                 border: '1px solid #e5e7eb',
-                borderRadius: '16px',
+                borderRadius: '4px',
                 padding: 'clamp(24px, 4vw, 40px)',
                 boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
               }}>
                 <h2 style={{
-                  color: 'var(--color-text-dark)',
+                  color: 'var(--text-dark)',
                   fontWeight: 700,
                   fontSize: '1.4rem',
                   margin: '0 0 24px 0',
@@ -136,7 +141,7 @@ export default function Quote() {
                 </h2>
 
                 <form onSubmit={(e) => e.preventDefault()}>
-                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-dark)' }}>
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
                     Namn *
                   </label>
                   <input
@@ -150,7 +155,7 @@ export default function Quote() {
                     required
                   />
 
-                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-dark)' }}>
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
                     E-postadress *
                   </label>
                   <input
@@ -164,7 +169,7 @@ export default function Quote() {
                     required
                   />
 
-                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-dark)' }}>
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
                     Telefonnummer *
                   </label>
                   <input
@@ -178,8 +183,8 @@ export default function Quote() {
                     required
                   />
 
-                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-dark)' }}>
-                    Typ av tjänst
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+                    Typ av VVS-tjänst
                   </label>
                   <select
                     value={service}
@@ -189,19 +194,19 @@ export default function Quote() {
                     onBlur={blurInput}
                   >
                     <option value="">Välj tjänst...</option>
-                    <option value="nybyggnation">Nybyggnation</option>
-                    <option value="renovering">Renovering</option>
-                    <option value="ombyggnation">Ombyggnation</option>
-                    <option value="totalentreprenad">Totalentreprenad</option>
-                    <option value="annat">Annat projekt</option>
+                    <option value="varmepumpar">Värmepumpar & Värmesystem</option>
+                    <option value="badrum-kok">Badrum & Kök</option>
+                    <option value="reparation-underhall">Reparation & Underhåll</option>
+                    <option value="radgivning-fastighetsservice">Rådgivning & Fastighetsservice</option>
+                    <option value="annat">Annat VVS-ärende</option>
                   </select>
 
-                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--color-text-dark)' }}>
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
                     Projektbeskrivning *
                   </label>
                   <textarea
                     rows={5}
-                    placeholder="Beskriv ditt projekt så detaljerat du kan (t.ex. yta i kvm, adress, önskad starttid)..."
+                    placeholder="Beskriv vad du behöver hjälp med (t.ex. typ av värmepump, byte av blandare, misstänkt läcka, adress och önskad tidpunkt)..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     style={{ ...inputStyle, resize: 'vertical', marginBottom: '24px' }}
@@ -212,24 +217,13 @@ export default function Quote() {
 
                   <button
                     type="submit"
+                    className="btn-craftsman btn-primary"
                     style={{
                       width: '100%',
                       padding: '16px',
-                      background: 'var(--color-primary)',
-                      color: '#ffffff',
-                      border: 'none',
-                      borderRadius: '12px',
-                      fontWeight: 700,
-                      fontSize: '1rem',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '8px',
-                      transition: 'transform 0.2s ease, opacity 0.2s ease',
                     }}
                   >
-                    <Send size={18} /> SKICKA OFFERTFÖRFRÅGAN
+                    <Send size={16} /> Skicka offertförfrågan
                   </button>
                 </form>
               </div>
@@ -251,7 +245,7 @@ export default function Quote() {
                     </h3>
                   </div>
                   <p style={{ margin: 0, color: 'var(--color-gray-600)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-                    Vi går igenom dina uppgifter direkt och skickar en tydlig kalkyl utan dolda avgifter.
+                    Vi återkopplar snabbt med rådgivning och fast prisförslag utan dolda kostnader.
                   </p>
                 </div>
 
@@ -264,11 +258,11 @@ export default function Quote() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                     <ShieldCheck size={24} color="var(--color-primary)" />
                     <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-text-dark)' }}>
-                      ROT avdrag på fakturan
+                      Kvalitetsgaranti & ROT-avdrag
                     </h3>
                   </div>
                   <p style={{ margin: 0, color: 'var(--color-gray-600)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-                    Vi drar av ROT avdraget direkt på din faktura när arbetet är berättigat till detta.
+                    Fackmannamässigt VVS-montage med fullständigt garantiintyg och 30% ROT-avdrag direkt på fakturan.
                   </p>
                 </div>
 
@@ -281,11 +275,11 @@ export default function Quote() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
                     <Award size={24} color="var(--color-primary)" />
                     <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-text-dark)' }}>
-                      Trygga villkor
+                      10 MSEK Ansvarsförsäkring
                     </h3>
                   </div>
                   <p style={{ margin: 0, color: 'var(--color-gray-600)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-                    Innehar F-skattsedel, ansvarsförsäkring och lämnar skriftliga garantier på allt utfört arbete.
+                    Full trygghet och heltäckande försäkringsskydd mot alla typer av vattenskador.
                   </p>
                 </div>
               </div>
@@ -306,7 +300,7 @@ export default function Quote() {
                 fontSize: 'clamp(1.8rem, 3.5vw, 2.4rem)',
                 margin: '0 0 14px 0',
               }}>
-                Vanliga frågor inför din offertförfrågan
+                Vanliga frågor inför din VVS-offert
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="scale-x-center" delay={150} duration={0.6}>
@@ -323,7 +317,14 @@ export default function Quote() {
       </section>
 
       {/* ── SECTION D: CTA BANNER ─────────────────────────────── */}
-      <CTABanner />
+      <CTABanner
+        heading="Professionell VVS-service med fast pris & garanti"
+        checkItems={[
+          'Fackmannamässigt utförande med fulla garantier',
+          '30% ROT-avdrag hanteras direkt på din faktura',
+          'Erfarna VVS- och värmepumpstekniker',
+        ]}
+      />
 
       <style>{`
         @media (max-width: 900px) {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, MapPin, Mail } from 'lucide-react';
+import { Phone, MapPin, Mail, ShieldCheck } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import FAQAccordion from '../components/FAQAccordion';
 import CTABanner from '../components/CTABanner';
@@ -13,20 +13,20 @@ const container: React.CSSProperties = {
 
 const faqItems = [
   {
-    question: 'Arbetar ni med ROT avdrag?',
-    answer: 'Ja, vi hanterar ROT avdrag och ser till att faktureringen sker korrekt. Arbeten som dränering och inkoppling av VA till befintliga hus berättigar till avdraget.',
+    question: 'Hur snabbt kan ni komma vid akuta ärenden?',
+    answer: 'Vi prioriterar alltid akuta rörbrott, läckor och trasiga värmepumpar för att minimera risken för följdskador. Ring oss direkt vid brådskande ärenden!',
   },
   {
-    question: 'Hur lång tid tar det att få ett prisförslag?',
-    answer: 'Vi brukar återkomma med en offert inom 1 till 3 arbetsdagar efter platsbesöket, beroende på projektets omfattning.',
+    question: 'Arbetar ni med 30% ROT-avdrag?',
+    answer: 'Ja, vi administrerar 30% ROT-avdrag direkt på fakturan för alla privatpersoner enligt Skatteverkets regler.',
   },
   {
-    question: 'Tar ni på er jobb utanför Uppland?',
-    answer: 'Uppland är vår utgångspunkt, men vi kan ta uppdrag i närliggande områden vid större projekt. Hör av dig så berättar vi mer.',
+    question: 'Erhåller jag garanti och dokumentation efter arbetet?',
+    answer: 'Ja, alla våra arbeten utförs fackmannamässigt med full garanti och skriftlig dokumentation för din och ditt försäkringsbolags trygghet.',
   },
   {
-    question: 'Kan jag boka ett platsbesök direkt?',
-    answer: 'Absolut! Skicka ett meddelande via formuläret eller ring oss, så bokar vi in ett kostnadsfritt platsbesök som passar dig.',
+    question: 'Kostar ett hembesök eller offert något?',
+    answer: 'Nej, vi erbjuder alltid kostnadsfria platsbesök och prisförslag utan ',
   },
 ];
 
@@ -34,11 +34,11 @@ const inputStyle: React.CSSProperties = {
   width: '100%',
   padding: '14px 16px',
   border: '1px solid #e5e7eb',
-  borderRadius: '12px',
+  borderRadius: '4px',
   background: '#fafafa',
   fontSize: '0.95rem',
-  fontFamily: 'var(--font-family)',
-  color: 'var(--color-text-dark)',
+  fontFamily: 'var(--font-body)',
+  color: 'var(--text-dark)',
   outline: 'none',
   boxSizing: 'border-box',
   marginBottom: '16px',
@@ -47,8 +47,8 @@ const inputStyle: React.CSSProperties = {
 };
 
 function focusInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
-  e.currentTarget.style.borderColor = 'var(--color-primary)';
-  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(234, 88, 12, 0.15)';
+  e.currentTarget.style.borderColor = 'var(--primary)';
+  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(175, 115, 73, 0.15)';
 }
 function blurInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
   e.currentTarget.style.borderColor = '#e5e7eb';
@@ -57,8 +57,8 @@ function blurInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) 
 
 export default function Contact() {
   usePageTitle(
-    'Kontakta JH Huskvalitet AB | Offert och Rådgivning',
-    'Hör av dig till JH Huskvalitet AB för frågor, kostnadsfria platsbesök eller offert gällande ditt nästa projekt med Uppland som utgångspunkt.'
+    'Kontakta oss | VVS Agent Stockholm AB – Specialister inom VVS',
+    'Kontakta VVS Agent Stockholm AB för kostnadsfri offert, rådgivning eller service. Telefon: 073-500 02 50, E-post: info@vvsagent.se.'
   );
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -66,35 +66,36 @@ export default function Contact() {
   const [message, setMessage] = useState('');
 
   return (
-    <main style={{ fontFamily: 'var(--font-family)' }}>
+    <main style={{ fontFamily: 'var(--font-body)' }}>
 
       {/* ── SECTION A: HERO ───────────────────────────────────── */}
       <section style={{
         position: 'relative',
-        backgroundImage: 'url(/hero-contact-mj.webp)',
+        backgroundImage: 'url(/contact-hero-bg.webp)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: '140px',
         paddingBottom: '60px',
         textAlign: 'center',
       }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.65)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(7, 19, 30, 0.7) 0%, rgba(7, 19, 30, 0.85) 100%)' }} />
         <div style={{ ...container, position: 'relative', zIndex: 1 }}>
           <div>
             <ScrollReveal animation="blur-in">
               <h1 style={{
                 color: 'var(--color-white)',
                 fontWeight: 800,
-                fontSize: 'clamp(2rem, 4vw, 3rem)',
+                fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
                 margin: '0 0 16px 0',
                 lineHeight: 1.15,
+                letterSpacing: '-0.02em',
               }}>
-                Kontakta oss
+                Kontakta VVS Agent Stockholm
               </h1>
             </ScrollReveal>
             <ScrollReveal animation="fade-up" delay={150}>
-              <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '1.05rem', margin: 0 }}>
-                Vi återkopplar vanligtvis inom 24 timmar. Kostnadsfritt platsbesök ingår alltid.
+              <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.05rem', margin: 0 }}>
+                Vi återkopplar snabbt. Kostnadsfritt platsbesök och prisförslag ingår alltid.
               </p>
             </ScrollReveal>
           </div>
@@ -102,7 +103,7 @@ export default function Contact() {
       </section>
 
       {/* ── SECTION B: CONTACT CONTENT ────────────────────────── */}
-      <section style={{ background: 'var(--color-light)', padding: '80px 0' }}>
+      <section style={{ background: '#f8fafc', padding: '80px 0' }}>
         <div style={container}>
           <div className="contact-grid" style={{
             display: 'grid',
@@ -114,7 +115,7 @@ export default function Contact() {
             {/* Left: info */}
             <ScrollReveal animation="fade-right" duration={0.8}>
               <h2 style={{
-                color: 'var(--color-text-dark)',
+                color: 'var(--text-dark)',
                 fontWeight: 800,
                 fontSize: 'clamp(1.6rem, 2.5vw, 2rem)',
                 margin: '0 0 20px 0',
@@ -123,35 +124,33 @@ export default function Contact() {
                 Så når du oss
               </h2>
               <p style={{ color: 'var(--color-gray-600)', fontSize: '1rem', lineHeight: 1.8, margin: 0 }}>
-                Du kan nå oss via formuläret, telefon eller e-post. Oavsett om det gäller ett stort eller litet entreprenad- eller markarbete hjälper vi dig gärna.
+                Du kan nå oss via formuläret, telefon eller e-post. Oavsett om det gäller kök, badrum, värmesystem eller fastighetsservice i Stockholm hjälper vi dig gärna.
               </p>
 
-              <div style={{ marginTop: '40px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div style={{ marginTop: '36px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
                   <div style={{
                     width: '48px',
                     height: '48px',
                     minWidth: '48px',
-                    background: 'rgba(234, 88, 12, 0.1)',
-                    borderRadius: '12px',
+                    background: 'rgba(175, 115, 73, 0.12)',
+                    borderRadius: '4px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                    <Phone size={22} color="var(--color-primary)" />
+                    <Phone size={22} color="var(--primary)" />
                   </div>
                   <div>
-                    <p style={{ margin: '0 0 4px 0', fontWeight: 700, fontSize: '0.9rem', color: 'var(--color-text-dark)' }}>
-                      Telefon
+                    <p style={{ margin: '0 0 4px 0', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-dark)' }}>
+                      Telefon & Service
                     </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                       <a
-                        href="tel:0722101075"
-                        style={{ color: 'var(--color-gray-600)', fontSize: '0.95rem', textDecoration: 'none', lineHeight: 1.5, transition: 'color 0.2s ease' }}
-                        onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-primary)')}
-                        onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-gray-600)')}
+                        href="tel:+46735000250"
+                        style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '1.05rem', textDecoration: 'none', lineHeight: 1.5 }}
                       >
-                        072-210 10 75
+                        073-500 02 50
                       </a>
                     </div>
                   </div>
@@ -162,20 +161,20 @@ export default function Contact() {
                     width: '48px',
                     height: '48px',
                     minWidth: '48px',
-                    background: 'rgba(234, 88, 12, 0.1)',
-                    borderRadius: '12px',
+                    background: 'rgba(175, 115, 73, 0.12)',
+                    borderRadius: '4px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                    <MapPin size={22} color="var(--color-primary)" />
+                    <ShieldCheck size={22} color="var(--primary)" />
                   </div>
                   <div>
-                    <p style={{ margin: '0 0 4px 0', fontWeight: 700, fontSize: '0.9rem', color: 'var(--color-text-dark)' }}>
-                      Plats / Utgångspunkt
+                    <p style={{ margin: '0 0 4px 0', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-dark)' }}>
+                      Trygghet & Försäkring
                     </p>
                     <p style={{ margin: 0, color: 'var(--color-gray-600)', fontSize: '0.95rem', lineHeight: 1.5 }}>
-                      Uppland som utgångspunkt
+                      Full ansvarsförsäkring upp till 10 MSEK
                     </p>
                   </div>
                 </div>
@@ -185,25 +184,25 @@ export default function Contact() {
                     width: '48px',
                     height: '48px',
                     minWidth: '48px',
-                    background: 'rgba(234, 88, 12, 0.1)',
-                    borderRadius: '12px',
+                    background: 'rgba(175, 115, 73, 0.12)',
+                    borderRadius: '4px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                    <Mail size={22} color="var(--color-primary)" />
+                    <Mail size={22} color="var(--primary)" />
                   </div>
                   <div>
-                    <p style={{ margin: '0 0 4px 0', fontWeight: 700, fontSize: '0.9rem', color: 'var(--color-text-dark)' }}>
+                    <p style={{ margin: '0 0 4px 0', fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-dark)' }}>
                       E-post
                     </p>
                     <a
-                      href="mailto:JHHuskvalitet@outlook.com"
+                      href="mailto:info@vvsagent.se"
                       style={{ color: 'var(--color-gray-600)', fontSize: '0.95rem', textDecoration: 'none', lineHeight: 1.5, transition: 'color 0.2s ease' }}
-                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-primary)')}
+                      onMouseEnter={e => (e.currentTarget.style.color = 'var(--primary)')}
                       onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-gray-600)')}
                     >
-                      JHHuskvalitet@outlook.com
+                      info@vvsagent.se
                     </a>
                   </div>
                 </div>
@@ -213,19 +212,20 @@ export default function Contact() {
             {/* Right: form */}
             <ScrollReveal animation="fade-left" duration={0.8} delay={100}>
               <h2 style={{
-                color: 'var(--color-text-dark)',
+                color: 'var(--text-dark)',
                 fontWeight: 800,
                 fontSize: 'clamp(1.6rem, 2.5vw, 2rem)',
                 margin: '0 0 24px 0',
                 lineHeight: 1.2,
               }}>
-                Skicka oss ett meddelande
+                Skicka ett meddelande
               </h2>
               <div style={{
                 background: 'var(--color-white)',
                 padding: '40px',
-                borderRadius: 'var(--border-radius-lg)',
+                borderRadius: '4px',
                 boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+                border: '1px solid #e2e8f0',
               }}>
                 <form onSubmit={e => e.preventDefault()}>
                   <input
@@ -250,48 +250,30 @@ export default function Contact() {
                   />
                   <input
                     type="tel"
-                    placeholder="Ditt telefonnummer"
+                    placeholder="Ditt telefonnummer *"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     style={inputStyle}
                     onFocus={focusInput}
                     onBlur={blurInput}
+                    required
                   />
                   <textarea
-                    placeholder="Beskriv ditt ärende *"
+                    rows={5}
+                    placeholder="Ditt meddelande... *"
                     value={message}
                     onChange={e => setMessage(e.target.value)}
-                    style={{ ...inputStyle, minHeight: '140px', resize: 'vertical', marginBottom: '24px' } as React.CSSProperties}
+                    style={{ ...inputStyle, resize: 'vertical', marginBottom: '24px' }}
                     onFocus={focusInput}
                     onBlur={blurInput}
                     required
                   />
                   <button
                     type="submit"
+                    className="btn-craftsman btn-primary"
                     style={{
                       width: '100%',
-                      padding: '14px',
-                      background: 'var(--color-primary)',
-                      color: '#ffffff',
-                      fontWeight: 700,
-                      fontFamily: 'var(--font-family)',
-                      fontSize: '0.95rem',
-                      border: 'none',
-                      borderRadius: 'var(--border-radius-pill)',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease',
-                    }}
-                    onMouseEnter={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.background = 'var(--color-primary-hover)';
-                      el.style.transform = 'translateY(-2px)';
-                      el.style.boxShadow = '0 8px 24px rgba(234, 88, 12, 0.45)';
-                    }}
-                    onMouseLeave={e => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.background = 'var(--color-primary)';
-                      el.style.transform = 'translateY(0)';
-                      el.style.boxShadow = 'none';
+                      padding: '16px',
                     }}
                   >
                     Skicka meddelande
@@ -309,15 +291,22 @@ export default function Contact() {
           <FAQAccordion
             dark={true}
             items={faqItems}
-            title="Vanliga frågor"
-            subtitle="Svar på det vi ofta får höra. Hittar du inte svaret är du alltid välkommen att ringa oss!"
-            buttonText="Skicka meddelande"
-            buttonLink="/kontakt"
+            title="Vanliga frågor till rörmokaren"
+            subtitle="Svar på vanliga frågor kring jour, priser och installationer. Ring oss direkt om du har en akut fråga!"
+            buttonText="Begär offert"
+            buttonLink="/offert"
           />
         </div>
       </section>
 
-      <CTABanner />
+      <CTABanner
+        heading="Professionellt VVS-arbete med fast pris & garanti"
+        checkItems={[
+          'Fackmannamässigt utförande med fulla garantier',
+          'Snabb återkoppling inom 24 timmar & kostnadsfritt hembesök',
+          '30% ROT-avdrag hanteras direkt på din faktura',
+        ]}
+      />
 
       <style>{`
         @media (max-width: 768px) {
@@ -327,3 +316,4 @@ export default function Contact() {
     </main>
   );
 }
+
