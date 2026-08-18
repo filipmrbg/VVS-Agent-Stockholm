@@ -3,6 +3,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import ImagePositionAdjuster from './components/ImagePositionAdjuster';
 
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -73,6 +74,7 @@ export default function App() {
         </Routes>
       </Suspense>
       <Footer />
+      <ImagePositionAdjuster />
     </BrowserRouter>
   );
 }

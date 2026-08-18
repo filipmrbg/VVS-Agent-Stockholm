@@ -99,7 +99,7 @@ const images: SiteImages = {
       alt: 'Värmepumpsinstallation och värmesystem i Stockholm',
     },
     badrumKok: {
-      url: '/images/service_badrum_kok.jpg',
+      url: 'https://i.imgur.com/YSkjklc.png',
       alt: 'Fackmannamässig VVS-installation i badrum och kök',
     },
     rorservice: {
@@ -125,7 +125,7 @@ const images: SiteImages = {
       alt: 'VVS Agent Stockholm - Offertförfrågan',
     },
     midSection: {
-      url: '/images/service_badrum_kok.jpg',
+      url: 'https://i.imgur.com/YSkjklc.png',
       alt: 'Fackmannamässig VVS-service',
     },
   },
@@ -191,7 +191,7 @@ const images: SiteImages = {
     },
     badrumKok: {
       hero: {
-        url: '/images/service_badrum_kok.jpg',
+        url: 'https://i.imgur.com/YSkjklc.png',
         alt: 'VVS i badrum och kök',
       },
       section1: {

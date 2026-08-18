@@ -12,6 +12,8 @@ export interface ServiceItem {
   heroImage: string;
   image: string;
   imagePosition?: string;
+  homeImagePosition?: string;
+  homeImageTransform?: string;
   href: string;
   tag?: string;
   badge?: string;
@@ -87,8 +89,11 @@ Vi utför nyinstallationer, utbyten av äldre värmepumpar samt löpande service
     detailedDescription: `Vid renovering eller nybyggnad av badrum och kök är fackmässigt VVS-arbete avgörande för att förhindra fukt- och vattenskador. Vi utför alla typer av VVS-arbeten – från installation av diskmaskin, tvättmaskin och blandarbyten till kompletta rördragningar, golvbrunnar och montering av sanitetsporslin.
 
 Alla rördragningar och kopplingar utförs fackmannamässigt med godkända metoder och kvalitetsmaterial enligt gällande branschstandarder för maximal trygghet och hållbarhet.`,
-    heroImage: '/images/service_badrum_kok.jpg',
-    image: '/images/service_badrum_kok.jpg',
+    heroImage: 'https://i.imgur.com/YSkjklc.png',
+    image: 'https://i.imgur.com/YSkjklc.png',
+    imagePosition: '51% 100%',
+    homeImagePosition: '47% 0%',
+    homeImageTransform: 'scale(1) translate(-1px, -88px)',
     href: '/tjanster#badrum-kok',
     tag: 'Installation & Renovering',
     highlights: [

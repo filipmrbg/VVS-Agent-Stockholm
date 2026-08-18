@@ -417,24 +417,19 @@ export default function Home() {
                 <Link
                   to={svc.href}
                   className="home-service-card"
-                  onMouseEnter={(e) => {
-                    const card = e.currentTarget;
-                    const img = card.querySelector('.card-bg-img') as HTMLElement;
-                    if (img) img.style.transform = 'scale(1.06)';
-                  }}
-                  onMouseLeave={(e) => {
-                    const card = e.currentTarget;
-                    const img = card.querySelector('.card-bg-img') as HTMLElement;
-                    if (img) img.style.transform = 'scale(1)';
-                  }}
+                  data-service-slug={svc.slug}
                 >
                   {/* Bakgrundsbild */}
                   <img
                     src={svc.image}
                     alt={svc.title}
+                    data-service-slug={svc.slug}
                     loading="lazy"
                     className="card-bg-img"
-                    style={{ objectPosition: svc.imagePosition || 'center center' }}
+                    style={{
+                      objectPosition: svc.homeImagePosition || svc.imagePosition || 'center center',
+                      transform: svc.homeImageTransform || undefined,
+                    }}
                   />
 
                   {/* Mörk overlay med mjuk gradient */}

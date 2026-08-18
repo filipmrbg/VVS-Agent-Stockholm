@@ -183,6 +183,7 @@ export default function ServicesOverview() {
                         <img
                           src={svc.image}
                           alt={svc.title}
+                          data-service-slug={svc.slug}
                           style={{
                             width: '100%',
                             height: '100%',
