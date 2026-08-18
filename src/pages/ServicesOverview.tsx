@@ -52,7 +52,7 @@ export default function ServicesOverview() {
       {/* ── HERO HEADER ──────────── */}
       <section style={{
         position: 'relative',
-        backgroundImage: 'url(https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1400)',
+        backgroundImage: 'url(https://i.imgur.com/UJRb9tO.jpeg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: '130px',
