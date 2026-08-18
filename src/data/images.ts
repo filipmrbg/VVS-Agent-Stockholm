@@ -107,7 +107,7 @@ const images: SiteImages = {
       alt: 'Reparation, underhåll och akut rörservice',
     },
     golvvarme: {
-      url: '/images/service_radgivning.jpg',
+      url: 'https://i.imgur.com/87K9ne1.jpeg',
       alt: 'Rådgivning och fastighetsservice',
     },
   },
@@ -168,7 +168,7 @@ const images: SiteImages = {
       category: 'Service',
     },
     {
-      image: { url: '/images/service_radgivning.jpg', alt: 'Rådgivning & Fastighetsservice' },
+      image: { url: 'https://i.imgur.com/87K9ne1.jpeg', alt: 'Rådgivning & Fastighetsservice' },
       title: 'Fastighetsservice & Rådgivning',
       category: 'Fastighetsservice',
     },
@@ -219,7 +219,7 @@ const images: SiteImages = {
     },
     golvvarme: {
       hero: {
-        url: '/images/service_radgivning.jpg',
+        url: 'https://i.imgur.com/87K9ne1.jpeg',
         alt: 'Rådgivning och fastighetsservice',
       },
       section1: {

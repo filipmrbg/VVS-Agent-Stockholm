@@ -160,8 +160,8 @@ Våra servicebilar är fullt utrustade med moderna verktyg, packningar, rördela
     detailedDescription: `Med rätt rådgivning och energioptimering kan du spara stora summor på din fastighets driftkostnader. Vi hjälper fastighetsägare, bostadsrättsföreningar och privatpersoner att se över sina värme- och VVS-system, identifiera energitjuvar och planera nödvändiga moderniseringar.
 
 Vi erbjuder personliga hembesök, projektering inför ombyggnationer samt löpande tillsyn och serviceavtal för bostadsrättsföreningar och företag.`,
-    heroImage: '/images/service_radgivning.jpg',
-    image: '/images/service_radgivning.jpg',
+    heroImage: 'https://i.imgur.com/87K9ne1.jpeg',
+    image: 'https://i.imgur.com/87K9ne1.jpeg',
     href: '/tjanster#radgivning',
     tag: 'Rådgivning & Fastighet',
     highlights: [

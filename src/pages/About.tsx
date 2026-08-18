@@ -62,7 +62,7 @@ export default function About() {
                 lineHeight: 1.15,
                 letterSpacing: '-0.02em',
               }}>
-                Om VVS Agent Stockholm
+                Om VVS Agent Stockholm AB
               </h1>
             </ScrollReveal>
             <ScrollReveal animation="fade-up" delay={150}>
