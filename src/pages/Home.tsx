@@ -434,6 +434,7 @@ export default function Home() {
                     alt={svc.title}
                     loading="lazy"
                     className="card-bg-img"
+                    style={{ objectPosition: svc.imagePosition || 'center center' }}
                   />
 
                   {/* Mörk overlay med mjuk gradient */}
@@ -1019,7 +1020,7 @@ export default function Home() {
         .home-service-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.2) 100%);
+          background: linear-gradient(to top, rgba(7, 19, 30, 0.94) 0%, rgba(7, 19, 30, 0.6) 30%, rgba(7, 19, 30, 0.08) 65%, transparent 100%);
           transition: background 0.3s ease;
         }
         .home-service-content {
@@ -1027,24 +1028,26 @@ export default function Home() {
           bottom: 0;
           left: 0;
           right: 0;
-          padding: 24px 20px;
+          padding: 22px 18px;
           z-index: 2;
         }
         .home-service-title {
           color: #ffffff;
           font-weight: 800;
           font-size: 1.25rem;
-          margin: 0 0 10px 0;
+          margin: 0 0 8px 0;
           line-height: 1.2;
           letter-spacing: -0.01em;
           font-family: var(--font-heading);
+          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
         }
         .home-service-desc {
-          color: rgba(255, 255, 255, 0.88);
+          color: rgba(255, 255, 255, 0.92);
           font-size: 0.88rem;
-          line-height: 1.5;
+          line-height: 1.45;
           margin: 0;
           font-weight: 400;
+          text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
         }
 
         @media (max-width: 1100px) {
@@ -1053,22 +1056,22 @@ export default function Home() {
             gap: 16px !important;
           }
           .home-service-card {
-            height: 380px !important;
+            height: 420px !important;
           }
         }
         @media (max-width: 640px) {
           .home-services-grid {
             grid-template-columns: 1fr !important;
-            gap: 14px !important;
+            gap: 16px !important;
           }
           .home-service-card {
-            height: 280px !important;
+            height: 380px !important;
           }
           .home-service-content {
-            padding: 20px 16px !important;
+            padding: 18px 16px !important;
           }
           .home-service-title {
-            font-size: 1.18rem !important;
+            font-size: 1.2rem !important;
             margin-bottom: 6px !important;
           }
           .home-service-desc {

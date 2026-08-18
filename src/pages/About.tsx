@@ -15,19 +15,7 @@ const teamMembers = [
     name: 'Farid Alizadeh',
     role: 'Grundare & VD / Auktoriserad VVS-montör',
     initial: 'F',
-    desc: 'Över 15 års erfarenhet av VVS, värmesystem och projektledning. Ansvarar för kundrelationer, projektering och kvalitetskontroll.',
-  },
-  {
-    name: 'Elias Lindström',
-    role: 'Erfaren VVS-montör & Värmetekniker',
-    initial: 'E',
-    desc: 'Specialist på värmepumpsinstallationer, stamdragningar och fackmannamässiga rörarbeten.',
-  },
-  {
-    name: 'Marcus Berg',
-    role: 'Behörig VVS- & Servicemontör',
-    initial: 'M',
-    desc: 'Expert på badrums-VVS, köksinstallationer, felsökning och snabb service för fastigheter och privatpersoner.',
+    desc: 'Auktoriserad VVS-montör med gedigen expertis inom rörarbeten, värmesystem och projektledning. Ansvarar för kundrelationer, projektering och kvalitetskontroll.',
   },
 ];
 
@@ -203,7 +191,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── SECTION D: TEAM PROFILES (3 PERSONS PER RULE 4) ───── */}
+      {/* ── SECTION D: TEAM PROFILES (Farid Alizadeh) ───── */}
       <section style={{ background: '#f8fafc', padding: '90px 0', borderTop: '1px solid #e2e8f0' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 clamp(20px, 5vw, 40px)' }}>
           <div style={{ textAlign: 'center', marginBottom: '48px' }}>
@@ -215,7 +203,7 @@ export default function About() {
                 letterSpacing: '-0.03em',
                 margin: '0 0 12px 0',
               }}>
-                Auktoriserade VVS-experter
+                Auktoriserad VVS-expert
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="fade-up" delay={100}>
@@ -226,15 +214,14 @@ export default function About() {
                 maxWidth: '600px',
                 margin: '0 auto',
               }}>
-                Med gedigen yrkeserfarenhet och behörigheter garanterar vi högsta kvalitet och personligt engagemang i varje projekt.
+                Med gedigen yrkeskunskap och behörigheter garanterar vi högsta kvalitet och personligt engagemang i varje projekt.
               </p>
             </ScrollReveal>
           </div>
 
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '28px',
+            maxWidth: '520px',
+            margin: '0 auto',
           }}>
             {teamMembers.map((member, i) => (
               <ScrollReveal key={i} animation="slide-up-fade" delay={i * 100}>

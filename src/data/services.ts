@@ -11,6 +11,7 @@ export interface ServiceItem {
   detailedDescription: string;
   heroImage: string;
   image: string;
+  imagePosition?: string;
   href: string;
   tag?: string;
   badge?: string;
@@ -162,6 +163,7 @@ Våra servicebilar är fullt utrustade med moderna verktyg, packningar, rördela
 Vi erbjuder personliga hembesök, projektering inför ombyggnationer samt löpande tillsyn och serviceavtal för bostadsrättsföreningar och företag.`,
     heroImage: 'https://i.imgur.com/87K9ne1.jpeg',
     image: 'https://i.imgur.com/87K9ne1.jpeg',
+    imagePosition: 'center 58%',
     href: '/tjanster#radgivning',
     tag: 'Rådgivning & Fastighet',
     highlights: [
