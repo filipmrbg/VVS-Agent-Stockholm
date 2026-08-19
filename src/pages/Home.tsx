@@ -199,7 +199,7 @@ export default function Home() {
         >
           <video
             ref={heroVideoRef}
-            src="/hero-drone.mp4"
+            src="https://mdwqheoccmerxxrpdews.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202026-08-19%20at%2020.02.36.mp4"
             poster="/hero-main.webp"
             preload="auto"
             autoPlay
@@ -214,7 +214,7 @@ export default function Home() {
               opacity: 1,
             }}
           >
-            <source src="/hero-drone.mp4" type="video/mp4" />
+            <source src="https://mdwqheoccmerxxrpdews.supabase.co/storage/v1/object/public/videos/WhatsApp%20Video%202026-08-19%20at%2020.02.36.mp4" type="video/mp4" />
           </video>
         </div>
 
