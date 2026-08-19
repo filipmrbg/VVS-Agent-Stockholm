@@ -199,7 +199,8 @@ export default function Home() {
         >
           <video
             ref={heroVideoRef}
-            src="https://www.dropbox.com/scl/fi/67abr5nczlam0l76wq87o/WhatsApp-Video-2026-08-19-at-20.02.36.mp4?rlkey=85wq6fquex9il3g2cmysyl6ez&st=p6mlv6b1&raw=1"
+            src="/hero-drone.mp4"
+            poster="/hero-main.webp"
             preload="auto"
             autoPlay
             loop
@@ -213,8 +214,7 @@ export default function Home() {
               opacity: 1,
             }}
           >
-            <source src="https://www.dropbox.com/scl/fi/67abr5nczlam0l76wq87o/WhatsApp-Video-2026-08-19-at-20.02.36.mp4?rlkey=85wq6fquex9il3g2cmysyl6ez&st=p6mlv6b1&raw=1" type="video/mp4" />
-            <source src="https://dl.dropboxusercontent.com/scl/fi/67abr5nczlam0l76wq87o/WhatsApp-Video-2026-08-19-at-20.02.36.mp4?rlkey=85wq6fquex9il3g2cmysyl6ez&st=p6mlv6b1" type="video/mp4" />
+            <source src="/hero-drone.mp4" type="video/mp4" />
           </video>
         </div>
 
