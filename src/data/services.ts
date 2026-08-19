@@ -166,8 +166,8 @@ Våra servicebilar är fullt utrustade med moderna verktyg, packningar, rördela
     detailedDescription: `Med rätt rådgivning och energioptimering kan du spara stora summor på din fastighets driftkostnader. Vi hjälper fastighetsägare, bostadsrättsföreningar och privatpersoner att se över sina värme- och VVS-system, identifiera energitjuvar och planera nödvändiga moderniseringar.
 
 Vi erbjuder personliga hembesök, projektering inför ombyggnationer samt löpande tillsyn och serviceavtal för bostadsrättsföreningar och företag.`,
-    heroImage: 'https://i.imgur.com/87K9ne1.jpeg',
-    image: 'https://i.imgur.com/87K9ne1.jpeg',
+    heroImage: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
+    image: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
     imagePosition: 'center 58%',
     href: '/tjanster#radgivning',
     tag: 'Rådgivning & Fastighet',

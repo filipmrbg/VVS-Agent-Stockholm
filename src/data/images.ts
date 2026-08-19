@@ -107,7 +107,7 @@ const images: SiteImages = {
       alt: 'Reparation, underhåll och akut rörservice',
     },
     golvvarme: {
-      url: 'https://i.imgur.com/87K9ne1.jpeg',
+      url: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
       alt: 'Rådgivning och fastighetsservice',
     },
   },
@@ -168,7 +168,7 @@ const images: SiteImages = {
       category: 'Service',
     },
     {
-      image: { url: 'https://i.imgur.com/87K9ne1.jpeg', alt: 'Rådgivning & Fastighetsservice' },
+      image: { url: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507', alt: 'Rådgivning & Fastighetsservice' },
       title: 'Fastighetsservice & Rådgivning',
       category: 'Fastighetsservice',
     },
@@ -219,7 +219,7 @@ const images: SiteImages = {
     },
     golvvarme: {
       hero: {
-        url: 'https://i.imgur.com/87K9ne1.jpeg',
+        url: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
         alt: 'Rådgivning och fastighetsservice',
       },
       section1: {
