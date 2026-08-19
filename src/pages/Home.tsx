@@ -199,7 +199,7 @@ export default function Home() {
         >
           <video
             ref={heroVideoRef}
-            src="/hero-video.mp4"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260819_133830_f8e36dbb-e5ed-43d8-b814-edd62c7b6a03.mp4"
             preload="auto"
             autoPlay
             loop
@@ -213,8 +213,7 @@ export default function Home() {
               opacity: 1,
             }}
           >
-            <source src="/hero-video.mp4" type="video/mp4" />
-            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260812_233545_f4a7afb0-ad1a-4be9-934a-6e90661f4992.mp4" type="video/mp4" />
+            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260819_133830_f8e36dbb-e5ed-43d8-b814-edd62c7b6a03.mp4" type="video/mp4" />
           </video>
         </div>
 
