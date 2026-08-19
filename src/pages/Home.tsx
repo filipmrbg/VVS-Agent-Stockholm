@@ -199,7 +199,7 @@ export default function Home() {
         >
           <video
             ref={heroVideoRef}
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260819_171627_1dba7b55-8a8c-498d-8342-d3f797bd45f9.mp4"
+            src="/hero-drone.mp4"
             preload="auto"
             autoPlay
             loop
@@ -213,7 +213,7 @@ export default function Home() {
               opacity: 1,
             }}
           >
-            <source src="https://d8j0ntlcm91z4.cloudfront.net/user_3G5LlmMYORSdAk8SxzXrK2S0Is5/hf_20260819_171627_1dba7b55-8a8c-498d-8342-d3f797bd45f9.mp4" type="video/mp4" />
+            <source src="/hero-drone.mp4" type="video/mp4" />
           </video>
         </div>
 
