@@ -73,7 +73,7 @@ function buildEmailHtml(
         <table role="presentation" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); overflow: hidden;">
           <tr>
             <td style="padding: 40px;">
-              <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #000000;">Ny offertförfrågan</h1>
+              <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #000000;">Ny kontaktförfrågan</h1>
               <p style="margin: 0 0 24px 0; font-size: 14px; color: #6b7280;">${safeDateTime}</p>
 
               <table role="presentation" style="width: 100%; background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
@@ -199,7 +199,7 @@ Deno.serve(async (req: Request) => {
     const submissionId = crypto.randomUUID();
     const dateTime = formatSwedishDateTime(new Date());
     const html = buildEmailHtml(name, email, phone, service, message, dateTime, submissionId);
-    const subject = `Ny offertförfrågan från ${name}`;
+    const subject = `Ny kontaktförfrågan från ${name}`;
 
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
