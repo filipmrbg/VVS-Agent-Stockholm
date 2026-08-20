@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   Star,
   Phone,
-  Mail,
+ Mail,
   MapPin,
   Building,
   Instagram,
@@ -17,6 +17,8 @@ import {
   Flame,
   ChevronLeft,
   ChevronRight,
+  Loader2,
+  AlertCircle,
 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import Button from '../components/Button';
@@ -103,17 +105,45 @@ export default function Home() {
   const [activeReviewIdx, setActiveReviewIdx] = useState(0);
 
   // Form state
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [formStatusMessage, setFormStatusMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
+    service: '',
     message: '',
   });
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    setFormStatus('sending');
+    setFormStatusMessage('');
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact-email`;
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error ?? 'Något gick fel.');
+      }
+
+      setFormStatus('success');
+      setFormStatusMessage('Tack för din offertförfrågan! Vi återkommer med ett prisförslag inom 24 timmar.');
+      setFormData({ name: '', phone: '', email: '', service: '', message: '' });
+    } catch (err) {
+      setFormStatus('error');
+      setFormStatusMessage(err instanceof Error ? err.message : 'Kunde inte skicka offertförfrågan. Försök igen senare.');
+    }
   };
 
   useEffect(() => {
@@ -741,7 +771,7 @@ export default function Home() {
                 </p>
               </ScrollReveal>
 
-              {formSubmitted ? (
+              {formStatus === 'success' ? (
                 <div style={{
                   background: 'rgba(255, 255, 255, 0.15)',
                   padding: '30px',
@@ -751,10 +781,25 @@ export default function Home() {
                 }}>
                   <Check size={40} color="#ffffff" style={{ margin: '0 auto 12px auto' }} />
                   <h3 style={{ color: '#ffffff', fontSize: '1.3rem', margin: '0 0 8px 0' }}>Tack för din förfrågan!</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.9)', margin: 0 }}>Vi återkommer till dig med offert och rådgivning inom 24 timmar.</p>
+                  <p style={{ color: 'rgba(255,255,255,0.9)', margin: 0 }}>{formStatusMessage}</p>
                 </div>
               ) : (
                 <form onSubmit={handleFormSubmit}>
+                  {formStatus === 'error' && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '12px 14px',
+                      marginBottom: '16px',
+                      borderRadius: '4px',
+                      background: 'rgba(239, 68, 68, 0.2)',
+                      border: '1px solid rgba(239, 68, 68, 0.4)',
+                    }}>
+                      <AlertCircle size={18} color="#fff" style={{ flexShrink: 0 }} />
+                      <span style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>{formStatusMessage}</span>
+                    </div>
+                  )}
                   <input
                     type="text"
                     required
@@ -779,6 +824,19 @@ export default function Home() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   />
+                  <select
+                    className="copper-input"
+                    value={formData.service}
+                    onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <option value="">Välj tjänst...</option>
+                    <option value="varmepumpar">Värmepumpar & Värmesystem</option>
+                    <option value="badrum-kok">Badrum & Kök</option>
+                    <option value="reparation-underhall">Reparation & Underhåll</option>
+                    <option value="radgivning-fastighetsservice">Rådgivning & Fastighetsservice</option>
+                    <option value="annat">Annat VVS-ärende</option>
+                  </select>
                   <textarea
                     required
                     rows={4}
@@ -788,9 +846,27 @@ export default function Home() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   />
-                  <Button variant="white" size="lg" className="w-full">
-                    Skicka offertförfrågan
+                  <Button
+                    variant="white"
+                    size="lg"
+                    className="w-full"
+                    disabled={formStatus === 'sending'}
+                    style={{
+                      opacity: formStatus === 'sending' ? 0.7 : 1,
+                      cursor: formStatus === 'sending' ? 'wait' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                    }}
+                  >
+                    {formStatus === 'sending' ? (
+                      <><Loader2 size={18} style={{ animation: 'spin 0.8s linear infinite' }} /> Skickar...</>
+                    ) : (
+                      'Skicka offertförfrågan'
+                    )}
                   </Button>
+                  <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
                 </form>
               )}
             </div>
