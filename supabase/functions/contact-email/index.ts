@@ -19,6 +19,14 @@ function normalizeFrom(raw: string | undefined): string {
 }
 const RESEND_FROM = normalizeFrom(Deno.env.get("RESEND_FROM"));
 
+const SERVICE_LABELS: Record<string, string> = {
+  varmepumpar: "Värmepumpar & Värmesystem",
+  "badrum-kok": "Badrum & Kök",
+  "reparation-underhall": "Reparation & Underhåll",
+  "radgivning-fastighetsservice": "Rådgivning & Fastighetsservice",
+  annat: "Annat VVS-ärende",
+};
+
 const SWEDISH_MONTHS = [
   "januari", "februari", "mars", "april", "maj", " juni",
   "juli", "augusti", "september", "oktober", "november", "december",
@@ -179,7 +187,7 @@ Deno.serve(async (req: Request) => {
     const name = (body.name ?? "").trim();
     const email = (body.email ?? "").trim();
     const phone = (body.phone ?? "").trim();
-    const service = (body.service ?? "").trim();
+    const service = SERVICE_LABELS[(body.service ?? "").trim()] ?? (body.service ?? "").trim();
     const message = (body.message ?? "").trim();
 
     if (!name || !email || !phone || !message) {
