@@ -14,9 +14,9 @@ const container: React.CSSProperties = {
 const teamMembers = [
   {
     name: 'Farid Alizadeh',
-    role: 'Grundare & VD / Auktoriserad VVS-montör',
+    role: 'Grundare & VD / VVS-montör',
     initial: 'F',
-    desc: 'Auktoriserad VVS-montör med gedigen expertis inom rörarbeten, värmesystem och projektledning. Ansvarar för kundrelationer, projektering och kvalitetskontroll.',
+    desc: 'VVS-montör med gedigen expertis inom rörarbeten, värmesystem och projektledning. Ansvarar för kundrelationer, projektering och kvalitetskontroll.',
   },
 ];
 
@@ -141,7 +141,7 @@ export default function About() {
                     margin: '0 0 18px 0',
                     fontWeight: 500,
                   }}>
-                    VVS AGENT STOCKHOLM AB grundades med en tydlig vision: att erbjuda stockholmarna en transparent, auktoriserad och personlig VVS-partner för både akuta insatser och planerade helhetsrenoveringar.
+                    VVS AGENT STOCKHOLM AB grundades med en tydlig vision: att erbjuda stockholmarna en transparent och personlig VVS-partner för både akuta insatser och planerade helhetsrenoveringar.
                   </p>
                   
                   <p style={{
@@ -204,7 +204,7 @@ export default function About() {
                 letterSpacing: '-0.03em',
                 margin: '0 0 12px 0',
               }}>
-                Auktoriserad VVS-expert
+                VVS-expert
               </h2>
             </ScrollReveal>
             <ScrollReveal animation="fade-up" delay={100}>

@@ -40,7 +40,7 @@ export const services: ServiceItem[] = [
     slug: 'varmepumpar',
     title: 'Värmepumpar & Värmesystem',
     shortDescription: 'Installation, service och felsökning av luft-vatten och bergvärmepumpar för ett effektivt och hållbart inomhusklimat.',
-    heroText: 'Sänk dina energikostnader med en modern värmepump. Auktoriserad installation, utbyte och service av bergvärme och luft/vatten.',
+    heroText: 'Sänk dina energikostnader med en modern värmepump. Installation, utbyte och service av bergvärme och luft/vatten.',
     detailedDescription: `En modern värmepump är en av de mest lönsamma investeringarna du kan göra för din fastighet. Som certifierade värmepumpstekniker hjälper vi dig genom hela processen – från dimensionering och val av rätt anläggning till komplett installation, injustering och driftsättning.
 
 Vi utför nyinstallationer, utbyten av äldre värmepumpar samt löpande service och felsökning på marknadsledande märken som NIBE, CTC, Bosch, Daikin och IVT. Med rätt dimensionerat värmesystem och fackmannamässigt montage säkerställer du maximal driftsäkerhet och lägsta möjliga uppvärmningskostnad.`,

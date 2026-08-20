@@ -292,7 +292,7 @@ export default function Home() {
                 margin: '0 0 28px 0',
                 fontWeight: 400,
               }}>
-                Söker du en pålitlig och auktoriserad rörmokare i Stockholm? Vi utför kompletta VVS-arbeten, kök, badrum och värmesystem för privatpersoner, BRF:er och fastighetsägare med fasta priser och 30% ROT-avdrag.
+                Söker du en pålitlig rörmokare i Stockholm? Vi utför kompletta VVS-arbeten, kök, badrum och värmesystem för privatpersoner, BRF:er och fastighetsägare med fasta priser och 30% ROT-avdrag.
               </p>
             </ScrollReveal>
 
@@ -435,7 +435,7 @@ export default function Home() {
                   lineHeight: 1.6,
                   margin: 0,
                 }}>
-                  Vi erbjuder auktoriserade VVS- och fastighetslösningar i hela Stockholmsområdet med fokus på fackmannamässig kvalitet, trygghet och långsiktig funktion.
+                  Vi erbjuder VVS- och fastighetslösningar i hela Stockholmsområdet med fokus på fackmannamässig kvalitet, trygghet och långsiktig funktion.
                 </p>
               </ScrollReveal>
             </div>
@@ -514,7 +514,7 @@ export default function Home() {
                   lineHeight: 1.75,
                   margin: '0 0 20px 0',
                 }}>
-                  VVS AGENT STOCKHOLM AB drivs av auktoriserade VVS-installatörer med lång yrkeserfarenhet inom rörarbeten, kök, badrum, värmesystem och komplett fastighetsservice i hela Stockholmsregionen.
+                  VVS AGENT STOCKHOLM AB drivs av VVS-installatörer med lång yrkeserfarenhet inom rörarbeten, kök, badrum, värmesystem och komplett fastighetsservice i hela Stockholmsregionen.
                 </p>
                 <p style={{
                   color: 'rgba(255, 255, 255, 0.88)',
