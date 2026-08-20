@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, MapPin, Mail, ShieldCheck } from 'lucide-react';
+import { Phone, MapPin, Mail, ShieldCheck, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import FAQAccordion from '../components/FAQAccordion';
 import CTABanner from '../components/CTABanner';
@@ -64,6 +64,42 @@ export default function Contact() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus('sending');
+    setStatusMessage('');
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact-email`;
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, phone, message }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error ?? 'Något gick fel.');
+      }
+
+      setStatus('success');
+      setStatusMessage('Tack för ditt meddelande! Vi återkommer så snart som möjligt.');
+      setName('');
+      setEmail('');
+      setPhone('');
+      setMessage('');
+    } catch (err) {
+      setStatus('error');
+      setStatusMessage(err instanceof Error ? err.message : 'Kunde inte skicka meddelandet. Försök igen senare.');
+    }
+  }
 
   return (
     <main style={{ fontFamily: 'var(--font-body)' }}>
@@ -227,7 +263,37 @@ export default function Contact() {
                 boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
                 border: '1px solid #e2e8f0',
               }}>
-                <form onSubmit={e => e.preventDefault()}>
+                <form onSubmit={handleSubmit}>
+                  {status === 'success' && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '14px 16px',
+                      marginBottom: '20px',
+                      borderRadius: '4px',
+                      background: 'rgba(34, 197, 94, 0.1)',
+                      border: '1px solid rgba(34, 197, 94, 0.3)',
+                    }}>
+                      <CheckCircle2 size={20} color="#16a34a" style={{ flexShrink: 0 }} />
+                      <span style={{ color: '#15803d', fontSize: '0.9rem', fontWeight: 600 }}>{statusMessage}</span>
+                    </div>
+                  )}
+                  {status === 'error' && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '14px 16px',
+                      marginBottom: '20px',
+                      borderRadius: '4px',
+                      background: 'rgba(239, 68, 68, 0.1)',
+                      border: '1px solid rgba(239, 68, 68, 0.3)',
+                    }}>
+                      <AlertCircle size={20} color="#dc2626" style={{ flexShrink: 0 }} />
+                      <span style={{ color: '#b91c1c', fontSize: '0.9rem', fontWeight: 600 }}>{statusMessage}</span>
+                    </div>
+                  )}
                   <input
                     type="text"
                     placeholder="Ditt namn *"
@@ -274,10 +340,22 @@ export default function Contact() {
                     style={{
                       width: '100%',
                       padding: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      opacity: status === 'sending' ? 0.7 : 1,
+                      cursor: status === 'sending' ? 'wait' : 'pointer',
                     }}
+                    disabled={status === 'sending'}
                   >
-                    Skicka meddelande
+                    {status === 'sending' ? (
+                      <><Loader2 size={18} style={{ animation: 'spin 0.8s linear infinite' }} /> Skickar...</>
+                    ) : (
+                      'Skicka meddelande'
+                    )}
                   </button>
+                  <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
                 </form>
               </div>
             </ScrollReveal>
