@@ -7,10 +7,10 @@ const corsHeaders = {
 };
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-const CONTACT_TO = "info@vvsagent.se";
+const CONTACT_TO = "f.bjorgaas@gmail.com";
 
 function normalizeFrom(raw: string | undefined): string {
-  const fallback = "Kontaktformulär <info@vvsagent.se>";
+  const fallback = "Kontaktformulär <info@contact.bgbygger.se>";
   const value = (raw ?? "").trim();
   if (!value) return fallback;
   const match = value.match(/^\s*<([^>]+)>\s*$/);
