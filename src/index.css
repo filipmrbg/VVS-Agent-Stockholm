@@ -337,6 +337,16 @@ p {
   line-height: 1.2 !important;
 }
 
+.btn-craftsman.btn-primary {
+  background-color: var(--primary) !important;
+  color: var(--color-white) !important;
+  border: none !important;
+}
+
+.btn-craftsman.btn-primary:hover {
+  background-color: var(--primary-hover) !important;
+}
+
 .copper-input {
   width: 100%;
   padding: 14px 0;
