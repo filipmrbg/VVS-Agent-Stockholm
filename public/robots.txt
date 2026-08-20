@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jhhuskvalitet.se/sitemap.xml
+Sitemap: https://vvsagent.se/sitemap.xml

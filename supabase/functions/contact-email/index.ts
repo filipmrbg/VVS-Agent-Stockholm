@@ -179,12 +179,23 @@ function clean(value: unknown, max: number, keepNewlines = false): string {
 
 /* ── Abuse protection ─────────────────────────────────────────────
    The endpoint is intentionally public (visitors are not signed in),
-   so volume is bounded per client IP and globally, and a hidden
-   honeypot field catches naive bots. */
+   so volume is bounded per client IP and a hidden honeypot field
+   catches naive bots.
+
+   The per-IP window lives in the database (see the
+   `claim_contact_send` migration) so that it survives isolate
+   recycling and is shared across concurrently running instances. The
+   in-memory counters below are only a fallback for when that call
+   cannot be made, and the global ceiling is a catastrophe backstop
+   set far above plausible legitimate volume so that it cannot be
+   filled by an attacker to lock real customers out. */
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
 const MAX_PER_IP_PER_WINDOW = 5;
-const MAX_GLOBAL_PER_WINDOW = 60;
+const MAX_GLOBAL_PER_WINDOW = 500;
 const MAX_TRACKED_IPS = 5000;
+
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL");
+const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
 
 const ipHits = new Map<string, number[]>();
 let globalHits: number[] = [];
@@ -199,7 +210,51 @@ function clientIp(req: Request): string {
   return first || req.headers.get("cf-connecting-ip") || "unknown";
 }
 
-/** True when this IP (or the site as a whole) has already sent its quota. */
+/** SHA-256 of the caller IP, so no raw visitor address is stored. */
+async function hashIp(ip: string): Promise<string> {
+  const data = new TextEncoder().encode(`contact-form:${ip}`);
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return Array.from(new Uint8Array(digest))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+/**
+ * Atomically records this send against the caller's durable window.
+ * Returns true when the caller may send, false when the hourly
+ * allowance is spent, and null when the check could not be performed.
+ */
+async function claimDurableSend(ip: string): Promise<boolean | null> {
+  if (!SUPABASE_URL || !SERVICE_ROLE_KEY) return null;
+
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/claim_contact_send`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SERVICE_ROLE_KEY}`,
+        "apikey": SERVICE_ROLE_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        p_ip_hash: await hashIp(ip),
+        p_max_per_window: MAX_PER_IP_PER_WINDOW,
+      }),
+    });
+
+    if (!response.ok) {
+      console.error("rate limit rpc failed:", response.status);
+      return null;
+    }
+
+    const allowed = await response.json();
+    return typeof allowed === "boolean" ? allowed : null;
+  } catch (err) {
+    console.error("rate limit rpc error:", err);
+    return null;
+  }
+}
+
+/** Global backstop plus the in-memory per-IP fallback. */
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
   globalHits = withinWindow(globalHits, now);
@@ -315,6 +370,20 @@ Deno.serve(async (req: Request) => {
     }
 
     const submissionId = crypto.randomUUID();
+
+    // Durable per-sender claim, recorded only for submissions that pass
+    // validation so a visitor correcting a typo is never penalised.
+    const durableAllowed = await claimDurableSend(ip);
+    if (durableAllowed === false) {
+      return new Response(
+        JSON.stringify({ error: "För många förfrågningar. Försök igen senare eller ring oss direkt." }),
+        {
+          status: 429,
+          headers: { ...corsHeaders, "Content-Type": "application/json", "Retry-After": "3600" },
+        },
+      );
+    }
+
     recordSend(ip);
     const dateTime = formatSwedishDateTime(new Date());
     const html = buildEmailHtml(name, email, phone, service, message, dateTime, submissionId);
