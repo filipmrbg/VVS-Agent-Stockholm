@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, MapPin, Mail, ShieldCheck, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Phone, MapPin, Mail, ShieldCheck, CheckCircle2, AlertCircle, Loader2, Send } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import FAQAccordion from '../components/FAQAccordion';
 import CTABanner from '../components/CTABanner';
@@ -46,11 +46,11 @@ const inputStyle: React.CSSProperties = {
   display: 'block',
 };
 
-function focusInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function focusInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderColor = 'var(--primary)';
   e.currentTarget.style.boxShadow = '0 0 0 3px rgba(175, 115, 73, 0.15)';
 }
-function blurInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) {
+function blurInput(e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
   e.currentTarget.style.borderColor = '#e5e7eb';
   e.currentTarget.style.boxShadow = 'none';
 }
@@ -63,6 +63,7 @@ export default function Contact() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [service, setService] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -80,7 +81,7 @@ export default function Contact() {
           'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, phone, message }),
+        body: JSON.stringify({ name, email, phone, service, message }),
       });
 
       const data = await response.json().catch(() => ({}));
@@ -90,10 +91,11 @@ export default function Contact() {
       }
 
       setStatus('success');
-      setStatusMessage('Tack för ditt meddelande! Vi återkommer så snart som möjligt.');
+      setStatusMessage('Tack för din offertförfrågan! Vi återkommer med ett prisförslag inom 24 timmar.');
       setName('');
       setEmail('');
       setPhone('');
+      setService('');
       setMessage('');
     } catch (err) {
       setStatus('error');
@@ -254,7 +256,7 @@ export default function Contact() {
                 margin: '0 0 24px 0',
                 lineHeight: 1.2,
               }}>
-                Skicka ett meddelande
+                Begär kostnadsfri offert
               </h2>
               <div style={{
                 background: 'var(--color-white)',
@@ -294,9 +296,12 @@ export default function Contact() {
                       <span style={{ color: '#b91c1c', fontSize: '0.9rem', fontWeight: 600 }}>{statusMessage}</span>
                     </div>
                   )}
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+                    Namn *
+                  </label>
                   <input
                     type="text"
-                    placeholder="Ditt namn *"
+                    placeholder="Ditt för- och efternamn"
                     value={name}
                     onChange={e => setName(e.target.value)}
                     style={inputStyle}
@@ -304,9 +309,12 @@ export default function Contact() {
                     onBlur={blurInput}
                     required
                   />
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+                    E-postadress *
+                  </label>
                   <input
                     type="email"
-                    placeholder="Din e-postadress *"
+                    placeholder="din.epost@doman.se"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     style={inputStyle}
@@ -314,9 +322,12 @@ export default function Contact() {
                     onBlur={blurInput}
                     required
                   />
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+                    Telefonnummer *
+                  </label>
                   <input
                     type="tel"
-                    placeholder="Ditt telefonnummer *"
+                    placeholder="07X-XXX XX XX"
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     style={inputStyle}
@@ -324,9 +335,29 @@ export default function Contact() {
                     onBlur={blurInput}
                     required
                   />
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+                    Typ av VVS-tjänst
+                  </label>
+                  <select
+                    value={service}
+                    onChange={e => setService(e.target.value)}
+                    style={{ ...inputStyle, cursor: 'pointer' }}
+                    onFocus={focusInput}
+                    onBlur={blurInput}
+                  >
+                    <option value="">Välj tjänst...</option>
+                    <option value="varmepumpar">Värmepumpar & Värmesystem</option>
+                    <option value="badrum-kok">Badrum & Kök</option>
+                    <option value="reparation-underhall">Reparation & Underhåll</option>
+                    <option value="radgivning-fastighetsservice">Rådgivning & Fastighetsservice</option>
+                    <option value="annat">Annat VVS-ärende</option>
+                  </select>
+                  <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
+                    Projektbeskrivning *
+                  </label>
                   <textarea
                     rows={5}
-                    placeholder="Ditt meddelande... *"
+                    placeholder="Beskriv vad du behöver hjälp med (t.ex. typ av värmepump, byte av blandare, misstänkt läcka, adress och önskad tidpunkt)..."
                     value={message}
                     onChange={e => setMessage(e.target.value)}
                     style={{ ...inputStyle, resize: 'vertical', marginBottom: '24px' }}
@@ -352,7 +383,7 @@ export default function Contact() {
                     {status === 'sending' ? (
                       <><Loader2 size={18} style={{ animation: 'spin 0.8s linear infinite' }} /> Skickar...</>
                     ) : (
-                      'Skicka meddelande'
+                      <><Send size={16} /> Skicka offertförfrågan</>
                     )}
                   </button>
                   <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>

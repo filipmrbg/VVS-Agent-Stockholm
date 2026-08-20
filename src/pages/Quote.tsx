@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Clock, Award, Send } from 'lucide-react';
+import { ShieldCheck, Clock, Award, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import FAQAccordion from '../components/FAQAccordion';
 import CTABanner from '../components/CTABanner';
@@ -65,6 +65,43 @@ export default function Quote() {
   const [phone, setPhone]     = useState('');
   const [service, setService] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus('sending');
+    setStatusMessage('');
+
+    try {
+      const apiUrl = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/contact-email`;
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, phone, service, message }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error ?? 'Något gick fel.');
+      }
+
+      setStatus('success');
+      setStatusMessage('Tack för din offertförfrågan! Vi återkommer med ett prisförslag inom 24 timmar.');
+      setName('');
+      setEmail('');
+      setPhone('');
+      setService('');
+      setMessage('');
+    } catch (err) {
+      setStatus('error');
+      setStatusMessage(err instanceof Error ? err.message : 'Kunde inte skicka offertförfrågan. Försök igen senare.');
+    }
+  }
 
   return (
     <main style={{ fontFamily: 'var(--font-body)' }}>
@@ -140,7 +177,37 @@ export default function Quote() {
                   Fyll i dina uppgifter
                 </h2>
 
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form onSubmit={handleSubmit}>
+                  {status === 'success' && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '14px 16px',
+                      marginBottom: '20px',
+                      borderRadius: '4px',
+                      background: 'rgba(34, 197, 94, 0.1)',
+                      border: '1px solid rgba(34, 197, 94, 0.3)',
+                    }}>
+                      <CheckCircle2 size={20} color="#16a34a" style={{ flexShrink: 0 }} />
+                      <span style={{ color: '#15803d', fontSize: '0.9rem', fontWeight: 600 }}>{statusMessage}</span>
+                    </div>
+                  )}
+                  {status === 'error' && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '14px 16px',
+                      marginBottom: '20px',
+                      borderRadius: '4px',
+                      background: 'rgba(239, 68, 68, 0.1)',
+                      border: '1px solid rgba(239, 68, 68, 0.3)',
+                    }}>
+                      <AlertCircle size={20} color="#dc2626" style={{ flexShrink: 0 }} />
+                      <span style={{ color: '#b91c1c', fontSize: '0.9rem', fontWeight: 600 }}>{statusMessage}</span>
+                    </div>
+                  )}
                   <label style={{ display: 'block', marginBottom: '4px', fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-dark)' }}>
                     Namn *
                   </label>
@@ -221,10 +288,22 @@ export default function Quote() {
                     style={{
                       width: '100%',
                       padding: '16px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      opacity: status === 'sending' ? 0.7 : 1,
+                      cursor: status === 'sending' ? 'wait' : 'pointer',
                     }}
+                    disabled={status === 'sending'}
                   >
-                    <Send size={16} /> Skicka offertförfrågan
+                    {status === 'sending' ? (
+                      <><Loader2 size={18} style={{ animation: 'spin 0.8s linear infinite' }} /> Skickar...</>
+                    ) : (
+                      <><Send size={16} /> Skicka offertförfrågan</>
+                    )}
                   </button>
+                  <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
                 </form>
               </div>
             </ScrollReveal>

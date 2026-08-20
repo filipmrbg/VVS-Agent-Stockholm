@@ -37,6 +37,7 @@ function buildEmailHtml(
   name: string,
   email: string,
   phone: string,
+  service: string,
   message: string,
   dateTime: string,
   submissionId: string,
@@ -44,6 +45,7 @@ function buildEmailHtml(
   const safeName = escapeHtml(name);
   const safeEmail = escapeHtml(email);
   const safePhone = escapeHtml(phone);
+  const safeService = escapeHtml(service);
   const safeMessage = escapeHtml(message);
   const safeDateTime = escapeHtml(dateTime);
   const safeId = escapeHtml(submissionId);
@@ -62,7 +64,7 @@ function buildEmailHtml(
         <table role="presentation" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); overflow: hidden;">
           <tr>
             <td style="padding: 40px;">
-              <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #000000;">Ny kontaktförfrågan</h1>
+              <h1 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 700; color: #000000;">Ny offertförfrågan</h1>
               <p style="margin: 0 0 24px 0; font-size: 14px; color: #6b7280;">${safeDateTime}</p>
 
               <table role="presentation" style="width: 100%; background-color: #f8f9fa; border-radius: 8px; padding: 20px; margin-bottom: 24px;">
@@ -85,6 +87,13 @@ function buildEmailHtml(
                   <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
                     <span style="font-weight: 600; color: #374151; display: block; margin-bottom: 4px;">Telefon:</span>
                     <a href="tel:${safePhone}" style="color: #2563eb; text-decoration: none;">${safePhone}</a>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                    <span style="font-weight: 600; color: #374151; display: block; margin-bottom: 4px;">Tjänst:</span>
+                    <span style="color: #1f2937;">${safeService}</span>
                   </td>
                 </tr>
 
@@ -122,6 +131,7 @@ interface ContactPayload {
   name?: string;
   email?: string;
   phone?: string;
+  service?: string;
   message?: string;
 }
 
@@ -160,6 +170,7 @@ Deno.serve(async (req: Request) => {
     const name = (body.name ?? "").trim();
     const email = (body.email ?? "").trim();
     const phone = (body.phone ?? "").trim();
+    const service = (body.service ?? "").trim();
     const message = (body.message ?? "").trim();
 
     if (!name || !email || !phone || !message) {
@@ -178,8 +189,8 @@ Deno.serve(async (req: Request) => {
 
     const submissionId = crypto.randomUUID();
     const dateTime = formatSwedishDateTime(new Date());
-    const html = buildEmailHtml(name, email, phone, message, dateTime, submissionId);
-    const subject = `"Ny kontaktförfrågan" från ${name}`;
+    const html = buildEmailHtml(name, email, phone, service, message, dateTime, submissionId);
+    const subject = `"Ny offertförfrågan" från ${name}`;
 
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
