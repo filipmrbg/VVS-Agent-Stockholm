@@ -22,6 +22,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import Button from '../components/Button';
 import SocialBanner from '../components/SocialBanner';
 import FAQAccordion from '../components/FAQAccordion';
+import WholesalersSection from '../components/WholesalersSection';
 import CallModal from '../components/CallModal';
 import { usePageTitle } from '../hooks/usePageTitle';
 import services, { ServiceItem } from '../data/services';
@@ -551,7 +552,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. INSTAGRAM & PROJEKTGALLERI (SocialBanner.tsx - Real Embedded Posts) ──── */}
+      {/* ── 5. GROSSISTER DÄR VI HANDLAR ──────────────────────── */}
+      <WholesalersSection />
+
+      {/* ── 6. INSTAGRAM & PROJEKTGALLERI (SocialBanner.tsx - Real Embedded Posts) ──── */}
       <SocialBanner />
 
       {/* ── 6. RECO OMDÖMES-SLIDER ──────────────────────────────── */}

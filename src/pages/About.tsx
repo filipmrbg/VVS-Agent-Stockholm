@@ -2,6 +2,7 @@ import { ShieldCheck, Award, Zap, Clock, Wrench, Play } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import Button from '../components/Button';
 import CTABanner from '../components/CTABanner';
+import WholesalersSection from '../components/WholesalersSection';
 import { usePageTitle } from '../hooks/usePageTitle';
 
 const container: React.CSSProperties = {
@@ -286,7 +287,10 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── SECTION E: CTA BANNER ─────────────────────────────── */}
+      {/* ── SECTION E: GROSSISTER DÄR VI HANDLAR ─────────────── */}
+      <WholesalersSection />
+
+      {/* ── SECTION F: CTA BANNER ─────────────────────────────── */}
       <CTABanner
         heading="Behöver du professionell VVS-hjälp i Stockholm?"
         checkItems={[
