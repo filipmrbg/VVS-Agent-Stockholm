@@ -150,9 +150,79 @@ interface ContactPayload {
   phone?: string;
   service?: string;
   message?: string;
+  company?: string;
 }
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/* ── Input bounds ─────────────────────────────────────────────────
+   Nothing from the browser is trusted for size or for content, so
+   the body is capped and every field is clamped and stripped of
+   control characters before it reaches the subject line or body. */
+const MAX_BODY_BYTES = 20_000;
+const FIELD_LIMITS = {
+  name: 100,
+  email: 254,
+  phone: 40,
+  service: 80,
+  message: 5000,
+} as const;
+
+/** Trim, drop control characters (incl. CR/LF) and clamp to `max`. */
+function clean(value: unknown, max: number, keepNewlines = false): string {
+  if (typeof value !== "string") return "";
+  const stripped = keepNewlines
+    ? value.replace(/\r\n?/g, "\n").replace(/[^\P{C}\n]/gu, "")
+    : value.replace(/\p{C}/gu, " ").replace(/\s{2,}/g, " ");
+  return stripped.trim().slice(0, max);
+}
+
+/* ── Abuse protection ─────────────────────────────────────────────
+   The endpoint is intentionally public (visitors are not signed in),
+   so volume is bounded per client IP and globally, and a hidden
+   honeypot field catches naive bots. */
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const MAX_PER_IP_PER_WINDOW = 5;
+const MAX_GLOBAL_PER_WINDOW = 60;
+const MAX_TRACKED_IPS = 5000;
+
+const ipHits = new Map<string, number[]>();
+let globalHits: number[] = [];
+
+function withinWindow(times: number[], now: number): number[] {
+  return times.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+}
+
+function clientIp(req: Request): string {
+  const forwarded = req.headers.get("x-forwarded-for") ?? "";
+  const first = forwarded.split(",")[0]?.trim();
+  return first || req.headers.get("cf-connecting-ip") || "unknown";
+}
+
+/** True when this IP (or the site as a whole) has already sent its quota. */
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  globalHits = withinWindow(globalHits, now);
+  if (globalHits.length >= MAX_GLOBAL_PER_WINDOW) return true;
+  return withinWindow(ipHits.get(ip) ?? [], now).length >= MAX_PER_IP_PER_WINDOW;
+}
+
+/** Records one actually-sent email against the IP and global windows. */
+function recordSend(ip: string): void {
+  const now = Date.now();
+
+  if (ipHits.size > MAX_TRACKED_IPS) {
+    for (const [key, times] of ipHits) {
+      if (withinWindow(times, now).length === 0) ipHits.delete(key);
+    }
+    if (ipHits.size > MAX_TRACKED_IPS) ipHits.clear();
+  }
+
+  const hits = withinWindow(ipHits.get(ip) ?? [], now);
+  hits.push(now);
+  ipHits.set(ip, hits);
+  globalHits.push(now);
+}
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
@@ -174,9 +244,20 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    let body: ContactPayload;
+    const ip = clientIp(req);
+    if (isRateLimited(ip)) {
+      return new Response(
+        JSON.stringify({ error: "För många förfrågningar. Försök igen senare eller ring oss direkt." }),
+        {
+          status: 429,
+          headers: { ...corsHeaders, "Content-Type": "application/json", "Retry-After": "3600" },
+        },
+      );
+    }
+
+    let raw: string;
     try {
-      body = await req.json();
+      raw = await req.text();
     } catch {
       return new Response(
         JSON.stringify({ error: "Ogiltig förfrågan." }),
@@ -184,11 +265,40 @@ Deno.serve(async (req: Request) => {
       );
     }
 
-    const name = (body.name ?? "").trim();
-    const email = (body.email ?? "").trim();
-    const phone = (body.phone ?? "").trim();
-    const service = SERVICE_LABELS[(body.service ?? "").trim()] ?? (body.service ?? "").trim();
-    const message = (body.message ?? "").trim();
+    if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) {
+      return new Response(
+        JSON.stringify({ error: "Meddelandet är för långt." }),
+        { status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    let body: ContactPayload;
+    try {
+      body = JSON.parse(raw);
+      if (typeof body !== "object" || body === null || Array.isArray(body)) {
+        throw new Error("not an object");
+      }
+    } catch {
+      return new Response(
+        JSON.stringify({ error: "Ogiltig förfrågan." }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    // Honeypot: the real forms keep this hidden field empty. Accept and drop.
+    if (clean(body.company, 200)) {
+      return new Response(
+        JSON.stringify({ success: true, submissionId: crypto.randomUUID() }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } },
+      );
+    }
+
+    const name = clean(body.name, FIELD_LIMITS.name);
+    const email = clean(body.email, FIELD_LIMITS.email);
+    const phone = clean(body.phone, FIELD_LIMITS.phone);
+    const serviceKey = clean(body.service, FIELD_LIMITS.service);
+    const service = SERVICE_LABELS[serviceKey] ?? SERVICE_LABELS.annat;
+    const message = clean(body.message, FIELD_LIMITS.message, true);
 
     if (!name || !email || !phone || !message) {
       return new Response(
@@ -205,6 +315,7 @@ Deno.serve(async (req: Request) => {
     }
 
     const submissionId = crypto.randomUUID();
+    recordSend(ip);
     const dateTime = formatSwedishDateTime(new Date());
     const html = buildEmailHtml(name, email, phone, service, message, dateTime, submissionId);
     const subject = `Ny kontaktförfrågan från ${name}`;
