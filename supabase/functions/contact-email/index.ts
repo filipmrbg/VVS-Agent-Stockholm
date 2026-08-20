@@ -199,7 +199,7 @@ Deno.serve(async (req: Request) => {
     const submissionId = crypto.randomUUID();
     const dateTime = formatSwedishDateTime(new Date());
     const html = buildEmailHtml(name, email, phone, service, message, dateTime, submissionId);
-    const subject = `"Ny offertförfrågan" från ${name}`;
+    const subject = `Ny offertförfrågan från ${name}`;
 
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
