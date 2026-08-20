@@ -393,7 +393,7 @@ export default function Home() {
         onClose={() => setIsCallModalOpen(false)}
       />
 
-      {/* ── 3. TJÄNSTER (Philip Rörmokaren stil) ────────────────── */}
+      {/* ── 3. TJÄNSTER ────────────────── */}
       <section
         id="tjanster"
         style={{
