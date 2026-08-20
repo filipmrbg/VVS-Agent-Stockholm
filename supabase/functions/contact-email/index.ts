@@ -7,8 +7,17 @@ const corsHeaders = {
 };
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-const RESEND_FROM = Deno.env.get("RESEND_FROM") ?? "Kontaktformulär <info@contact.bgbygger.se>";
 const CONTACT_TO = "f.bjorgaas@gmail.com";
+
+function normalizeFrom(raw: string | undefined): string {
+  const fallback = "Kontaktformulär <info@contact.bgbygger.se>";
+  const value = (raw ?? "").trim();
+  if (!value) return fallback;
+  const match = value.match(/^\s*<([^>]+)>\s*$/);
+  if (match) return `Kontaktformulär <${match[1]}>`;
+  return value;
+}
+const RESEND_FROM = normalizeFrom(Deno.env.get("RESEND_FROM"));
 
 const SWEDISH_MONTHS = [
   "januari", "februari", "mars", "april", "maj", " juni",
