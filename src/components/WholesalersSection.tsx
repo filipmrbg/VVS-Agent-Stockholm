@@ -56,7 +56,7 @@ export default function WholesalersSection({ className = '', dark = false }: Who
                 margin: 0,
               }}
             >
-              Grossister där vi handlar
+              Grossister vi samarbetar med
             </h2>
           </div>
 
