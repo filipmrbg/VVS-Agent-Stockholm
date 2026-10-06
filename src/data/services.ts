@@ -97,6 +97,7 @@ Alla rördragningar och kopplingar utförs fackmannamässigt med godkända metod
     href: '/tjanster#badrum-kok',
     tag: 'Installation & Renovering',
     highlights: [
+      'Auktoriserat VVS-företag – Säker Vatten',
       'Fackmannamässig rördragning & montering',
       'Byte av tvättställs-, dusch- och köksblandare',
       'Montering av toaletter, kommoder och sanitetsporslin',
@@ -105,8 +106,9 @@ Alla rördragningar och kopplingar utförs fackmannamässigt med godkända metod
     sections: [
       {
         heading: 'Säkra vatteninstallationer utan kompromisser',
-        text: 'Ett felaktigt kopplat rör kan snabbt leda till kostsamma fuktskador. Vi garanterar att alla installationer uppfyller gällande byggregler och branschstandarder.',
+        text: 'Ett felaktigt kopplat rör kan snabbt leda till kostsamma fuktskador. Som auktoriserat VVS-företag garanterar vi att alla installationer uppfyller Branschregler Säker Vatteninstallation.',
         bullets: [
+          'Säker Vatten: Auktoriserat montage med godkänt intyg till försäkringsbolag',
           'Vatten och avlopp: Kompletta stam- och rördragningar vid renovering',
           'Sanitet: Montering av toalettstolar, duschväggar, badkar och kommoder',
           'Kök: Säker anslutning av diskmaskin, vattenansluten kyl/frys och blandare',
@@ -116,8 +118,8 @@ Alla rördragningar och kopplingar utförs fackmannamässigt med godkända metod
     ],
     faq: [
       {
-        question: 'Får jag skriftlig garanti och dokumentation efter färdigställt badrum?',
-        answer: 'Ja, vi utfärdar alltid fullständig dokumentation och garanti som styrker att installationen följer alla gällande branschregler och normer.',
+        question: 'Får jag intyg enligt Säker Vatten efter färdigställt arbete?',
+        answer: 'Ja, som auktoriserat VVS-företag utfärdar vi alltid intyg om Säker Vatteninstallation vilket garanterar att arbetet är fackmannamässigt utfört och godkänns av ditt försäkringsbolag.',
       },
     ],
   },
@@ -134,6 +136,7 @@ Våra servicebilar är fullt utrustade med moderna verktyg, packningar, rördela
     href: '/tjanster#reparation-underhall',
     tag: 'Service & Jour',
     highlights: [
+      'Auktoriserad rörservice enligt Säker Vatten',
       'Snabb inställelse vid akuta vattenläckor',
       'Avloppsrensning och mekanisk rensning av rör',
       'Byte och reparation av varmvattenberedare',
@@ -166,9 +169,10 @@ Våra servicebilar är fullt utrustade med moderna verktyg, packningar, rördela
     detailedDescription: `Med rätt rådgivning och energioptimering kan du spara stora summor på din fastighets driftkostnader. Vi hjälper fastighetsägare, bostadsrättsföreningar och privatpersoner att se över sina värme- och VVS-system, identifiera energitjuvar och planera nödvändiga moderniseringar.
 
 Vi erbjuder personliga hembesök, projektering inför ombyggnationer samt löpande tillsyn och serviceavtal för bostadsrättsföreningar och företag.`,
-    heroImage: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
-    image: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
-    imagePosition: 'center 58%',
+    heroImage: '/images/service_radgivning.jpg',
+    image: '/images/service_radgivning.jpg',
+    imagePosition: 'center 55%',
+    homeImagePosition: 'center 50%',
     href: '/tjanster#radgivning',
     tag: 'Rådgivning & Fastighet',
     highlights: [

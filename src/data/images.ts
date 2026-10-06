@@ -74,6 +74,9 @@ export interface SiteImages {
       section2: ImageSlot;
     };
   };
+  certifications?: {
+    sakerVatten: ImageSlot;
+  };
 }
 
 const images: SiteImages = {
@@ -107,7 +110,7 @@ const images: SiteImages = {
       alt: 'Reparation, underhåll och akut rörservice',
     },
     golvvarme: {
-      url: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
+      url: '/images/service_radgivning.jpg',
       alt: 'Rådgivning och fastighetsservice',
     },
   },
@@ -168,7 +171,7 @@ const images: SiteImages = {
       category: 'Service',
     },
     {
-      image: { url: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507', alt: 'Rådgivning & Fastighetsservice' },
+      image: { url: '/images/service_radgivning.jpg', alt: 'Rådgivning & Fastighetsservice' },
       title: 'Fastighetsservice & Rådgivning',
       category: 'Fastighetsservice',
     },
@@ -219,7 +222,7 @@ const images: SiteImages = {
     },
     golvvarme: {
       hero: {
-        url: 'https://scontent-arn2-1.xx.fbcdn.net/v/t1.15752-9/779816003_915756511602777_7830897370362718145_n.png?_nc_cat=101&ccb=1-7&_nc_sid=fc17b8&_nc_ohc=NVA4ZvkVGcgQ7kNvwEe-yxT&_nc_oc=Adp5n6Ru4KPnGPni7QAgBYsxtgRH5R9RDqeJpV2KS3SWYs0bW8VAStQb8q5j56t_tm4&_nc_zt=23&_nc_ht=scontent-arn2-1.xx&_nc_ss=7b6a8&oh=03_Q7cD6AGen2Ycgb5rvsQHM2UHImy32FgrWcrIbMqP-6HxINzloA&oe=6AAD2507',
+        url: '/images/service_radgivning.jpg',
         alt: 'Rådgivning och fastighetsservice',
       },
       section1: {
@@ -230,6 +233,13 @@ const images: SiteImages = {
         url: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=900',
         alt: 'Fastighetsservice i Stockholm',
       },
+    },
+  },
+
+  certifications: {
+    sakerVatten: {
+      url: '/images/saker-vatten.webp',
+      alt: 'Auktoriserat VVS-företag – Branschregler Säker Vatteninstallation',
     },
   },
 };

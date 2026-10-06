@@ -93,6 +93,63 @@ export default function Footer() {
             <div style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.5)' }}>
               Org.nr: 559368-1066 • Innehar F-skatt
             </div>
+
+            {/* Säker Vatten Auktorisation Badge */}
+            <a
+              href="https://sakervatten.se"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Auktoriserat VVS-företag Säker Vatten (öppnas i ny flik)"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '12px',
+                marginTop: '18px',
+                padding: '10px 14px',
+                background: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+              }}
+            >
+              <img
+                src="/images/saker-vatten.webp"
+                alt="Auktoriserat VVS-företag – Säker Vatten"
+                style={{
+                  height: '42px',
+                  width: '42px',
+                  objectFit: 'contain',
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <div style={{
+                  color: '#ffffff',
+                  fontSize: '0.86rem',
+                  fontWeight: 700,
+                  lineHeight: 1.25,
+                  letterSpacing: '0.01em',
+                }}>
+                  Auktoriserat VVS-företag
+                </div>
+                <div style={{
+                  color: 'rgba(255, 255, 255, 0.65)',
+                  fontSize: '0.74rem',
+                  lineHeight: 1.2,
+                }}>
+                  Branschregler Säker Vatten
+                </div>
+              </div>
+            </a>
           </div>
 
           {/* Kolumn 2: Tjänster */}

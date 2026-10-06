@@ -76,14 +76,36 @@ export default function ServicesOverview() {
           </ScrollReveal>
           <ScrollReveal animation="fade-up" delay={150}>
             <p style={{
-              color: 'rgba(255, 255, 255, 0.85)',
+              color: 'rgba(255, 255, 255, 0.88)',
               fontSize: '1.08rem',
-              maxWidth: '640px',
+              maxWidth: '680px',
               margin: '0 auto',
               lineHeight: 1.65,
             }}>
-              Kompletta och fackmannamässiga VVS-installationer för både privatpersoner och fastighetsägare – alltid med fasta priser och 30% ROT-avdrag.
+              Kompletta och fackmannamässiga VVS-installationer utförda enligt branschregler Säker Vatten – alltid med fasta priser, fulla garantier och 30% ROT-avdrag.
             </p>
+
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              marginTop: '22px',
+              padding: '8px 16px',
+              background: 'rgba(255, 255, 255, 0.12)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              borderRadius: '24px',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+            }}>
+              <img
+                src="/images/saker-vatten.webp"
+                alt="Auktoriserat VVS-företag Säker Vatten"
+                style={{ height: '22px', width: '22px', objectFit: 'contain' }}
+              />
+              <span style={{ color: '#ffffff', fontSize: '0.88rem', fontWeight: 600, letterSpacing: '0.01em' }}>
+                Auktoriserat VVS-företag enligt Säker Vatten
+              </span>
+            </div>
           </ScrollReveal>
         </div>
       </section>

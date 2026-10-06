@@ -60,9 +60,9 @@ export default function Quote() {
     'Begär offert | VVS Agent Stockholm AB – Fast Pris & ROT-avdrag',
     'Begär en kostnadsfri VVS-offert från VVS Agent Stockholm AB. Kök, badrum, värmesystem och fastighetsservice. Snabb återkoppling inom 24 timmar.'
   );
-  const [name, setName]       = useState('');
-  const [email, setEmail]     = useState('');
-  const [phone, setPhone]     = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [service, setService] = useState('');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
@@ -325,6 +325,27 @@ export default function Quote() {
                   </div>
                   <p style={{ margin: 0, color: 'var(--color-gray-600)', fontSize: '0.9rem', lineHeight: 1.6 }}>
                     Vi återkopplar snabbt med rådgivning och fast prisförslag utan dolda kostnader.
+                  </p>
+                </div>
+
+                <div style={{
+                  background: '#ffffff',
+                  border: '1px solid #e5e7eb',
+                  borderRadius: '16px',
+                  padding: '24px',
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                    <img
+                      src="/images/saker-vatten.webp"
+                      alt="Auktoriserat VVS-företag Säker Vatten"
+                      style={{ height: '30px', width: '30px', objectFit: 'contain' }}
+                    />
+                    <h3 style={{ margin: 0, fontSize: '1.05rem', fontWeight: 700, color: 'var(--color-text-dark)' }}>
+                      Auktoriserat VVS-företag – Säker Vatten
+                    </h3>
+                  </div>
+                  <p style={{ margin: 0, color: 'var(--color-gray-600)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+                    Samtliga arbeten utförs enligt Branschregler Säker Vatteninstallation. Intyg och dokumentation lämnas för fullt skydd hos ditt försäkringsbolag.
                   </p>
                 </div>
 

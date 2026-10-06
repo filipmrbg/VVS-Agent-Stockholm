@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   Star,
   Phone,
- Mail,
+  Mail,
   MapPin,
   Building,
   Instagram,
@@ -174,7 +174,7 @@ export default function Home() {
       video.playsInline = true;
       const promise = video.play();
       if (promise !== undefined) {
-        promise.catch(() => {});
+        promise.catch(() => { });
       }
     };
 
@@ -306,9 +306,9 @@ export default function Home() {
                 width: '100%',
               }}>
                 {[
-                  'VVS-service & rörarbeten',
-                  'Jour & akuta ärenden',
-                  'VVS-tjänster i Stockholm med omnejd',
+                  'Auktoriserat VVS-företag – Säker Vatten',
+                  'VVS-service, badrum, kök & värmepumpar',
+                  'Fasta priser, 30% ROT-avdrag & 10 MSEK försäkring',
                 ].map((item, idx) => (
                   <div key={idx} style={{
                     display: 'flex',
@@ -357,7 +357,7 @@ export default function Home() {
         minHeight: '64px',
         display: 'flex',
         alignItems: 'center',
-        padding: '16px 0',
+        padding: '14px 0',
         position: 'relative',
         zIndex: 10,
       }}>
@@ -368,21 +368,71 @@ export default function Home() {
             justifyContent: 'center',
             textAlign: 'center',
             flexWrap: 'wrap',
-            gap: '14px',
+            gap: '16px clamp(12px, 2.5vw, 28px)',
           }}>
-            <div style={{ display: 'flex', gap: '3px' }}>
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} size={18} fill="#f59e0b" color="#f59e0b" />
-              ))}
+            {/* Reviews */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ display: 'flex', gap: '2px' }}>
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={16} fill="#f59e0b" color="#f59e0b" />
+                ))}
+              </div>
+              <span style={{
+                fontWeight: 700,
+                fontSize: '0.94rem',
+                color: '#111827',
+              }}>
+                4.9 / 5 i betyg
+              </span>
+              <span style={{ color: '#64748b', fontSize: '0.88rem' }}>
+                (50+ omdömen)
+              </span>
             </div>
-            <span style={{
-              fontWeight: 700,
-              fontSize: '1rem',
-              color: '#111827',
-              letterSpacing: '0.01em',
+
+            {/* Divider */}
+            <div className="home-trust-divider" style={{ width: '1px', height: '22px', background: '#cbd5e1' }} />
+
+            {/* Säker Vatten Auktorisation */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '9px' }}>
+              <img
+                src="/images/saker-vatten.webp"
+                alt="Auktoriserat VVS-företag Säker Vatten"
+                style={{
+                  height: '26px',
+                  width: '26px',
+                  objectFit: 'contain',
+                }}
+              />
+              <span style={{
+                fontWeight: 700,
+                fontSize: '0.94rem',
+                color: '#0f172a',
+              }}>
+                Auktoriserat VVS-företag
+              </span>
+              <span style={{
+                color: 'var(--primary, #af7349)',
+                fontWeight: 700,
+                fontSize: '0.84rem',
+                background: 'rgba(175, 115, 73, 0.1)',
+                padding: '2px 8px',
+                borderRadius: '4px',
+              }}>
+                Säker Vatten
+              </span>
+            </div>
+
+            {/* Divider */}
+            <div className="home-trust-divider" style={{ width: '1px', height: '22px', background: '#cbd5e1' }} />
+
+            {/* ROT & Garanti */}
+            <div style={{
+              fontWeight: 600,
+              fontSize: '0.9rem',
+              color: '#475569',
             }}>
-              4.9 / 5 i betyg på Reco & Google | Över 50+ verifierade kundomdömen
-            </span>
+              30% ROT-avdrag direkt • Full ansvarsförsäkring
+            </div>
           </div>
         </div>
       </section>
@@ -514,7 +564,7 @@ export default function Home() {
                   lineHeight: 1.75,
                   margin: '0 0 20px 0',
                 }}>
-                  VVS AGENT STOCKHOLM AB drivs av VVS-installatörer med lång yrkeserfarenhet inom rörarbeten, kök, badrum, värmesystem och komplett fastighetsservice i hela Stockholmsregionen.
+                  VVS AGENT STOCKHOLM AB är ett auktoriserat VVS-företag enligt Säker Vatten. Vi drivs av certifierade VVS-installatörer med mångårig yrkeserfarenhet inom rörarbeten, kök, badrum, värmesystem och komplett fastighetsservice i hela Stockholmsregionen.
                 </p>
                 <p style={{
                   color: 'rgba(255, 255, 255, 0.88)',
@@ -522,7 +572,7 @@ export default function Home() {
                   lineHeight: 1.7,
                   margin: '0 0 28px 0',
                 }}>
-                  För oss är personlig kontakt, hög tillgänglighet och ett fackmannamässigt hantverk en självklarhet. Oavsett om det rör sig om en akut insats, en planerad badrumsrenovering eller löpande fastighetsskötsel garanterar vi högsta kvalitet och trygghet från start till mål.
+                  För oss är personlig kontakt, hög tillgänglighet och ett fackmannamässigt hantverk enligt gällande branschregler en självklarhet. Alla installationer utförs med godkända metoder och material för att minimera risken för fuktskador och garantera fullt försäkringsskydd.
                 </p>
               </ScrollReveal>
 
@@ -572,7 +622,7 @@ export default function Home() {
                       VVS AGENT STOCKHOLM AB
                     </div>
                     <div style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.85rem' }}>
-                      Kvalitetsgaranti & trygg VVS i hela Stockholm
+                      Auktoriserat VVS-företag • Säker Vatten & full garanti
                     </div>
                   </div>
                 </div>
@@ -1132,6 +1182,11 @@ export default function Home() {
           }
           .home-service-card {
             height: 420px !important;
+          }
+        }
+        @media (max-width: 768px) {
+          .home-trust-divider {
+            display: none !important;
           }
         }
         @media (max-width: 640px) {

@@ -141,7 +141,7 @@ export default function About() {
                     margin: '0 0 18px 0',
                     fontWeight: 500,
                   }}>
-                    VVS AGENT STOCKHOLM AB grundades med en tydlig vision: att erbjuda stockholmarna en transparent och personlig VVS-partner för både akuta insatser och planerade helhetsrenoveringar.
+                    VVS AGENT STOCKHOLM AB grundades med en tydlig vision: att erbjuda stockholmarna en transparent, auktoriserad och personlig VVS-partner för både akuta insatser och planerade helhetsrenoveringar.
                   </p>
                   
                   <p style={{
@@ -150,8 +150,39 @@ export default function About() {
                     lineHeight: 1.8,
                     margin: '0 0 20px 0',
                   }}>
-                    Oavsett om det gäller byte av köks- och badrumsblandare, installation av energieffektiva värmesystem eller löpande fastighetsservice arbetar vi alltid fackmannamässigt enligt gällande branschregler och med fulla garantier.
+                    Som auktoriserat VVS-företag enligt Säker Vatten arbetar vi alltid strikt efter de senaste branschreglerna. Oavsett om det gäller byte av köks- och badrumsblandare, installation av energieffektiva värmesystem eller löpande fastighetsservice arbetar vi fackmannamässigt med fulla garantier och godkända intyg till försäkringsbolag.
                   </p>
+
+                  {/* Säker Vatten Trust Card */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '18px',
+                    padding: '16px 20px',
+                    background: '#f8fafc',
+                    border: '1px solid #e2e8f0',
+                    borderRadius: '6px',
+                    margin: '0 0 22px 0',
+                  }}>
+                    <img
+                      src="/images/saker-vatten.webp"
+                      alt="Auktoriserat VVS-företag Säker Vatten"
+                      style={{
+                        height: '54px',
+                        width: '54px',
+                        objectFit: 'contain',
+                        flexShrink: 0,
+                      }}
+                    />
+                    <div>
+                      <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--color-text-dark)', marginBottom: '2px' }}>
+                        Auktoriserat VVS-företag – Säker Vatten
+                      </div>
+                      <div style={{ fontSize: '0.84rem', color: 'var(--color-gray-600)', lineHeight: 1.45 }}>
+                        Vi uppfyller alla krav enligt Branschregler Säker Vatteninstallation. Fullt skydd och intyg till ditt försäkringsbolag.
+                      </div>
+                    </div>
+                  </div>
 
                   {/* Founder Quote Card */}
                   <div style={{

@@ -42,7 +42,102 @@ export default function WholesalersSection({ className = '', dark = false }: Who
       }}
     >
       <div style={containerStyle}>
+        {/* Säker Vatten Auktorisation Banner */}
         <ScrollReveal animation="fade-up">
+          <div
+            style={{
+              maxWidth: '860px',
+              margin: '0 auto clamp(36px, 5vw, 48px) auto',
+              padding: 'clamp(20px, 3vw, 26px) clamp(20px, 3.5vw, 32px)',
+              background: dark ? 'rgba(255, 255, 255, 0.05)' : '#f8fafc',
+              border: `1px solid ${dark ? 'rgba(255, 255, 255, 0.12)' : '#e2e8f0'}`,
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: '24px',
+              boxShadow: dark ? 'none' : '0 4px 20px rgba(0, 0, 0, 0.03)',
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flex: '1 1 340px' }}>
+              <img
+                src="/images/saker-vatten.webp"
+                alt="Auktoriserat VVS-företag Säker Vatten"
+                style={{
+                  height: '70px',
+                  width: '70px',
+                  objectFit: 'contain',
+                  flexShrink: 0,
+                }}
+              />
+              <div>
+                <div style={{
+                  color: 'var(--primary, #af7349)',
+                  fontWeight: 700,
+                  fontSize: '0.78rem',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.06em',
+                  marginBottom: '4px',
+                }}>
+                  Certifierad trygghet
+                </div>
+                <h3 style={{
+                  margin: '0 0 6px 0',
+                  color: dark ? '#ffffff' : '#0f172a',
+                  fontFamily: 'var(--font-heading, Outfit, sans-serif)',
+                  fontWeight: 800,
+                  fontSize: 'clamp(1.15rem, 2vw, 1.35rem)',
+                  lineHeight: 1.25,
+                }}>
+                  Auktoriserat VVS-företag enligt Säker Vatten
+                </h3>
+                <p style={{
+                  margin: 0,
+                  color: dark ? 'rgba(255, 255, 255, 0.75)' : '#475569',
+                  fontSize: '0.9rem',
+                  lineHeight: 1.55,
+                }}>
+                  Vi arbetar enligt Branschregler Säker Vatteninstallation. Det innebär godkända metoder, fackmannamässigt utförande och fullt godkännande hos försäkringsbolag.
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://sakervatten.se"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Läs mer om Säker Vatten (öppnas i ny flik)"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '10px 18px',
+                borderRadius: '4px',
+                background: dark ? 'rgba(255, 255, 255, 0.1)' : '#ffffff',
+                border: `1px solid ${dark ? 'rgba(255, 255, 255, 0.2)' : '#cbd5e1'}`,
+                color: dark ? '#ffffff' : '#0f172a',
+                fontSize: '0.88rem',
+                fontWeight: 600,
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--primary, #af7349)';
+                e.currentTarget.style.color = 'var(--primary, #af7349)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = dark ? 'rgba(255, 255, 255, 0.2)' : '#cbd5e1';
+                e.currentTarget.style.color = dark ? '#ffffff' : '#0f172a';
+              }}
+            >
+              Läs mer på Säker Vatten
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal animation="fade-up" delay={100}>
           {/* Rubrik */}
           <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 3.5vw, 36px)' }}>
             <h2
@@ -50,13 +145,13 @@ export default function WholesalersSection({ className = '', dark = false }: Who
                 color: dark ? 'rgba(255, 255, 255, 0.9)' : '#111827',
                 fontFamily: 'var(--font-heading, Outfit, sans-serif)',
                 fontWeight: 800,
-                fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)',
+                fontSize: 'clamp(1.4rem, 2.4vw, 1.9rem)',
                 lineHeight: 1.2,
                 letterSpacing: '-0.02em',
                 margin: 0,
               }}
             >
-              Grossister vi handlar hos
+              Kvalitetsmaterial från ledande grossister
             </h2>
           </div>
 
